@@ -2,6 +2,8 @@
 
 A personal professional portfolio presenting Mehak Pahwa's work across business operations, recruitment systems, cross-functional coordination, and digital marketing.
 
+**Live website:** [mehak-pahwa-portfolio.mehakpahwa2828.workers.dev](https://mehak-pahwa-portfolio.mehakpahwa2828.workers.dev)
+
 ## About the website
 
 The portfolio is designed around the idea of **bringing structure to the moving parts of business**. It presents experience and capabilities through visual systems, selected-work narratives, and an evidence-led professional journey rather than reproducing a résumé online.
@@ -58,7 +60,7 @@ The public website and repository intentionally exclude Mehak's private address,
 
 ## Deployment
 
-The intended production host is Cloudflare Pages. Deployment details and the live URL will be added after the repository is connected and the first production deployment is verified.
+The site is deployed through Cloudflare Workers with GitHub integration. Pushing an approved commit to the `main` branch triggers Cloudflare to build and publish the latest production version automatically.
 
 ## License
 
