@@ -4,29 +4,11 @@ export const proofPoints = [
   { value: '10 weeks', label: 'McKinsey Forward learning journey' },
 ];
 
-export const capabilities = [
-  {
-    number: '01',
-    title: 'Structure',
-    description: 'Building trackers, documentation, and repeatable processes that keep work visible and organized.',
-  },
-  {
-    number: '02',
-    title: 'Insight',
-    description: 'Reading operational data, spotting gaps, and turning observations into clearer next steps.',
-  },
-  {
-    number: '03',
-    title: 'Execution',
-    description: 'Coordinating across people and functions to move plans from an idea into practical work.',
-  },
-];
-
 export const projects = [
   {
     index: '01',
     category: 'Operations · Recruitment systems',
-    title: 'Making a recruitment pipeline easier to see—and manage.',
+    title: 'Making a recruitment pipeline easier to see and manage.',
     summary: 'A working system of Google Sheets trackers, quality checks, and standard operating procedures designed to bring consistency to a multi-stage recruitment process.',
     contributions: ['Pipeline tracking', 'Data quality', 'SOP authoring', 'Cross-layer coordination'],
     theme: 'terracotta',
@@ -49,15 +31,9 @@ export const projects = [
   },
 ];
 
-export const journey = [
-  { period: '2023–2024', title: 'Built the analytical foundation', detail: 'B.Com studies, CA Foundation distinction on the first attempt, and university merit recognition.' },
-  { period: '2025', title: 'Strengthened professional problem-solving', detail: 'Completed the McKinsey Forward Program and formal Excel learning.' },
-  { period: '2026', title: 'Moved into applied, cross-functional work', detail: 'Worked across digital marketing, content planning, recruitment operations, quality assurance, and team coordination.' },
-];
-
 export const experience = [
   {
-    period: 'May 2026 — Present',
+    period: 'May 2026 to present',
     organisation: 'Jarurat Care Foundation',
     role: 'Project Manager · Layer-1 Lead',
     lead: 'Helping bring visibility, consistency, and coordination to a multi-stage recruitment pipeline.',
@@ -69,7 +45,7 @@ export const experience = [
     ],
   },
   {
-    period: 'March — May 2026',
+    period: 'March to May 2026',
     organisation: 'Upskill Campus',
     role: 'Summer Intern · Digital Marketing',
     lead: 'Translating a brand objective into a structured content strategy for FreshNest.',
@@ -79,7 +55,7 @@ export const experience = [
     ],
   },
   {
-    period: 'April — May 2026',
+    period: 'April to May 2026',
     organisation: 'Alfido Tech',
     role: 'Digital Marketing Intern',
     lead: 'Building hands-on familiarity with content production and broader campaign workflows.',
@@ -110,7 +86,7 @@ export const capabilityGroups = [
 ];
 
 export const credentials = [
-  { year: '2023–2026', title: 'Bachelor of Commerce', source: 'Maharishi Dayanand University', detail: '71.36% through Semester V' },
+  { year: '2023 to 2026', title: 'Bachelor of Commerce', source: 'Maharishi Dayanand University', detail: '71.36% through Semester V' },
   { year: '2024', title: 'CA Foundation · Distinction', source: 'Institute of Chartered Accountants of India', detail: '286/400 · First attempt' },
   { year: '2025', title: 'McKinsey Forward Program', source: 'McKinsey & Company', detail: '10-week learning journey' },
   { year: '2025', title: 'Excel Certification', source: 'IIST Computer Institute', detail: 'Core functions, formatting, and formulas' },

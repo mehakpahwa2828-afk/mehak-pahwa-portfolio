@@ -9,6 +9,7 @@ interface Props {
 const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL('/og-image.png', Astro.site);
+const pageName = Astro.url.pathname === '/' ? 'home' : Astro.url.pathname.split('/').filter(Boolean)[0];
 ---
 
 <!doctype html>
@@ -25,7 +26,7 @@ const socialImageURL = new URL('/og-image.png', Astro.site);
     <meta property="og:image" content={socialImageURL} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Mehak Pahwa — bringing structure to the moving parts of business" />
+    <meta property="og:image:alt" content="Mehak Pahwa, business operations portfolio" />
     <meta property="og:site_name" content="Mehak Pahwa" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -33,6 +34,11 @@ const socialImageURL = new URL('/og-image.png', Astro.site);
     <meta name="twitter:image" content={socialImageURL} />
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      const savedTheme = localStorage.getItem('theme');
+      const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = savedTheme || preferredTheme;
+    </script>
     <title>{title}</title>
     <script is:inline type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
@@ -44,8 +50,9 @@ const socialImageURL = new URL('/og-image.png', Astro.site);
       knowsAbout: ['Business operations', 'Google Sheets', 'Recruitment operations', 'Digital marketing', 'Accounting', 'Economics'],
     })}></script>
   </head>
-  <body>
+  <body class={`page-${pageName}`}>
     <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-ambient" aria-hidden="true"><i></i><i></i><i></i><span></span></div>
     <slot />
     <script>
       const observer = new IntersectionObserver((entries) => {
@@ -59,6 +66,19 @@ const socialImageURL = new URL('/og-image.png', Astro.site);
       document.querySelectorAll('.mobile-menu a').forEach((link) => {
         link.addEventListener('click', () => link.closest('details')?.removeAttribute('open'));
       });
+
+      document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = next;
+          localStorage.setItem('theme', next);
+        });
+      });
+
+      window.addEventListener('pointermove', (event) => {
+        document.documentElement.style.setProperty('--pointer-x', `${event.clientX}px`);
+        document.documentElement.style.setProperty('--pointer-y', `${event.clientY}px`);
+      }, { passive: true });
     </script>
   </body>
 </html>

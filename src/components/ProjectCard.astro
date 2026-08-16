@@ -9,44 +9,110 @@ interface Props {
 }
 
 const { index, category, title, summary, contributions, theme } = Astro.props;
+const miniatureSets = {
+  '01': [['▦', 'Tracker'], ['✓', 'Quality check'], ['↗', 'Handoff']],
+  '02': [['Aa', 'Message'], ['◫', 'Format'], ['◎', 'Audience']],
+  '03': [['07', 'Assets'], ['◇', 'Canva'], ['⌁', 'Research']],
+};
+const miniatures = miniatureSets[index as keyof typeof miniatureSets] ?? [];
 ---
 
 <article class={`project-card project-${theme}`} data-reveal>
   <div class="project-visual" aria-hidden="true">
     <span class="visual-index">Project / {index}</span>
+    <span class="visual-stamp">OPEN THE INTERFACE ↘</span>
+    {index !== '01' && <div class={`visual-signals signals-${index}`} aria-hidden="true"><span>✦</span><span>↗</span><span>◎</span><span>{index === '02' ? 'IDEA / SIGNAL' : 'MAKE / SHARE'}</span><div class="signal-poster"><small>{index === '02' ? 'CONTENT SYSTEM' : 'CAMPAIGN SYSTEM'}</small><strong>{index === '02' ? '01—03' : '07'}</strong><p>{index === '02' ? 'Educate · Engage · Publish' : 'Research · Design · Content'}</p></div></div>}
     {index === '01' && (
       <div class="pipeline-visual">
-        <div class="pipeline-head"><span>Recruitment flow</span><i>Live system view</i></div>
-        <div class="pipeline-row"><b>01</b><span>Applications</span><i></i></div>
-        <div class="pipeline-row"><b>02</b><span>Screening</span><i></i></div>
-        <div class="pipeline-row active"><b>03</b><span>Assignments</span><i></i></div>
-        <div class="pipeline-row"><b>04</b><span>Interviews</span><i></i></div>
-        <div class="pipeline-footer"><span>Track</span><span>Check</span><span>Standardise</span></div>
+        <div class="pipeline-head"><span>Recruitment flow</span><i>Choose a stage</i></div>
+        <div class="pipeline-tabs" role="tablist" aria-label="Recruitment stages">
+          <button type="button" role="tab" aria-selected="true" data-stage="applications"><b>01</b><span>Applications</span></button>
+          <button type="button" role="tab" aria-selected="false" data-stage="screening"><b>02</b><span>Screening</span></button>
+          <button type="button" role="tab" aria-selected="false" data-stage="assignments"><b>03</b><span>Assignments</span></button>
+          <button type="button" role="tab" aria-selected="false" data-stage="interviews"><b>04</b><span>Interviews</span></button>
+        </div>
+        <div class="stage-detail" aria-live="polite"><small>APPLICATIONS</small><p>Tracked incoming activity so the pipeline stayed visible and current.</p></div>
       </div>
     )}
     {index === '02' && (
       <div class="content-board">
-        <div class="board-note note-a"><small>PILLAR 01</small><strong>Educate</strong><span>Useful, clear, credible</span></div>
-        <div class="board-note note-b"><small>PILLAR 02</small><strong>Engage</strong><span>Prompt conversation</span></div>
-        <div class="board-note note-c"><small>CHANNEL PLAN</small><strong>Plan → Publish</strong><span>Audience · Format · Rhythm</span></div>
+        <button type="button" class="board-note note-a selected" data-content-step="educate"><small>PILLAR 01</small><strong>Educate</strong><span>Useful, clear, credible</span></button>
+        <button type="button" class="board-note note-b" data-content-step="engage"><small>PILLAR 02</small><strong>Engage</strong><span>Prompt conversation</span></button>
+        <button type="button" class="board-note note-c" data-content-step="publish"><small>PILLAR 03</small><strong>Plan to publish</strong><span>Audience · Format · Rhythm</span></button>
         <svg viewBox="0 0 300 220" role="presentation"><path d="M70 58 C140 20 170 70 220 92 M88 150 C145 190 190 160 222 124" /></svg>
+        <div class="board-detail" aria-live="polite"><small>EDUCATE</small><p>Build useful content around topics the audience can understand and apply.</p></div>
+        <div class="studio-extra board-extra"><span>IDEA</span><i></i><b>AUDIENCE</b></div>
       </div>
     )}
     {index === '03' && (
       <div class="campaign-visual">
-        <div class="post post-back"><span>03</span><strong>RESEARCH</strong></div>
-        <div class="post post-middle"><span>02</span><strong>DESIGN</strong></div>
-        <div class="post post-front"><span>01</span><strong>CONTENT</strong><i>7 social assets</i></div>
+        <button type="button" class="post post-back" data-campaign-step="research"><span>03</span><strong>RESEARCH</strong><i>Campaign context</i></button>
+        <button type="button" class="post post-middle" data-campaign-step="design"><span>02</span><strong>DESIGN</strong><i>Canva execution</i></button>
+        <button type="button" class="post post-front selected" data-campaign-step="content"><span>01</span><strong>CONTENT</strong><i>7 social assets</i></button>
         <div class="campaign-tags"><span>Canva</span><span>SEO</span><span>HTML</span></div>
+        <div class="campaign-detail" aria-live="polite"><small>CONTENT</small><p>Seven social posts, including carousel formats, created as part of the campaign workflow.</p></div>
+        <div class="studio-extra campaign-extra"><span>07</span><i></i><b>POSTS</b></div>
       </div>
     )}
   </div>
   <div class="project-content">
+    <div class={`project-sticker project-sticker-${index}`} aria-hidden="true">
+      {index === '01' ? <svg viewBox="0 0 74 74"><path d="M12 15h50v44H12zM12 27h50M24 27v32M48 27v32"/><circle cx="18" cy="21" r="2"/><path d="M30 38h11M30 46h17"/></svg> : index === '02' ? <svg viewBox="0 0 74 74"><path d="M13 18h29v36H13zM32 28h29v30H32z"/><path d="M20 28h15M20 36h10M39 39h15M39 47h10"/><path d="M47 18l4-7 4 7 7 4-7 4-4 7-4-7-7-4z"/></svg> : <svg viewBox="0 0 74 74"><rect x="11" y="12" width="38" height="50" rx="2"/><path d="M18 23h24M18 31h16M18 50h24"/><circle cx="53" cy="47" r="10"/><path d="M60 54l7 7"/></svg>}
+    </div>
     <p class="eyebrow">{category}</p>
     <h3>{title}</h3>
     <p class="project-summary">{summary}</p>
-    <ul aria-label="Key contributions">
-      {contributions.map((item) => <li>{item}</li>)}
-    </ul>
+    <div class="project-miniatures" aria-label="Project artifacts">
+      {miniatures.map(([mark, label]) => <div><b>{mark}</b><span>{label}</span></div>)}
+    </div>
+    <div class="contribution-list" aria-label="Key contributions">{contributions.map((item, itemIndex) => <span><b>0{itemIndex + 1}</b>{item}</span>)}</div>
   </div>
 </article>
+{index === '01' && <script>
+  const stageCopy = {
+    applications: ['APPLICATIONS', 'Tracked incoming activity so the pipeline stayed visible and current.'],
+    screening: ['SCREENING', 'Supported quality checks to keep screening decisions consistent and reliable.'],
+    assignments: ['ASSIGNMENTS', 'Monitored assignment activity and maintained accurate status information.'],
+    interviews: ['INTERVIEWS', 'Tracked interview and scheduling activity across the recruitment process.'],
+  };
+  document.querySelectorAll('[data-stage]').forEach((button) => button.addEventListener('click', () => {
+    const key = button.getAttribute('data-stage');
+    const detail = button.closest('.pipeline-visual')?.querySelector('.stage-detail');
+    const copy = key ? stageCopy[key as keyof typeof stageCopy] : undefined;
+    button.closest('[role="tablist"]')?.querySelectorAll('[role="tab"]').forEach((tab) => tab.setAttribute('aria-selected', 'false'));
+    button.setAttribute('aria-selected', 'true');
+    if (detail && copy) detail.innerHTML = `<small>${copy[0]}</small><p>${copy[1]}</p>`;
+  }));
+</script>}
+{index === '02' && <script>
+  const contentCopy = {
+    educate: ['EDUCATE', 'Build useful content around topics the audience can understand and apply.'],
+    engage: ['ENGAGE', 'Use formats and prompts that invite the audience to respond and participate.'],
+    publish: ['PLAN TO PUBLISH', 'Match each idea with an audience, format, platform, and publishing rhythm.'],
+  };
+  document.querySelectorAll('[data-content-step]').forEach((button) => button.addEventListener('click', () => {
+    const key = button.getAttribute('data-content-step');
+    const copy = key ? contentCopy[key as keyof typeof contentCopy] : undefined;
+    const board = button.closest('.content-board');
+    board?.querySelectorAll('[data-content-step]').forEach((item) => item.classList.remove('selected'));
+    button.classList.add('selected');
+    const detail = board?.querySelector('.board-detail');
+    if (detail && copy) detail.innerHTML = `<small>${copy[0]}</small><p>${copy[1]}</p>`;
+  }));
+</script>}
+{index === '03' && <script>
+  const campaignCopy = {
+    content: ['CONTENT', 'Seven social posts, including carousel formats, created as part of the campaign workflow.'],
+    design: ['DESIGN', 'Canva was used to turn planned ideas into clear, independent social assets.'],
+    research: ['RESEARCH', 'SEO and campaign research provided context for wider digital marketing work.'],
+  };
+  document.querySelectorAll('[data-campaign-step]').forEach((button) => button.addEventListener('click', () => {
+    const key = button.getAttribute('data-campaign-step');
+    const copy = key ? campaignCopy[key as keyof typeof campaignCopy] : undefined;
+    const visual = button.closest('.campaign-visual');
+    visual?.querySelectorAll('[data-campaign-step]').forEach((item) => item.classList.remove('selected'));
+    button.classList.add('selected');
+    const detail = visual?.querySelector('.campaign-detail');
+    if (detail && copy) detail.innerHTML = `<small>${copy[0]}</small><p>${copy[1]}</p>`;
+  }));
+</script>}

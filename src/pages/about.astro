@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { capabilityGroups } from '../data/portfolio';
+---
+
+<BaseLayout title="About | Mehak Pahwa" description="About Mehak Pahwa, her capabilities, interests, and professional direction.">
+  <div class="site-shell">
+    <Header />
+    <main id="main">
+      <header class="story-hero">
+        <div class="story-hero-copy" data-reveal>
+          <p class="page-kicker"><span></span>About / My story</p>
+          <h1>Curiosity gave me range. <em>Responsibility gave me direction.</em></h1>
+          <p>I began with commerce and a strong academic foundation. Practical roles showed me where I work best: making information clearer, processes more visible, and teamwork easier to coordinate.</p>
+        </div>
+        <div class="story-map" data-reveal aria-label="Mehak's professional journey">
+          <div class="story-map-head"><span>JOURNEY / 2023—NOW</span><i>LIVE</i></div>
+          <div class="story-map-core"><small>CURRENT DIRECTION</small><strong>Operations<br/>+ analysis</strong></div>
+          <span class="map-point point-a"><b>01</b>Commerce</span>
+          <span class="map-point point-b"><b>02</b>Content</span>
+          <span class="map-point point-c"><b>03</b>Coordination</span>
+          <svg viewBox="0 0 420 420" aria-hidden="true"><circle cx="210" cy="210" r="92"/><circle cx="210" cy="210" r="153"/><path d="M102 104l108 106 123-96M210 210l87 122"/></svg>
+        </div>
+      </header>
+
+      <section class="story-section section-space">
+        <div class="section-intro" data-reveal><p>01 / The journey</p><h2>Four chapters that shaped how I think about work</h2></div>
+        <div class="story-chapters">
+          <article data-reveal><span>2023</span><div><small>THE FOUNDATION</small><h3>Learning how businesses work</h3><p>B.Com studies in accounting and economics gave me a structured way to understand decisions, markets, and business fundamentals.</p></div><strong>Commerce</strong></article>
+          <article data-reveal><span>FIRST MILESTONE</span><div><small>ACADEMIC DISCIPLINE</small><h3>CA Foundation, first attempt</h3><p>Scoring 286 out of 400 with distinction reinforced the value of consistency, preparation, and working carefully under pressure.</p></div><strong>286/400</strong></article>
+          <article data-reveal><span>2026</span><div><small>PRACTICE</small><h3>Turning ideas into visible work</h3><p>Digital marketing roles introduced content strategy, research, Canva execution, and the discipline of producing work for a real objective.</p></div><strong>7 assets</strong></article>
+          <article data-reveal><span>NOW</span><div><small>RESPONSIBILITY</small><h3>Moving closer to operations</h3><p>Project management and Layer-1 leadership made process visibility, documentation, quality checks, and coordination the strongest thread in my work.</p></div><strong>Lead</strong></article>
+        </div>
+      </section>
+
+      <section class="about-belief section-space" data-reveal>
+        <p>WHAT I NOTICE</p>
+        <h2>I notice the tracker people stop trusting, the handoff that needs repeating, and the status nobody can see.</h2>
+        <div><span>That kind of friction interests me.</span><p>I want to understand where it comes from, organize the information around it, and help the work move more clearly.</p></div>
+      </section>
+
+      <section class="approach-section section-space">
+        <div class="section-intro" data-reveal><p>02 / Working approach</p><h2>How I move from an unclear situation to useful action</h2></div>
+        <div class="approach-interface" data-reveal>
+          <article><span>01</span><div><small>OBSERVE</small><h3>Understand what is actually happening</h3></div><i>Look at the process, information, and people involved.</i></article>
+          <article><span>02</span><div><small>ORGANIZE</small><h3>Give the moving parts a structure</h3></div><i>Use trackers, categories, documentation, or a clear plan.</i></article>
+          <article><span>03</span><div><small>COMMUNICATE</small><h3>Make the next step visible</h3></div><i>Keep people aligned through concise and reliable information.</i></article>
+          <article><span>04</span><div><small>REVIEW</small><h3>Check where the process still breaks</h3></div><i>Use quality checks and data to find what needs attention.</i></article>
+        </div>
+      </section>
+
+      <section class="toolkit-section section-space">
+        <div class="section-intro" data-reveal><p>03 / Working toolkit</p><h2>Capabilities, grouped by the job they help me do</h2></div>
+        <div class="toolkit-deck" data-reveal>
+          {capabilityGroups.map((group, index) => (
+            <article tabindex="0"><span>0{index + 1}</span><h3>{group.label}</h3><ul>{group.items.map((item) => <li>{item}</li>)}</ul><i aria-hidden="true">✦</i></article>
+          ))}
+        </div>
+      </section>
+
+      <section class="about-direction section-space" data-reveal>
+        <div><small>NEXT CHAPTER</small><h2>Building toward work at the intersection of operations, analysis, and coordination.</h2></div>
+        <ul><li>Business operations</li><li>Operations analysis</li><li>Project coordination</li><li>Founder’s office roles</li></ul>
+      </section>
+
+      <section class="contact-panel"><p>Open to early-career opportunities and thoughtful professional conversations.</p><h2>Let’s connect.</h2><a class="button button-light" href="https://www.linkedin.com/in/mehak--pahwa" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a></section>
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>

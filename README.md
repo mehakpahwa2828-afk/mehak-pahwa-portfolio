@@ -1,4 +1,4 @@
-# Mehak Pahwa — Professional Portfolio
+# Mehak Pahwa | Professional Portfolio
 
 A personal professional portfolio presenting Mehak Pahwa's work across business operations, recruitment systems, cross-functional coordination, and digital marketing.
 

@@ -1,22 +1,26 @@
+---
+const path = Astro.url.pathname;
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/work', label: 'Work' },
+  { href: '/experience', label: 'Experience' },
+  { href: '/about', label: 'About' },
+];
+---
 <header class="site-header" aria-label="Primary navigation">
-  <a class="brand" href="#top" aria-label="Mehak Pahwa, back to top">
+  <a class="brand" href="/" aria-label="Mehak Pahwa, home">
     <span class="brand-mark">MP</span>
     <span class="brand-name">Mehak Pahwa</span>
   </a>
   <nav>
-    <a href="#work">Work</a>
-    <a href="#experience">Experience</a>
-    <a href="#capabilities">Capabilities</a>
-    <a href="#about">About</a>
-    <a class="nav-cta" href="https://www.linkedin.com/in/mehak--pahwa" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+    {links.map((link) => <a class:list={{ active: path === link.href }} href={link.href}>{link.label}</a>)}
   </nav>
+  <div class="header-actions"><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode"><span aria-hidden="true"></span></button><a class="nav-cta" href="https://www.linkedin.com/in/mehak--pahwa" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></div>
   <details class="mobile-menu">
     <summary>Menu <span aria-hidden="true">＋</span></summary>
     <div>
-      <a href="#work">Selected work</a>
-      <a href="#experience">Experience</a>
-      <a href="#capabilities">Capabilities</a>
-      <a href="#about">About</a>
+      {links.map((link) => <a class:list={{ active: path === link.href }} href={link.href}>{link.label}</a>)}
+      <button class="mobile-theme" type="button" data-theme-toggle>Change color mode <span aria-hidden="true">◐</span></button>
       <a href="https://www.linkedin.com/in/mehak--pahwa" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
     </div>
   </details>
