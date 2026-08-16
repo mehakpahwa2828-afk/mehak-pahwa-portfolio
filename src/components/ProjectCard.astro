@@ -1,0 +1,52 @@
+---
+interface Props {
+  index: string;
+  category: string;
+  title: string;
+  summary: string;
+  contributions: string[];
+  theme: string;
+}
+
+const { index, category, title, summary, contributions, theme } = Astro.props;
+---
+
+<article class={`project-card project-${theme}`} data-reveal>
+  <div class="project-visual" aria-hidden="true">
+    <span class="visual-index">Project / {index}</span>
+    {index === '01' && (
+      <div class="pipeline-visual">
+        <div class="pipeline-head"><span>Recruitment flow</span><i>Live system view</i></div>
+        <div class="pipeline-row"><b>01</b><span>Applications</span><i></i></div>
+        <div class="pipeline-row"><b>02</b><span>Screening</span><i></i></div>
+        <div class="pipeline-row active"><b>03</b><span>Assignments</span><i></i></div>
+        <div class="pipeline-row"><b>04</b><span>Interviews</span><i></i></div>
+        <div class="pipeline-footer"><span>Track</span><span>Check</span><span>Standardise</span></div>
+      </div>
+    )}
+    {index === '02' && (
+      <div class="content-board">
+        <div class="board-note note-a"><small>PILLAR 01</small><strong>Educate</strong><span>Useful, clear, credible</span></div>
+        <div class="board-note note-b"><small>PILLAR 02</small><strong>Engage</strong><span>Prompt conversation</span></div>
+        <div class="board-note note-c"><small>CHANNEL PLAN</small><strong>Plan → Publish</strong><span>Audience · Format · Rhythm</span></div>
+        <svg viewBox="0 0 300 220" role="presentation"><path d="M70 58 C140 20 170 70 220 92 M88 150 C145 190 190 160 222 124" /></svg>
+      </div>
+    )}
+    {index === '03' && (
+      <div class="campaign-visual">
+        <div class="post post-back"><span>03</span><strong>RESEARCH</strong></div>
+        <div class="post post-middle"><span>02</span><strong>DESIGN</strong></div>
+        <div class="post post-front"><span>01</span><strong>CONTENT</strong><i>7 social assets</i></div>
+        <div class="campaign-tags"><span>Canva</span><span>SEO</span><span>HTML</span></div>
+      </div>
+    )}
+  </div>
+  <div class="project-content">
+    <p class="eyebrow">{category}</p>
+    <h3>{title}</h3>
+    <p class="project-summary">{summary}</p>
+    <ul aria-label="Key contributions">
+      {contributions.map((item) => <li>{item}</li>)}
+    </ul>
+  </div>
+</article>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f4efe5"/>
+  <path d="M70 70H1130M70 560H1130" stroke="#17252b" stroke-opacity=".22"/>
+  <circle cx="100" cy="112" r="25" fill="none" stroke="#17252b"/>
+  <text x="100" y="120" text-anchor="middle" font-family="Georgia,serif" font-size="18" fill="#17252b">MP</text>
+  <text x="145" y="120" font-family="Arial,sans-serif" font-size="19" font-weight="600" fill="#17252b">MEHAK PAHWA</text>
+  <text x="70" y="235" font-family="Georgia,serif" font-size="83" fill="#17252b">I bring structure to the</text>
+  <text x="70" y="330" font-family="Georgia,serif" font-size="92" font-style="italic" fill="#ad4f32">moving parts</text>
+  <text x="650" y="330" font-family="Georgia,serif" font-size="83" fill="#17252b">of business.</text>
+  <text x="72" y="418" font-family="Arial,sans-serif" font-size="22" fill="#586367">BUSINESS OPERATIONS · ANALYSIS · CROSS-FUNCTIONAL EXECUTION</text>
+  <g transform="translate(930 390)">
+    <rect width="200" height="120" fill="#17252b"/>
+    <path d="M25 35H175M25 60H145M25 85H165" stroke="#f4efe5" stroke-opacity=".65"/>
+    <circle cx="175" cy="35" r="6" fill="#ad4f32"/>
+  </g>
+</svg>

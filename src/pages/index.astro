@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { capabilities, capabilityGroups, credentials, experience, journey, projects, proofPoints, recognition } from '../data/portfolio';
+---
+
+<BaseLayout
+  title="Mehak Pahwa — Business Operations & Cross-functional Execution"
+  description="Mehak Pahwa is an emerging business operations professional bringing structure to data, processes, and cross-functional work."
+>
+  <div id="top" class="page-shell">
+    <Header />
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-kicker" data-reveal>
+          <span class="status-dot"></span>
+          Emerging business operations professional
+        </div>
+        <div class="hero-grid">
+          <div class="hero-copy" data-reveal>
+            <h1 id="hero-title">I bring structure to the <em>moving parts</em> of business.</h1>
+            <p>I’m Mehak Pahwa—using analysis, process design, and cross-functional coordination to turn information into organized action.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
+              <a class="text-link" href="https://www.linkedin.com/in/mehak--pahwa" target="_blank" rel="noreferrer">View LinkedIn <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <aside class="hero-system" aria-label="A visual model of Mehak's working approach" data-reveal>
+            <div class="system-topline"><span>WORKING MODEL / 01</span><i>In motion</i></div>
+            <div class="orbit-stage stage-input"><span>01</span><strong>Information</strong><small>Understand the moving parts</small></div>
+            <div class="orbit-stage stage-structure"><span>02</span><strong>Structure</strong><small>Build clarity and a system</small></div>
+            <div class="orbit-stage stage-action"><span>03</span><strong>Action</strong><small>Coordinate practical execution</small></div>
+            <svg class="system-path" viewBox="0 0 360 440" aria-hidden="true">
+              <path d="M92 86 C264 80 278 188 177 218 C70 250 90 355 265 360" />
+              <circle cx="92" cy="86" r="4"/><circle cx="177" cy="218" r="4"/><circle cx="265" cy="360" r="4"/>
+            </svg>
+            <p class="system-caption">Not a straight line.<br />A way of making work clearer.</p>
+          </aside>
+        </div>
+        <div class="proof-strip" aria-label="Professional highlights" data-reveal>
+          {proofPoints.map((point) => (
+            <div><strong>{point.value}</strong><span>{point.label}</span></div>
+          ))}
+        </div>
+      </section>
+
+      <section class="capability-section" aria-labelledby="approach-heading">
+        <div class="section-label" data-reveal><span>How I work</span>From complexity to clarity</div>
+        <h2 id="approach-heading" class="sr-only">How I work</h2>
+        <div class="capability-grid connected-grid">
+          {capabilities.map((capability) => (
+            <article data-reveal>
+              <span>{capability.number}</span>
+              <h3>{capability.title}</h3>
+              <p>{capability.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="work" class="section projects-section" aria-labelledby="work-heading">
+        <SectionHeading
+          index="01"
+          eyebrow="Selected work"
+          title="Evidence, not adjectives."
+          copy="A selection of work that shows how I organize information, shape processes, and help ideas become usable outputs."
+        />
+        <div id="work-heading" class="projects-list">
+          {projects.map((project) => <ProjectCard {...project} />)}
+        </div>
+      </section>
+
+      <section id="journey" class="section journey-section" aria-labelledby="journey-heading">
+        <SectionHeading
+          index="02"
+          eyebrow="Journey"
+          title="A foundation in commerce. A growing range in practice."
+          copy="My path so far is defined by disciplined learning and an increasing willingness to take ownership of real work."
+        />
+        <ol id="journey-heading" class="timeline">
+          {journey.map((item) => (
+            <li data-reveal>
+              <span class="timeline-period">{item.period}</span>
+              <div><h3>{item.title}</h3><p>{item.detail}</p></div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section id="experience" class="experience-section" aria-labelledby="experience-heading">
+        <div class="experience-wrap">
+          <SectionHeading
+            index="03"
+            eyebrow="Experience"
+            title="Responsibility that became increasingly real."
+            copy="Three roles across two functions—connected by a consistent instinct to organize, communicate, and follow through."
+          />
+          <div id="experience-heading" class="experience-list">
+            {experience.map((item, index) => (
+              <article class="experience-item" data-reveal>
+                <div class="experience-meta">
+                  <span>0{index + 1}</span>
+                  <p>{item.period}</p>
+                </div>
+                <div class="experience-main">
+                  <p class="eyebrow">{item.organisation}</p>
+                  <h3>{item.role}</h3>
+                  <p class="experience-lead">{item.lead}</p>
+                </div>
+                <ul>
+                  {item.evidence.map((point) => <li>{point}</li>)}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="capabilities" class="section capabilities-detail" aria-labelledby="capabilities-heading">
+        <SectionHeading
+          index="04"
+          eyebrow="Capabilities"
+          title="Skills organized around what they help me accomplish."
+          copy="Tools matter most when they support clearer decisions, better systems, and dependable execution."
+        />
+        <div id="capabilities-heading" class="capability-map">
+          <div class="map-center" data-reveal>
+            <span>MEHAK / TOOLKIT</span>
+            <strong>Learn.<br />Structure.<br /><em>Apply.</em></strong>
+          </div>
+          {capabilityGroups.map((group, index) => (
+            <article class={`map-group map-group-${index + 1}`} data-reveal>
+              <span>0{index + 1}</span>
+              <h3>{group.label}</h3>
+              <ul>{group.items.map((item) => <li>{item}</li>)}</ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="section credentials-section" aria-labelledby="credentials-heading">
+        <SectionHeading
+          index="05"
+          eyebrow="Foundation"
+          title="Education, development, and evidence of discipline."
+          copy="A commerce foundation supported by structured professional learning and consistent academic performance."
+        />
+        <div id="credentials-heading" class="credential-layout">
+          <div class="credential-list">
+            {credentials.map((item) => (
+              <article data-reveal>
+                <span>{item.year}</span>
+                <div><h3>{item.title}</h3><p>{item.source}</p></div>
+                <p>{item.detail}</p>
+              </article>
+            ))}
+          </div>
+          <aside class="recognition-board" data-reveal>
+            <p class="eyebrow">Selected recognition</p>
+            {recognition.map((item) => (
+              <div><span>{item.marker}</span><h3>{item.title}</h3><p>{item.detail}</p></div>
+            ))}
+          </aside>
+        </div>
+      </section>
+
+      <section id="about" class="section about-section" aria-labelledby="about-heading">
+        <div class="about-index" data-reveal><span>06</span>About</div>
+        <div class="about-copy" data-reveal>
+          <h2 id="about-heading">Curious about how businesses work—and how they can work <em>better.</em></h2>
+          <p>I’m drawn to the space between a plan and its execution: the trackers, decisions, communication, and follow-through that turn activity into progress.</p>
+          <p>My commerce and accounting foundation gives me a disciplined way of looking at business. Experience across operations and digital marketing is teaching me how that thinking changes across functions.</p>
+        </div>
+      </section>
+
+      <section id="contact" class="closing" aria-labelledby="contact-heading">
+        <p class="eyebrow" data-reveal>Open to learning, contributing, and building</p>
+        <h2 id="contact-heading" data-reveal>Let’s begin with a thoughtful conversation.</h2>
+        <div class="closing-actions" data-reveal>
+          <a class="button button-light" href="https://www.linkedin.com/in/mehak--pahwa" target="_blank" rel="noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+          <p>Interested in early-career opportunities across business operations, analysis, and cross-functional roles.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 Mehak Pahwa</p>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+  </div>
+</BaseLayout>
