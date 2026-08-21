@@ -455,15 +455,13 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 }
 .portrait-canvas .canvas-portrait::after{
   z-index:2;
-  background:
-    linear-gradient(90deg,var(--surface) 0%,color-mix(in srgb,var(--surface),transparent 30%) 8%,transparent 22%,transparent 78%,color-mix(in srgb,var(--surface),transparent 30%) 92%,var(--surface) 100%),
-    linear-gradient(180deg,color-mix(in srgb,var(--surface),transparent 8%) 0%,transparent 16%,transparent 56%,color-mix(in srgb,var(--surface),transparent 86%) 66%,color-mix(in srgb,var(--surface),transparent 30%) 82%,var(--surface) 100%);
+  background:linear-gradient(180deg,transparent 58%,color-mix(in srgb,var(--surface),transparent 82%) 70%,var(--surface) 100%);
 }
 .portrait-canvas .canvas-portrait img{
   position:relative;
   z-index:1;
-  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 57%,rgba(0,0,0,.96) 66%,rgba(0,0,0,.46) 84%,transparent 100%);
-  mask-image:linear-gradient(180deg,#000 0%,#000 57%,rgba(0,0,0,.96) 66%,rgba(0,0,0,.46) 84%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 68% 74% at 52% 43%,#000 0%,#000 42%,rgba(0,0,0,.82) 58%,rgba(0,0,0,.3) 76%,transparent 92%);
+  mask-image:radial-gradient(ellipse 68% 74% at 52% 43%,#000 0%,#000 42%,rgba(0,0,0,.82) 58%,rgba(0,0,0,.3) 76%,transparent 92%);
 }
 
 /* Make the storyline legible and give supporting evidence distinct identities. */
