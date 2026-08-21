@@ -414,6 +414,40 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
   .portrait-canvas .card-score{left:1.8rem;bottom:78px}
 }
 
+/* Mobile portrait: keep every label outside the photograph. */
+@media(max-width:620px){
+  .portrait-canvas{min-height:800px}
+  .portrait-canvas .canvas-portrait{inset:54px .75rem 306px}
+  .portrait-canvas .canvas-card{
+    top:auto;
+    right:auto;
+    min-height:104px;
+    padding:.78rem;
+    transform:none;
+    box-shadow:4px 4px 0 color-mix(in srgb,var(--accent-soft),transparent 8%);
+    backdrop-filter:none;
+  }
+  .portrait-canvas .card-role{
+    left:.75rem;
+    bottom:174px;
+    width:calc(100% - 1.5rem);
+  }
+  .portrait-canvas .card-study{
+    left:.75rem;
+    bottom:56px;
+    width:calc(50% - 1rem);
+  }
+  .portrait-canvas .card-score{
+    left:auto;
+    right:.75rem;
+    bottom:56px;
+    width:calc(50% - 1rem);
+  }
+  .portrait-canvas .canvas-card strong{font-size:1.12rem}
+  .portrait-canvas .canvas-card span{font-size:.54rem;line-height:1.35}
+  .portrait-canvas .canvas-card>i{display:none}
+}
+
 /* Make the storyline legible and give supporting evidence distinct identities. */
 .notes-panel::after{opacity:.32;backdrop-filter:none}.storyline-track{stroke:color-mix(in srgb,var(--ink),transparent 70%);stroke-width:1.4}.storyline-motion{stroke:var(--accent);stroke-width:2.4;stroke-dasharray:11 16;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--accent),transparent 45%))}.storyline-runner{fill:var(--accent);stroke:var(--surface);stroke-width:3;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 7px color-mix(in srgb,var(--accent),transparent 15%))}.story-node-label{padding:6px 8px;background:color-mix(in srgb,var(--surface),transparent 12%);border:1px solid color-mix(in srgb,var(--ink),transparent 80%);color:color-mix(in srgb,var(--ink),transparent 28%);box-shadow:2px 3px 0 color-mix(in srgb,var(--accent),transparent 82%);font-weight:700}.field-notes[data-active-note="0"] .label-foundation,.field-notes[data-active-note="1"] .label-exploration,.field-notes[data-active-note="2"] .label-systems,.field-notes[data-active-note="3"] .label-direction{background:var(--ink);border-color:var(--ink);color:var(--bg)}.editorial-corner-note{position:absolute;right:-18px;top:46%;width:190px;padding:15px 22px;background:#26364b;color:#f7efe4;box-shadow:6px 7px 0 color-mix(in srgb,var(--accent),transparent 38%);transform:rotate(4deg);opacity:.9}.editorial-corner-note::before{content:'';position:absolute;left:38px;top:-9px;width:72px;height:18px;background:rgba(209,175,137,.62);transform:rotate(-5deg)}.editorial-corner-note small{display:block;margin-bottom:8px;color:#efab81;font-size:.46rem;letter-spacing:.14em}.editorial-corner-note q{font-family:var(--font-display);font-size:1.05rem;line-height:1.1}.editorial-cutting{position:absolute;left:43%;bottom:-10px;width:190px;padding:12px 16px;background:#eee2ca;color:#332c25;border-top:3px double #3d352d;box-shadow:4px 5px 0 rgba(61,53,45,.16);transform:rotate(-2deg);opacity:.86}.editorial-cutting b,.editorial-cutting span{display:block}.editorial-cutting b{font-family:Georgia,serif;font-size:1rem}.editorial-cutting span{margin-top:5px;font-size:.46rem;letter-spacing:.08em;line-height:1.35;text-transform:uppercase}
 .credential-ledger div:nth-child(3){background:#ede1cb;border:0;border-top:4px double #8c6446;box-shadow:7px 8px 0 #d4b58d;transform:rotate(-1deg)}.credential-ledger div:nth-child(3)::after{content:'01';position:absolute;right:8px;bottom:-23px;color:rgba(142,91,58,.12);font-family:var(--font-display);font-size:6rem}.credential-ledger div:nth-child(5){border:2px dashed #806b55;background:#f4ecdd;clip-path:polygon(0 0,96% 0,100% 9%,97% 18%,100% 27%,97% 36%,100% 45%,97% 54%,100% 63%,97% 72%,100% 81%,97% 90%,100% 100%,0 100%);box-shadow:none}.credential-ledger div:nth-child(5)::after{content:'MERIT';position:absolute;right:-5px;bottom:8px;color:rgba(58,48,39,.08);font-family:var(--font-display);font-size:3.4rem}.credential-ledger div:nth-child(6){border:0;border-radius:60px 8px 60px 8px;background:#526d6b;color:#fff;box-shadow:6px 7px 0 #b9ccc6}.credential-ledger div:nth-child(6)::before{color:#f2c9a8}.credential-ledger div:nth-child(6) span{color:rgba(255,255,255,.75)}
