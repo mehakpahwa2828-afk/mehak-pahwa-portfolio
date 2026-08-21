@@ -455,7 +455,9 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 }
 .portrait-canvas .canvas-portrait::after{
   z-index:2;
-  background:linear-gradient(180deg,transparent 56%,color-mix(in srgb,var(--surface),transparent 86%) 66%,color-mix(in srgb,var(--surface),transparent 30%) 82%,var(--surface) 100%);
+  background:
+    linear-gradient(90deg,var(--surface) 0%,color-mix(in srgb,var(--surface),transparent 30%) 8%,transparent 22%,transparent 78%,color-mix(in srgb,var(--surface),transparent 30%) 92%,var(--surface) 100%),
+    linear-gradient(180deg,color-mix(in srgb,var(--surface),transparent 8%) 0%,transparent 16%,transparent 56%,color-mix(in srgb,var(--surface),transparent 86%) 66%,color-mix(in srgb,var(--surface),transparent 30%) 82%,var(--surface) 100%);
 }
 .portrait-canvas .canvas-portrait img{
   position:relative;
