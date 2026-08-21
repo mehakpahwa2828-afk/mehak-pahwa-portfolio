@@ -4,4 +4,47 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { credentials, experience, recognition } from '../data/portfolio';
 ---
-<BaseLayout title="Experience | Mehak Pahwa" description="Experience, education, and recognition for Mehak Pahwa."><div class="site-shell"><Header /><main id="main"><header class="page-header"><p class="page-kicker"><span></span>Experience</p><h1>Learning by taking responsibility for <em>real work.</em></h1><p>My roles have moved from content execution into process tracking, quality checks, documentation, and team coordination.</p></header><div class="trajectory" aria-hidden="true"><span>Content execution</span><i></i><span>Process visibility</span><i></i><span>Team coordination</span><b>NOW</b></div><section class="role-list">{experience.map((item, index) => <article data-reveal tabindex="0"><div class={`role-sticker sticker-${index + 1}`} aria-hidden="true">{index === 0 ? <svg viewBox="0 0 90 90"><circle cx="45" cy="20" r="10"/><path d="M45 31v30M27 47l18-9 18 9M32 76l13-15 13 15"/><circle cx="17" cy="49" r="6"/><circle cx="73" cy="49" r="6"/></svg> : index === 1 ? <svg viewBox="0 0 90 90"><path d="M18 20h54v48H18zM28 31h34M28 42h22M28 53h28"/><path d="M59 61l13 13"/><circle cx="55" cy="57" r="12"/></svg> : <svg viewBox="0 0 90 90"><path d="M15 28l30-13 30 13-30 13zM24 36v22c12 9 30 9 42 0V36"/><path d="M75 28v24"/><circle cx="75" cy="58" r="5"/></svg>}</div><div class="role-number"><span>0{index + 1}</span><i>VIEW ROLE</i></div><div class="role-heading"><p>{item.period}</p><h2>{item.organisation}</h2><strong>{item.role}</strong></div><div class="role-detail"><p>{item.lead}</p><ul>{item.evidence.map((point) => <li>{point}</li>)}</ul><small>{item.evidence.length} responsibility highlights</small></div></article>)}</section><section class="education-section section-space"><div class="section-intro"><p>02 / Foundation</p><h2>Education and professional development</h2></div><div class="education-grid">{credentials.map((item) => <article tabindex="0"><span>{item.year}</span><h3>{item.title}</h3><p>{item.source}</p><small>{item.detail}</small></article>)}</div></section><section class="recognition-section section-space"><div class="section-intro"><p>03 / Recognition</p><h2>Selected academic evidence</h2></div><div class="recognition-grid">{recognition.map((item) => <article tabindex="0"><span>{item.marker}</span><h3>{item.title}</h3><p>{item.detail}</p></article>)}</div></section></main><Footer /></div></BaseLayout>
+
+<BaseLayout title="Experience | Mehak Pahwa" description="Experience, education, and recognition for Mehak Pahwa.">
+  <div class="site-shell">
+    <Header />
+    <main id="main">
+      <header class="page-header" data-reveal>
+        <p class="page-kicker"><span></span>Experience</p>
+        <h1>Learning by taking responsibility for <em>real work.</em></h1>
+        <p>My roles have moved from content execution into process tracking, quality checks, documentation, and team coordination.</p>
+      </header>
+
+      <div class="trajectory" data-reveal aria-hidden="true"><span>Content execution</span><i></i><span>Process visibility</span><i></i><span>Team coordination</span><b>NOW</b></div>
+
+      <div class="section-intro experience-intro" data-reveal>
+        <p>01 / Experience</p>
+        <h2>Responsibility across content, systems, and coordination</h2>
+      </div>
+
+      <section class="role-list" aria-label="Professional experience">
+        {experience.map((item, index) => (
+          <article id={index === 0 ? 'current-role' : undefined} data-reveal tabindex="0">
+            <div class={`role-sticker sticker-${index + 1}`} aria-hidden="true">
+              {index === 0 ? <svg viewBox="0 0 90 90"><circle cx="45" cy="20" r="10"/><path d="M45 31v30M27 47l18-9 18 9M32 76l13-15 13 15"/><circle cx="17" cy="49" r="6"/><circle cx="73" cy="49" r="6"/></svg> : index === 1 ? <svg viewBox="0 0 90 90"><path d="M18 20h54v48H18zM28 31h34M28 42h22M28 53h28"/><path d="M59 61l13 13"/><circle cx="55" cy="57" r="12"/></svg> : <svg viewBox="0 0 90 90"><path d="M15 28l30-13 30 13-30 13zM24 36v22c12 9 30 9 42 0V36"/><path d="M75 28v24"/><circle cx="75" cy="58" r="5"/></svg>}
+            </div>
+            <div class="role-number"><span>0{index + 1}</span><i>VIEW ROLE</i></div>
+            <div class="role-heading"><p>{item.period}</p><h2>{item.organisation}</h2><strong>{item.role}</strong></div>
+            <div class="role-detail"><p>{item.lead}</p><ul>{item.evidence.map((point) => <li>{point}</li>)}</ul><small>{item.evidence.length} responsibility highlights</small></div>
+          </article>
+        ))}
+      </section>
+
+      <section id="education" class="education-section section-space">
+        <div class="section-intro" data-reveal><p>02 / Foundation</p><h2>Education and professional development</h2></div>
+        <div class="education-grid">{credentials.map((item) => <article data-reveal tabindex="0"><span>{item.year}</span><h3>{item.title}</h3><p>{item.source}</p><small>{item.detail}</small></article>)}</div>
+      </section>
+
+      <section id="recognition" class="recognition-section section-space">
+        <div class="section-intro" data-reveal><p>03 / Recognition</p><h2>Selected academic evidence</h2></div>
+        <div class="recognition-grid">{recognition.map((item) => <article data-reveal tabindex="0"><span>{item.marker}</span><h3>{item.title}</h3><p>{item.detail}</p></article>)}</div>
+      </section>
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>

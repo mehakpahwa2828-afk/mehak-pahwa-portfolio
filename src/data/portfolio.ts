@@ -1,31 +1,40 @@
 export const proofPoints = [
-  { value: '286/400', label: 'CA Foundation · first attempt' },
-  { value: '3', label: 'functions explored through practice' },
-  { value: '10 weeks', label: 'McKinsey Forward learning journey' },
+  { value: '286/400', label: 'CA Foundation · first attempt', href: '/experience#recognition' },
+  { value: '3', label: 'functions explored through practice', href: '/work' },
+  { value: '10 weeks', label: 'McKinsey Forward learning journey', href: '/experience#education' },
 ];
 
 export const projects = [
   {
     index: '01',
+    featured: true,
     category: 'Operations · Recruitment systems',
+    context: 'Jarurat Care Foundation · Project management',
     title: 'Making a recruitment pipeline easier to see and manage.',
     summary: 'A working system of Google Sheets trackers, quality checks, and standard operating procedures designed to bring consistency to a multi-stage recruitment process.',
+    skills: ['Google Sheets', 'Process documentation', 'Quality checks'],
     contributions: ['Pipeline tracking', 'Data quality', 'SOP authoring', 'Cross-layer coordination'],
     theme: 'terracotta',
   },
   {
     index: '02',
+    featured: false,
     category: 'Strategy · Digital marketing',
+    context: 'FreshNest · Content strategy project',
     title: 'Turning a brand objective into a usable content plan.',
     summary: 'A content marketing direction for FreshNest, translating audience and platform thinking into content pillars, distribution choices, and an actionable calendar.',
+    skills: ['Content strategy', 'Audience research', 'Content planning'],
     contributions: ['Content pillars', 'Channel planning', 'Audience thinking', 'Content calendar'],
     theme: 'sage',
   },
   {
     index: '03',
+    featured: false,
     category: 'Creative execution · Campaign support',
+    context: 'Alfido Tech · Digital marketing internship',
     title: 'Designing content as part of a wider campaign workflow.',
     summary: 'Hands-on experience creating social posts and carousels while gaining exposure to HTML campaign work, SEO research, and AI-assisted workflows.',
+    skills: ['Canva', 'SEO research', 'Campaign support'],
     contributions: ['7 social posts', 'Carousel design', 'SEO research', 'Campaign support'],
     theme: 'ink',
   },

@@ -7,20 +7,33 @@ import { proofPoints } from '../data/portfolio';
 <BaseLayout title="Mehak Pahwa | Business Operations and Analysis" description="Mehak Pahwa works across business operations, analysis, recruitment systems, and cross-functional coordination.">
   <div class="site-shell"><Header /><main id="main">
     <section class="home-hero">
-      <div class="hero-atmosphere" aria-hidden="true"><i></i><i></i><i></i><span>STRUCTURE · CLARITY · MOMENTUM ·</span></div>
-      <div class="hero-intro" data-reveal><p class="page-kicker"><span></span>Business operations · Early career</p><h1>I make complex work <em>easier to follow.</em></h1><p class="hero-lead">I’m Mehak Pahwa. My experience spans recruitment operations, reporting systems, content planning, and cross-functional coordination.</p><div class="hero-actions"><a class="button button-primary" href="/work">See my work <span>↗</span></a><a class="text-link" href="/experience">View experience <span>→</span></a></div></div>
-      <div class="profile-canvas" data-reveal aria-label="Mehak Pahwa at a glance">
+      <div class="hero-atmosphere" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="hero-intro" data-reveal>
+        <p class="page-kicker"><span></span>Business operations · Early career</p>
+        <h1>I make complex work <em>easier to follow.</em></h1>
+        <p class="hero-lead">I’m Mehak Pahwa, a B.Com student with a CA Foundation distinction, building practical experience across recruitment operations, reporting systems, content planning, and cross-functional coordination.</p>
+        <div class="hero-workflow" aria-label="Example recruitment workflow">
+          <div><span>System in practice</span><small>Recruitment operations</small></div>
+          <ol><li><b>01</b>Applications</li><li><b>02</b>Screening</li><li><b>03</b>Assignments</li><li><b>04</b>Interviews</li></ol>
+        </div>
+        <div class="hero-actions"><a class="button button-primary" href="/work">See my work <span>↗</span></a><a class="text-link" href="/experience">View experience <span>→</span></a></div>
+      </div>
+      <div class="profile-canvas portrait-canvas" data-reveal aria-label="Mehak Pahwa at a glance">
         <div class="canvas-top"><span>MEHAK / AT A GLANCE</span><i>2026</i></div>
-        <div class="canvas-orbit" aria-hidden="true"><span>MP</span></div>
-        <article class="canvas-card card-role"><small>NOW</small><strong>Project Manager</strong><span>Jarurat Care Foundation</span></article>
-        <article class="canvas-card card-study"><small>FOUNDATION</small><strong>B.Com</strong><span>MDU · 2023–26</span></article>
-        <article class="canvas-card card-score"><small>MILESTONE</small><strong>286 / 400</strong><span>CA Foundation · first attempt</span></article>
+        <figure class="canvas-portrait"><img src="/images/mehak-pahwa-portrait.webp" width="1000" height="1000" alt="Professional portrait of Mehak Pahwa" decoding="async" fetchpriority="high" /></figure>
+        <svg class="canvas-connectors" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <path class="portrait-orbit-line portrait-orbit-left" d="M 16 22 C 5 35, 5 68, 16 81" />
+          <path class="portrait-orbit-line portrait-orbit-right" d="M 84 22 C 95 35, 95 68, 84 81" />
+        </svg>
+        <a class="canvas-card card-role" href="/experience#current-role" aria-label="View current role in Experience"><small>NOW</small><strong>Project Manager</strong><span>Jarurat Care Foundation</span><i aria-hidden="true">View ↗</i></a>
+        <a class="canvas-card card-study" href="/experience#education" aria-label="View education and professional development"><small>FOUNDATION</small><strong>B.Com</strong><span>MDU · 2023–26</span><i aria-hidden="true">View ↗</i></a>
+        <a class="canvas-card card-score" href="/experience#recognition" aria-label="View academic recognition"><small>MILESTONE</small><strong>286 / 400</strong><span>CA Foundation · first attempt</span><i aria-hidden="true">View ↗</i></a>
         <div class="canvas-footer"><span>Operations</span><span>Analysis</span><span>Coordination</span></div>
       </div>
     </section>
-    <section class="proof-bar" aria-label="Professional highlights">{proofPoints.map((point) => <div><strong>{point.value}</strong><span>{point.label}</span></div>)}</section>
+    <section class="proof-bar" data-reveal aria-label="Professional highlights">{proofPoints.map((point) => <a href={point.href}><strong>{point.value}</strong><span>{point.label}</span><i aria-hidden="true">View ↗</i></a>)}</section>
     <section class="home-story section-space"><div class="section-intro" data-reveal><p>01 / What I bring</p><h2>Practical experience, supported by a strong commerce foundation.</h2></div><div class="story-grid"><article data-reveal><span>Structure</span><h3>Systems that make progress visible</h3><p>I have built trackers, documented workflows, and used spreadsheet logic to organize recruitment activity.</p></article><article data-reveal><span>Coordination</span><h3>Clear information across teams</h3><p>As a Layer-1 Lead, I coordinated between the founder’s office and interns to keep work aligned.</p></article><article data-reveal><span>Range</span><h3>Experience across business functions</h3><p>My work includes operations, content strategy, campaign support, accounting, and economics.</p></article></div></section>
     <section class="featured-work section-space"><div class="feature-copy" data-reveal><p>02 / Featured work</p><h2>Recruitment operations at Jarurat Care Foundation</h2><p>I helped track recruitment activity, review process quality, document working methods, and coordinate information across levels.</p><a class="button button-outline" href="/work">Explore the project <span>→</span></a></div><div class="feature-interface" data-reveal aria-hidden="true"><div class="fi-head"><span>PIPELINE / OVERVIEW</span><b>4 stages</b></div><div class="fi-stage"><i>01</i><strong>Applications</strong><span>Track</span></div><div class="fi-stage"><i>02</i><strong>Screening</strong><span>Check</span></div><div class="fi-stage active"><i>03</i><strong>Assignments</strong><span>Monitor</span></div><div class="fi-stage"><i>04</i><strong>Interviews</strong><span>Coordinate</span></div></div></section>
-    <section class="page-cta"><p>There is more behind the overview.</p><h2>See the work, responsibilities, and decisions in context.</h2><div><a href="/work">Selected work ↗</a><a href="/experience">Experience ↗</a><a href="/about">About me ↗</a></div></section>
+    <section class="page-cta" data-reveal><p>There is more behind the overview.</p><h2>See the work, responsibilities, and decisions in context.</h2><div><a href="/work">Selected work ↗</a><a href="/experience">Experience ↗</a><a href="/about">About me ↗</a></div></section>
   </main><Footer /></div>
 </BaseLayout>

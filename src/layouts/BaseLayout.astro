@@ -35,6 +35,7 @@ const pageName = Astro.url.pathname === '/' ? 'home' : Astro.url.pathname.split(
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <script is:inline>
+      document.documentElement.classList.add('has-js');
       const savedTheme = localStorage.getItem('theme');
       const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       document.documentElement.dataset.theme = savedTheme || preferredTheme;
@@ -53,15 +54,25 @@ const pageName = Astro.url.pathname === '/' ? 'home' : Astro.url.pathname.split(
   <body class={`page-${pageName}`}>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="site-ambient" aria-hidden="true"><i></i><i></i><i></i><span></span></div>
+    <div class="pointer-orb" aria-hidden="true"><span></span></div>
     <slot />
     <script>
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      const revealElements = document.querySelectorAll('[data-reveal]');
+      let revealFrame = 0;
+      const syncReveals = () => {
+        cancelAnimationFrame(revealFrame);
+        revealFrame = requestAnimationFrame(() => {
+          const viewportHeight = window.innerHeight;
+          revealElements.forEach((element) => {
+            const bounds = element.getBoundingClientRect();
+            const isInView = bounds.bottom > viewportHeight * 0.04 && bounds.top < viewportHeight * 0.96;
+            element.classList.toggle('is-visible', isInView);
+          });
         });
-      }, { threshold: 0.12 });
-
-      document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
+      };
+      syncReveals();
+      window.addEventListener('scroll', syncReveals, { passive: true });
+      window.addEventListener('resize', syncReveals, { passive: true });
 
       document.querySelectorAll('.mobile-menu a').forEach((link) => {
         link.addEventListener('click', () => link.closest('details')?.removeAttribute('open'));
@@ -75,10 +86,25 @@ const pageName = Astro.url.pathname === '/' ? 'home' : Astro.url.pathname.split(
         });
       });
 
+      const pointerOrb = document.querySelector('.pointer-orb');
+
       window.addEventListener('pointermove', (event) => {
+        if (event.pointerType === 'touch') {
+          pointerOrb?.classList.remove('is-active');
+          return;
+        }
         document.documentElement.style.setProperty('--pointer-x', `${event.clientX}px`);
         document.documentElement.style.setProperty('--pointer-y', `${event.clientY}px`);
+        pointerOrb?.classList.add('is-active');
       }, { passive: true });
+
+      document.addEventListener('pointerover', (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        pointerOrb?.classList.toggle('is-interacting', Boolean(target.closest('a, button, summary, [tabindex]')));
+      });
+
+      document.documentElement.addEventListener('mouseleave', () => pointerOrb?.classList.remove('is-active'));
     </script>
   </body>
 </html>

@@ -15,23 +15,50 @@ import { capabilityGroups } from '../data/portfolio';
           <h1>Curiosity gave me range. <em>Responsibility gave me direction.</em></h1>
           <p>I began with commerce and a strong academic foundation. Practical roles showed me where I work best: making information clearer, processes more visible, and teamwork easier to coordinate.</p>
         </div>
-        <div class="story-map" data-reveal aria-label="Mehak's professional journey">
-          <div class="story-map-head"><span>JOURNEY / 2023—NOW</span><i>LIVE</i></div>
-          <div class="story-map-core"><small>CURRENT DIRECTION</small><strong>Operations<br/>+ analysis</strong></div>
-          <span class="map-point point-a"><b>01</b>Commerce</span>
-          <span class="map-point point-b"><b>02</b>Content</span>
-          <span class="map-point point-c"><b>03</b>Coordination</span>
-          <svg viewBox="0 0 420 420" aria-hidden="true"><circle cx="210" cy="210" r="92"/><circle cx="210" cy="210" r="153"/><path d="M102 104l108 106 123-96M210 210l87 122"/></svg>
-        </div>
       </header>
 
-      <section class="story-section section-space">
-        <div class="section-intro" data-reveal><p>01 / The journey</p><h2>Four chapters that shaped how I think about work</h2></div>
-        <div class="story-chapters">
-          <article data-reveal><span>2023</span><div><small>THE FOUNDATION</small><h3>Learning how businesses work</h3><p>B.Com studies in accounting and economics gave me a structured way to understand decisions, markets, and business fundamentals.</p></div><strong>Commerce</strong></article>
-          <article data-reveal><span>FIRST MILESTONE</span><div><small>ACADEMIC DISCIPLINE</small><h3>CA Foundation, first attempt</h3><p>Scoring 286 out of 400 with distinction reinforced the value of consistency, preparation, and working carefully under pressure.</p></div><strong>286/400</strong></article>
-          <article data-reveal><span>2026</span><div><small>PRACTICE</small><h3>Turning ideas into visible work</h3><p>Digital marketing roles introduced content strategy, research, Canva execution, and the discipline of producing work for a real objective.</p></div><strong>7 assets</strong></article>
-          <article data-reveal><span>NOW</span><div><small>RESPONSIBILITY</small><h3>Moving closer to operations</h3><p>Project management and Layer-1 leadership made process visibility, documentation, quality checks, and coordination the strongest thread in my work.</p></div><strong>Lead</strong></article>
+      <section class="field-notes-section section-space" data-field-notes>
+        <div class="section-intro" data-reveal><p>01 / Career field notes</p><h2>The evidence behind my direction</h2></div>
+        <div class="field-notes" data-reveal data-active-note="0">
+          <nav class="notes-index" aria-label="Career story chapters">
+            <button class="is-active" type="button" data-note-tab="0" aria-selected="true"><span>01</span><b>Profile</b><small>About + why me</small></button>
+            <button type="button" data-note-tab="1" aria-selected="false"><span>02</span><b>Foundation</b><small>Academic discipline</small></button>
+            <button type="button" data-note-tab="2" aria-selected="false"><span>03</span><b>Exploration</b><small>Creative practice</small></button>
+            <button type="button" data-note-tab="3" aria-selected="false"><span>04</span><b>Direction</b><small>HR operations</small></button>
+          </nav>
+
+          <div class="notes-stage" aria-live="polite">
+            <div class="notes-storyline" aria-hidden="true">
+              <svg viewBox="0 0 1000 520" preserveAspectRatio="none">
+                <path class="storyline-track" d="M-30 470 C160 430 300 468 470 438 S735 395 1030 105" />
+                <path class="storyline-motion" d="M-30 470 C160 430 300 468 470 438 S735 395 1030 105" />
+                <circle cx="120" cy="447" r="7"/><circle cx="390" cy="451" r="7"/><circle cx="680" cy="397" r="7"/><circle cx="900" cy="215" r="7"/>
+              </svg>
+              <span class="story-node-label label-foundation">FOUNDATION</span><span class="story-node-label label-exploration">EXPLORATION</span><span class="story-node-label label-systems">SYSTEMS</span><span class="story-node-label label-direction">DIRECTION</span>
+              <div class="editorial-corner-note"><small>FIELD NOTE / 04</small><q>Notice what others work around.</q></div>
+              <div class="editorial-cutting"><b>CLARITY</b><span>turning moving parts into visible work</span></div>
+            </div>
+            <article class="notes-panel panel-profile is-active" data-note-panel="0">
+              <figure><img src="/images/mehak-about.jpg" width="1254" height="1254" loading="lazy" decoding="async" alt="Portrait of Mehak Pahwa"/><span class="portrait-editorial-note" aria-hidden="true">Me beyond<br/>the CV</span><figcaption>MEHAK PAHWA / COMMERCE + OPERATIONS</figcaption></figure>
+              <div class="notes-copy"><p>PROFILE / 01</p><h3>I bring discipline to ideas—and clarity to moving work.</h3><p>Commerce taught me to read the numbers. Practical work taught me to notice the system around them.</p><div class="evidence-pills"><span>Academic consistency</span><span>Creative execution</span><span>Process thinking</span><span>People coordination</span></div></div>
+            </article>
+
+            <article class="notes-panel panel-foundation" data-note-panel="1" hidden>
+              <div class="notes-copy"><p>FOUNDATION / 02</p><h3>Proof that consistency compounds.</h3><p>Academic discipline was the first system I learned to build: preparation, repetition and careful execution.</p></div>
+              <div class="credential-ledger"><div><strong>Class Rank 2</strong><span>Academic Excellence Award · Class XII</span></div><div><strong>98/100</strong><span>Accountancy</span></div><div><strong>School Rank 1</strong><span>Economics Olympiad</span></div><div><strong>286/400</strong><span>CA Foundation · first attempt</span></div><div><strong>Merit list</strong><span>First-year B.Com recognition</span></div><div><strong>NSS</strong><span>Community work and teamwork</span></div></div>
+            </article>
+
+            <article class="notes-panel panel-exploration" data-note-panel="2" hidden>
+              <div class="notes-copy"><p>EXPLORATION / 03</p><h3>From an objective to something people can see.</h3><p>Two internships gave me room to explore strategy, independent design work and digital execution.</p></div>
+              <div class="practice-board"><section><small>UPSKILL CAMPUS</small><h4><b>FreshNest</b><span>Content strategy</span></h4><div><span>Educate</span><span>Engage</span><span>Activate</span></div><p>Content pillars, platform distribution and audience engagement for an imaginary brand.</p></section><section><small>ALFIDO TECH</small><h4><span>Creative execution</span></h4><strong>7 Canva posts</strong><p>Independently designed posts and carousel formats, plus a content calendar and AI-assisted exposure to HTML and SEO research.</p></section></div>
+            </article>
+
+            <article class="notes-panel panel-direction" data-note-panel="3" hidden>
+              <div class="notes-copy"><p>DIRECTION / 04</p><h3>The work became less about one task—and more about how everything connects.</h3><p>Recruitment operations brought together tracking, reporting, documentation, quality checks and leadership.</p></div>
+              <div class="operations-evidence"><div class="pipeline-mini" aria-label="Illustrative recruitment workflow"><span>Applications</span><i></i><span>Assignment</span><i></i><span>Scheduling</span><i></i><span>Interviews</span><i></i><span>Probation</span></div><div class="role-evidence"><small>CURRENT RESPONSIBILITY</small><strong class="role-credential-stamp">Project Manager<br/><b>+ HR Lead</b></strong><ul><li>Google Sheets trackers</li><li>Pivot tables and reporting</li><li>SOPs and quality checks</li><li>Cross-team coordination</li></ul><blockquote>“I notice the tracker people stop trusting, the handoff that needs repeating, and the status nobody can see.”</blockquote></div></div>
+            </article>
+            <div class="notes-progress"><span data-note-current>01</span><i><b data-note-bar></b></i><span>04</span></div>
+          </div>
         </div>
       </section>
 
@@ -70,3 +97,28 @@ import { capabilityGroups } from '../data/portfolio';
     <Footer />
   </div>
 </BaseLayout>
+
+<script>
+  const fieldNotes = document.querySelector('[data-field-notes]');
+  if (fieldNotes) {
+    const notesFrame = fieldNotes.querySelector('.field-notes');
+    const tabs = [...fieldNotes.querySelectorAll('[data-note-tab]')];
+    const panels = [...fieldNotes.querySelectorAll('[data-note-panel]')];
+    const current = fieldNotes.querySelector('[data-note-current]');
+    const bar = fieldNotes.querySelector('[data-note-bar]');
+    const activate = (index: number) => {
+      notesFrame?.setAttribute('data-active-note', String(index));
+      tabs.forEach((tab, tabIndex) => {
+        tab.classList.toggle('is-active', tabIndex === index);
+        tab.setAttribute('aria-selected', String(tabIndex === index));
+      });
+      panels.forEach((panel, panelIndex) => {
+        panel.toggleAttribute('hidden', panelIndex !== index);
+        panel.classList.toggle('is-active', panelIndex === index);
+      });
+      if (current) current.textContent = `0${index + 1}`;
+      if (bar instanceof HTMLElement) bar.style.width = `${((index + 1) / panels.length) * 100}%`;
+    };
+    tabs.forEach((tab, index) => tab.addEventListener('click', () => activate(index)));
+  }
+</script>
