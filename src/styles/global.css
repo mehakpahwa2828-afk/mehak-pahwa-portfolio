@@ -386,16 +386,6 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 
 /* Live-site reliability fixes: keep portrait labels clear of the face and
    never leave experience content trapped in a blurred reveal state. */
-@media(min-width:621px){
-  .portrait-canvas .card-role{
-    left:.55rem;
-    top:82px;
-    width:146px;
-    padding:.8rem;
-  }
-  .portrait-canvas .card-role strong{font-size:1.22rem}
-}
-
 .page-experience .role-list article[data-reveal]{
   opacity:1;
   filter:none;
@@ -410,29 +400,18 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
   to{opacity:1;transform:none}
 }
 
-/* Give the portrait and the three proof cards separate visual space. */
-@media(min-width:621px){
-  .portrait-canvas{min-height:620px}
-  .portrait-canvas .canvas-portrait{inset:54px 4% 184px}
-  .portrait-canvas .canvas-card{
-    top:auto;
-    bottom:48px;
-    width:calc((100% - 3.2rem)/3);
-    min-height:112px;
-    padding:.75rem;
-    transform:none;
-    box-shadow:4px 4px 0 color-mix(in srgb,var(--accent-soft),transparent 8%);
-    backdrop-filter:none;
+/* Preserve the floating-card composition while giving it enough width. */
+@media(min-width:901px){
+  .home-hero{
+    grid-template-columns:minmax(0,1fr) minmax(620px,.9fr);
+    gap:clamp(2.5rem,4vw,4.5rem);
   }
-  .portrait-canvas .card-role{left:.8rem}
-  .portrait-canvas .card-study{left:calc(33.333% + .25rem);right:auto}
-  .portrait-canvas .card-score{left:auto;right:.8rem}
-  .portrait-canvas .canvas-card strong{
-    margin:.35rem 0;
-    font-size:clamp(1rem,1.35vw,1.25rem);
-  }
-  .portrait-canvas .canvas-card span{font-size:.55rem;line-height:1.35}
-  .portrait-canvas .canvas-card>i{display:none}
+  .portrait-canvas{min-height:650px}
+  .portrait-canvas .canvas-portrait{inset:54px 7% 42px}
+  .portrait-canvas .canvas-card{width:182px;padding:1rem}
+  .portrait-canvas .card-role{left:.75rem;top:104px}
+  .portrait-canvas .card-study{right:.75rem;top:252px}
+  .portrait-canvas .card-score{left:1.8rem;bottom:78px}
 }
 
 /* Make the storyline legible and give supporting evidence distinct identities. */
