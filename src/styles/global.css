@@ -456,12 +456,14 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 .portrait-canvas .canvas-portrait::after{
   z-index:2;
   background:
-    linear-gradient(90deg,var(--surface) 0%,transparent 11%,transparent 89%,var(--surface) 100%),
-    linear-gradient(180deg,var(--surface) 0%,transparent 9%,transparent 78%,var(--surface) 100%);
+    linear-gradient(90deg,var(--surface) 0%,transparent 24%,transparent 78%,var(--surface) 100%),
+    linear-gradient(180deg,var(--surface) 0%,transparent 16%,transparent 70%,var(--surface) 100%);
 }
 .portrait-canvas .canvas-portrait img{
   position:relative;
   z-index:1;
+  -webkit-mask-image:radial-gradient(ellipse 82% 88% at 52% 48%,#000 58%,rgba(0,0,0,.94) 68%,transparent 100%);
+  mask-image:radial-gradient(ellipse 82% 88% at 52% 48%,#000 58%,rgba(0,0,0,.94) 68%,transparent 100%);
 }
 
 /* Make the storyline legible and give supporting evidence distinct identities. */
