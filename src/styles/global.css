@@ -508,6 +508,32 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 }
 @media(prefers-reduced-motion:reduce){.home-story .story-grid article.is-visible{animation:none}}
 
+/* One-time homepage introduction and a dimensional recruitment pipeline. */
+.intro-word{display:inline-block;opacity:0;transform:translateY(.65em) rotateX(-45deg);filter:blur(3px)}
+.is-intro-ready .intro-word{animation:intro-word-in .52s cubic-bezier(.16,.8,.2,1) forwards;animation-delay:calc(.34s + var(--word-index) * 42ms)}
+@keyframes intro-word-in{to{opacity:1;transform:none;filter:none}}
+
+.pipeline-carousel{position:relative;min-height:480px;padding-bottom:0;overflow:hidden;isolation:isolate;background:linear-gradient(145deg,var(--surface),color-mix(in srgb,var(--accent-soft),var(--surface) 78%));perspective:1000px}
+.pipeline-carousel .fi-head{position:relative;z-index:5;background:color-mix(in srgb,var(--surface),transparent 7%);backdrop-filter:blur(8px)}
+.pipeline-deck{position:absolute;z-index:3;inset:86px 7% 72px;transform-style:preserve-3d}
+.pipeline-carousel .fi-stage{position:absolute;top:50%;left:50%;width:min(76%,360px);min-height:112px;margin:0;padding:0 1.25rem;grid-template-columns:48px 1fr auto;border:1px solid var(--ink);background:var(--surface);box-shadow:12px 15px 0 color-mix(in srgb,var(--accent),transparent 68%);transform-style:preserve-3d;animation:pipeline-stage-cycle 12s cubic-bezier(.55,.05,.25,1) infinite;animation-delay:calc(var(--stage) * -9s)}
+.pipeline-carousel .fi-stage::before{content:'';position:absolute;inset:9px;border:1px solid color-mix(in srgb,var(--accent),transparent 72%);pointer-events:none}
+.pipeline-carousel .fi-stage i{position:relative;width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--accent);border-radius:50%;background:var(--surface)}
+.pipeline-carousel .fi-stage strong{position:relative;font-size:1.7rem}
+.pipeline-carousel .fi-stage span{position:relative;padding:.3rem .5rem;border:1px solid var(--line);background:var(--bg);text-transform:uppercase;letter-spacing:.08em}
+.pipeline-orbit{position:absolute;z-index:1;left:50%;top:51%;width:330px;height:210px;border:1px solid color-mix(in srgb,var(--accent),transparent 45%);border-radius:50%;transform:translate(-50%,-50%) rotate(-9deg);animation:pipeline-orbit-turn 14s linear infinite}
+.pipeline-orbit::before,.pipeline-orbit::after{content:'';position:absolute;border-radius:50%;background:var(--accent)}
+.pipeline-orbit::before{width:11px;height:11px;left:27px;top:22px;box-shadow:0 0 0 8px color-mix(in srgb,var(--accent),transparent 82%)}
+.pipeline-orbit::after{width:7px;height:7px;right:34px;bottom:24px}
+.pipeline-orbit i{position:absolute;inset:22px;border:1px dashed color-mix(in srgb,var(--ink),transparent 72%);border-radius:50%}
+.pipeline-orbit i+ i{inset:52px;transform:rotate(18deg)}
+.pipeline-orbit span{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;animation:pipeline-orbit-turn 14s linear infinite reverse}
+.pipeline-caption{position:absolute;z-index:4;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;margin:0;padding:1rem 1.2rem;border-top:1px solid var(--line);background:color-mix(in srgb,var(--surface),transparent 6%);font-size:.6rem;letter-spacing:.08em}.pipeline-caption span{color:var(--accent)}.pipeline-caption b{font-weight:500;color:var(--muted)}
+@keyframes pipeline-stage-cycle{0%,18%{opacity:1;transform:translate3d(-50%,-50%,110px) rotateY(0) scale(1);filter:none}24%,43%{opacity:.48;transform:translate3d(-108%,-52%,-90px) rotateY(18deg) scale(.76);filter:saturate(.55)}49%,68%{opacity:.16;transform:translate3d(-50%,-62%,-180px) rotateY(0) scale(.64);filter:blur(1px)}74%,93%{opacity:.45;transform:translate3d(8%,-52%,-90px) rotateY(-18deg) scale(.76);filter:saturate(.55)}100%{opacity:1;transform:translate3d(-50%,-50%,110px) rotateY(0) scale(1);filter:none}}
+@keyframes pipeline-orbit-turn{to{transform:translate(-50%,-50%) rotate(351deg)}}
+@media(max-width:620px){.pipeline-carousel{min-height:430px}.pipeline-deck{inset-inline:3%}.pipeline-carousel .fi-stage{width:88%;min-height:100px;grid-template-columns:42px 1fr auto;padding-inline:.8rem}.pipeline-carousel .fi-stage strong{font-size:1.35rem}.pipeline-orbit{width:260px;height:175px}.pipeline-caption b{display:none}}
+@media(prefers-reduced-motion:reduce){.intro-word{opacity:1;transform:none;filter:none}.is-intro-ready .intro-word,.pipeline-carousel .fi-stage,.pipeline-orbit,.pipeline-orbit span{animation:none}.pipeline-carousel .fi-stage{opacity:0}.pipeline-carousel .fi-stage:first-child{opacity:1;transform:translate3d(-50%,-50%,0)}}
+
 /* Keep the site cursor; remove only the Field Notes route circles. */
 .pointer-orb,.site-ambient i{display:block!important}.notes-storyline circle{display:none!important}
 
