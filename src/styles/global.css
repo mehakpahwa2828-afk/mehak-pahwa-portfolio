@@ -487,6 +487,11 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 @media(max-width:960px){.role-credential-stamp{font-size:clamp(1rem,2.3vw,1.35rem)!important}.role-evidence{padding:18px}.panel-direction{min-height:540px}}
 @media(max-width:700px){.panel-direction{min-height:0}.role-credential-stamp{font-size:1.35rem!important}}
 
+/* Keep all four career-field-note chapters visually equal. */
+.panel-direction{min-height:445px}
+@media(max-width:960px){.panel-direction{min-height:420px}}
+@media(max-width:700px){.panel-direction{min-height:0}}
+
 /* Keep the site cursor; remove only the Field Notes route circles. */
 .pointer-orb,.site-ambient i{display:block!important}.notes-storyline circle{display:none!important}
 
