@@ -40,6 +40,8 @@ import { proofPoints } from '../data/portfolio';
     const counterSection = document.querySelector('[data-proof-counters]');
     const counters = counterSection?.querySelectorAll('[data-count-to]') ?? [];
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const counterFrames = new Map<HTMLElement, number>();
+    let counterFinishTimer: number | undefined;
 
     const showFinalValues = () => counters.forEach((counter) => {
       const element = counter;
@@ -48,23 +50,46 @@ import { proofPoints } from '../data/portfolio';
     });
 
     const animateCounters = () => {
+      counterFrames.forEach((frame) => cancelAnimationFrame(frame));
+      counterFrames.clear();
+      if (counterFinishTimer) window.clearTimeout(counterFinishTimer);
+      counterSection?.classList.add('is-counting');
+
       counters.forEach((counter, index) => {
         const element = counter;
         if (!(element instanceof HTMLElement)) return;
         const target = Number(element.dataset.countTo ?? 0);
         const suffix = element.dataset.countSuffix ?? '';
-        const duration = target > 100 ? 1150 : 850;
-        const delay = index * 120;
+        const duration = target > 100 ? 1750 : 1250;
+        const delay = index * 160;
         const startedAt = performance.now() + delay;
+        element.textContent = `0${suffix}`;
 
         const tick = (now: number) => {
           const progress = Math.min(Math.max((now - startedAt) / duration, 0), 1);
           const eased = 1 - Math.pow(1 - progress, 3);
           element.textContent = `${Math.round(target * eased)}${suffix}`;
-          if (progress < 1) requestAnimationFrame(tick);
+          if (progress < 1) {
+            counterFrames.set(element, requestAnimationFrame(tick));
+          } else {
+            counterFrames.delete(element);
+          }
         };
 
-        requestAnimationFrame(tick);
+        counterFrames.set(element, requestAnimationFrame(tick));
+      });
+
+      counterFinishTimer = window.setTimeout(() => counterSection?.classList.remove('is-counting'), 2250);
+    };
+
+    const resetCounters = () => {
+      counterFrames.forEach((frame) => cancelAnimationFrame(frame));
+      counterFrames.clear();
+      if (counterFinishTimer) window.clearTimeout(counterFinishTimer);
+      counterSection?.classList.remove('is-counting');
+      counters.forEach((counter) => {
+        if (!(counter instanceof HTMLElement)) return;
+        counter.textContent = `0${counter.dataset.countSuffix ?? ''}`;
       });
     };
 
@@ -72,11 +97,10 @@ import { proofPoints } from '../data/portfolio';
       if (reduceMotion || !('IntersectionObserver' in window)) {
         showFinalValues();
       } else {
-        const counterObserver = new IntersectionObserver(([entry], observer) => {
-          if (!entry?.isIntersecting) return;
-          animateCounters();
-          observer.disconnect();
-        }, { threshold: .45 });
+        const counterObserver = new IntersectionObserver(([entry]) => {
+          if (entry?.isIntersecting) animateCounters();
+          else resetCounters();
+        }, { threshold: .35 });
         counterObserver.observe(counterSection);
       }
     }

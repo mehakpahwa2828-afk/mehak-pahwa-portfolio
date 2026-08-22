@@ -494,6 +494,8 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 
 /* Homepage proof counters and deliberate one-by-one capability reveal. */
 .proof-bar [data-count-to]{display:inline-block;min-width:4.8ch;font-variant-numeric:tabular-nums}
+.proof-bar [data-count-to]{transition:color .3s,transform .3s,text-shadow .3s}
+.proof-bar.is-counting [data-count-to]{color:var(--accent);transform:translateY(-3px) scale(1.08);text-shadow:0 7px 22px color-mix(in srgb,var(--accent),transparent 68%)}
 .home-story .story-grid article.is-visible{animation:home-capability-in .78s cubic-bezier(.16,.76,.2,1) both}
 .home-story .story-grid article:nth-child(1).is-visible{animation-delay:.08s}
 .home-story .story-grid article:nth-child(2).is-visible{animation-delay:.3s}
