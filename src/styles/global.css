@@ -492,6 +492,18 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 @media(max-width:960px){.panel-direction{min-height:420px}}
 @media(max-width:700px){.panel-direction{min-height:0}}
 
+/* Homepage proof counters and deliberate one-by-one capability reveal. */
+.proof-bar [data-count-to]{display:inline-block;min-width:4.8ch;font-variant-numeric:tabular-nums}
+.home-story .story-grid article.is-visible{animation:home-capability-in .78s cubic-bezier(.16,.76,.2,1) both}
+.home-story .story-grid article:nth-child(1).is-visible{animation-delay:.08s}
+.home-story .story-grid article:nth-child(2).is-visible{animation-delay:.3s}
+.home-story .story-grid article:nth-child(3).is-visible{animation-delay:.52s}
+@keyframes home-capability-in{
+  from{opacity:0;transform:translateY(34px) scale(.965);filter:blur(4px)}
+  to{opacity:1;transform:none;filter:none}
+}
+@media(prefers-reduced-motion:reduce){.home-story .story-grid article.is-visible{animation:none}}
+
 /* Keep the site cursor; remove only the Field Notes route circles. */
 .pointer-orb,.site-ambient i{display:block!important}.notes-storyline circle{display:none!important}
 

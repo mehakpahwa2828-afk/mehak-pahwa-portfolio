@@ -31,9 +31,54 @@ import { proofPoints } from '../data/portfolio';
         <div class="canvas-footer"><span>Operations</span><span>Analysis</span><span>Coordination</span></div>
       </div>
     </section>
-    <section class="proof-bar" data-reveal aria-label="Professional highlights">{proofPoints.map((point) => <a href={point.href}><strong>{point.value}</strong><span>{point.label}</span><i aria-hidden="true">View ↗</i></a>)}</section>
+    <section class="proof-bar" data-reveal data-proof-counters aria-label="Professional highlights">{proofPoints.map((point, index) => <a href={point.href}><strong aria-label={point.value}><span aria-hidden="true" data-count-to={index === 0 ? '286' : index === 1 ? '3' : '10'} data-count-suffix={index === 0 ? ' / 400' : index === 2 ? ' weeks' : ''}>0</span></strong><span>{point.label}</span><i aria-hidden="true">View ↗</i></a>)}</section>
     <section class="home-story section-space"><div class="section-intro" data-reveal><p>01 / What I bring</p><h2>Practical experience, supported by a strong commerce foundation.</h2></div><div class="story-grid"><article data-reveal><span>Structure</span><h3>Systems that make progress visible</h3><p>I have built trackers, documented workflows, and used spreadsheet logic to organize recruitment activity.</p></article><article data-reveal><span>Coordination</span><h3>Clear information across teams</h3><p>As a Layer-1 Lead, I coordinated between the founder’s office and interns to keep work aligned.</p></article><article data-reveal><span>Range</span><h3>Experience across business functions</h3><p>My work includes operations, content strategy, campaign support, accounting, and economics.</p></article></div></section>
     <section class="featured-work section-space"><div class="feature-copy" data-reveal><p>02 / Featured work</p><h2>Recruitment operations at Jarurat Care Foundation</h2><p>I helped track recruitment activity, review process quality, document working methods, and coordinate information across levels.</p><a class="button button-outline" href="/work">Explore the project <span>→</span></a></div><div class="feature-interface" data-reveal aria-hidden="true"><div class="fi-head"><span>PIPELINE / OVERVIEW</span><b>4 stages</b></div><div class="fi-stage"><i>01</i><strong>Applications</strong><span>Track</span></div><div class="fi-stage"><i>02</i><strong>Screening</strong><span>Check</span></div><div class="fi-stage active"><i>03</i><strong>Assignments</strong><span>Monitor</span></div><div class="fi-stage"><i>04</i><strong>Interviews</strong><span>Coordinate</span></div></div></section>
     <section class="page-cta" data-reveal><p>There is more behind the overview.</p><h2>See the work, responsibilities, and decisions in context.</h2><div><a href="/work">Selected work ↗</a><a href="/experience">Experience ↗</a><a href="/about">About me ↗</a></div></section>
   </main><Footer /></div>
+  <script>
+    const counterSection = document.querySelector('[data-proof-counters]');
+    const counters = counterSection?.querySelectorAll('[data-count-to]') ?? [];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const showFinalValues = () => counters.forEach((counter) => {
+      const element = counter;
+      if (!(element instanceof HTMLElement)) return;
+      element.textContent = `${element.dataset.countTo ?? '0'}${element.dataset.countSuffix ?? ''}`;
+    });
+
+    const animateCounters = () => {
+      counters.forEach((counter, index) => {
+        const element = counter;
+        if (!(element instanceof HTMLElement)) return;
+        const target = Number(element.dataset.countTo ?? 0);
+        const suffix = element.dataset.countSuffix ?? '';
+        const duration = target > 100 ? 1150 : 850;
+        const delay = index * 120;
+        const startedAt = performance.now() + delay;
+
+        const tick = (now) => {
+          const progress = Math.min(Math.max((now - startedAt) / duration, 0), 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          element.textContent = `${Math.round(target * eased)}${suffix}`;
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+
+        requestAnimationFrame(tick);
+      });
+    };
+
+    if (counterSection) {
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        showFinalValues();
+      } else {
+        const counterObserver = new IntersectionObserver(([entry], observer) => {
+          if (!entry?.isIntersecting) return;
+          animateCounters();
+          observer.disconnect();
+        }, { threshold: .45 });
+        counterObserver.observe(counterSection);
+      }
+    }
+  </script>
 </BaseLayout>
