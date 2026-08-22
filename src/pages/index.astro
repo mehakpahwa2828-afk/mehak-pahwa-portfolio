@@ -57,7 +57,7 @@ import { proofPoints } from '../data/portfolio';
         const delay = index * 120;
         const startedAt = performance.now() + delay;
 
-        const tick = (now) => {
+        const tick = (now: number) => {
           const progress = Math.min(Math.max((now - startedAt) / duration, 0), 1);
           const eased = 1 - Math.pow(1 - progress, 3);
           element.textContent = `${Math.round(target * eased)}${suffix}`;
