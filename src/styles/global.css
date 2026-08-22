@@ -554,6 +554,21 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 @media(max-width:620px){.pipeline-carousel{min-height:720px}.pipeline-stage-nav{grid-template-columns:repeat(3,1fr)}.pipeline-stage-nav button:nth-child(4),.pipeline-stage-nav button:nth-child(5){border-top:1px solid var(--line)}.pipeline-deck{inset:165px 3% auto;height:215px}.pipeline-orbit{top:38%}.pipeline-details{height:250px;left:.75rem;right:.75rem;bottom:.75rem}.pipeline-details article{padding:1rem}.pipeline-details h3{font-size:1.35rem}.pipeline-details p{font-size:.7rem}}
 @media(prefers-reduced-motion:reduce){.pipeline-carousel .fi-stage{transition:none}.pipeline-carousel .fi-stage.is-current{opacity:1;transform:translate3d(-50%,-50%,0)}.pipeline-details article.is-active{opacity:1;transform:none;animation:none}}
 
+/* Asymmetric homepage closing statement with intentional link highlights. */
+.home-closing-cta{margin-inline:clamp(12px,2.4vw,38px);padding:clamp(4.5rem,8vw,8rem) clamp(3rem,8vw,9rem);clip-path:polygon(0 7%,7% 0,93% 3%,100% 19%,97% 88%,88% 100%,7% 96%,0 79%);background:linear-gradient(135deg,var(--dark) 0%,color-mix(in srgb,var(--dark),var(--accent) 8%) 100%)}
+.home-closing-cta h2{max-width:880px}
+.home-closing-cta>div{gap:.8rem}
+.home-closing-cta .closing-link{position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:space-between;gap:2rem;min-width:165px;overflow:hidden;border-color:rgba(255,255,255,.42);color:#f4efe5;transition:color .32s,border-color .32s,transform .32s}
+.home-closing-cta .closing-link::before{content:'';position:absolute;z-index:-1;inset:-1px;background:#f4efe5;transform:translateX(-104%) skewX(-10deg);transform-origin:left;transition:transform .48s cubic-bezier(.16,.78,.2,1)}
+.home-closing-cta .closing-link-work{border-color:var(--accent);color:#ffd3c0}
+.home-closing-cta .closing-link-work::before{background:var(--accent)}
+.home-closing-cta .closing-link:hover,.home-closing-cta .closing-link:focus-visible{color:var(--dark);border-color:#f4efe5;transform:translateY(-3px)}
+.home-closing-cta .closing-link-work:hover,.home-closing-cta .closing-link-work:focus-visible{color:#fff;border-color:var(--accent)}
+.home-closing-cta .closing-link:hover::before,.home-closing-cta .closing-link:focus-visible::before{transform:translateX(0) skewX(-10deg) scaleX(1.08)}
+.home-closing-cta .closing-link span{transition:transform .32s}.home-closing-cta .closing-link:hover span,.home-closing-cta .closing-link:focus-visible span{transform:translate(4px,-3px)}
+@media(max-width:620px){.home-closing-cta{margin-inline:8px;padding:5.5rem 1.4rem;clip-path:polygon(0 4%,9% 0,92% 2%,100% 11%,97% 93%,86% 100%,5% 97%,0 86%)}.home-closing-cta .closing-link{width:100%}}
+@media(prefers-reduced-motion:reduce){.home-closing-cta .closing-link,.home-closing-cta .closing-link::before,.home-closing-cta .closing-link span{transition:none}}
+
 /* Keep the site cursor; remove only the Field Notes route circles. */
 .pointer-orb,.site-ambient i{display:block!important}.notes-storyline circle{display:none!important}
 
