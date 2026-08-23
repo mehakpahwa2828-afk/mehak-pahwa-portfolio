@@ -5,4 +5,32 @@ import Footer from '../components/Footer.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { projects } from '../data/portfolio';
 ---
-<BaseLayout title="Selected Work | Mehak Pahwa" description="Selected operations and digital marketing work by Mehak Pahwa."><div class="site-shell"><Header /><main id="main"><header class="page-header" data-reveal><p class="page-kicker"><span></span>Selected work</p><h1>Work that made information <em>more useful.</em></h1><p>These projects show what I was responsible for, how I approached the work, and which tools supported it.</p></header><div class="work-marquee" data-reveal aria-hidden="true"><div><span>PROCESS DESIGN</span><i>✦</i><span>CONTENT THINKING</span><i>✦</i><span>QUALITY CHECKS</span><i>✦</i><span>VISUAL EXECUTION</span><i>✦</i><span>PROCESS DESIGN</span><i>✦</i><span>CONTENT THINKING</span></div></div><section class="work-list">{projects.map((project) => <ProjectCard {...project} />)}</section><section class="page-cta compact" data-reveal><p>Want the role-level context?</p><h2>See where this work fits in my experience.</h2><div><a href="/experience">View experience ↗</a><a href="/about">Capabilities ↗</a></div></section></main><Footer /></div></BaseLayout>
+<BaseLayout title="Selected Work | Mehak Pahwa" description="Selected operations and digital marketing work by Mehak Pahwa.">
+  <div class="site-shell">
+    <Header />
+    <main id="main">
+      <header class="page-header" data-reveal><p class="page-kicker"><span></span>Selected work</p><h1>Work that made information <em>more useful.</em></h1><p>These projects show what I was responsible for, how I approached the work, and which tools supported it.</p></header>
+      <div class="work-marquee" data-reveal aria-hidden="true"><div><span>PROCESS DESIGN</span><i>✦</i><span>CONTENT THINKING</span><i>✦</i><span>QUALITY CHECKS</span><i>✦</i><span>VISUAL EXECUTION</span><i>✦</i><span>PROCESS DESIGN</span><i>✦</i><span>CONTENT THINKING</span></div></div>
+      <div class="work-progress" aria-hidden="true"><span>ACTIVE PROJECT</span><b><i>01</i> / 03</b><em><u></u></em></div>
+      <section class="work-list">{projects.map((project) => <ProjectCard {...project} />)}</section>
+      <section class="page-cta compact" data-reveal><p>Want the role-level context?</p><h2>See where this work fits in my experience.</h2><div><a href="/experience">View experience ↗</a><a href="/about">Capabilities ↗</a></div></section>
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>
+<script>
+  const projectCards = [...document.querySelectorAll<HTMLElement>('.work-list .project-card')];
+  const activeNumber = document.querySelector<HTMLElement>('.work-progress b i');
+  const activeLine = document.querySelector<HTMLElement>('.work-progress em u');
+  if (projectCards.length && activeNumber && activeLine) {
+    const updateProject = (index: number) => {
+      activeNumber.textContent = String(index + 1).padStart(2, '0');
+      activeLine.style.width = `${((index + 1) / projectCards.length) * 100}%`;
+    };
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) updateProject(projectCards.indexOf(visible.target as HTMLElement));
+    }, { threshold: [.25, .5, .75] });
+    projectCards.forEach((card) => observer.observe(card));
+  }
+</script>

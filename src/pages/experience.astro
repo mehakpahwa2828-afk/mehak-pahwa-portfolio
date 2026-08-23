@@ -3,6 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { credentials, experience, recognition } from '../data/portfolio';
+
+const recognitionMetrics = ['MERIT', '286/400', '98/100', '#1'];
+const relatedWorkLinks = ['/work#project-01', '/work#project-02', '/work#project-03'];
 ---
 
 <BaseLayout title="Experience | Mehak Pahwa" description="Experience, education, and recognition for Mehak Pahwa.">
@@ -22,29 +25,98 @@ import { credentials, experience, recognition } from '../data/portfolio';
         <h2>Responsibility across content, systems, and coordination</h2>
       </div>
 
-      <section class="role-list" aria-label="Professional experience">
+      <section class="role-list role-timeline" aria-label="Professional experience" data-role-timeline style="--timeline-progress: 0%">
+        <span class="timeline-track" aria-hidden="true"><i></i></span>
         {experience.map((item, index) => (
-          <article id={index === 0 ? 'current-role' : undefined} data-reveal tabindex="0">
+          <article id={index === 0 ? 'current-role' : undefined} class:list={{ 'is-active': index === 0 }} data-role-index={index} data-reveal tabindex="0">
+            <span class="timeline-marker" aria-hidden="true"><i></i></span>
             <div class={`role-sticker sticker-${index + 1}`} aria-hidden="true">
               {index === 0 ? <svg viewBox="0 0 90 90"><circle cx="45" cy="20" r="10"/><path d="M45 31v30M27 47l18-9 18 9M32 76l13-15 13 15"/><circle cx="17" cy="49" r="6"/><circle cx="73" cy="49" r="6"/></svg> : index === 1 ? <svg viewBox="0 0 90 90"><path d="M18 20h54v48H18zM28 31h34M28 42h22M28 53h28"/><path d="M59 61l13 13"/><circle cx="55" cy="57" r="12"/></svg> : <svg viewBox="0 0 90 90"><path d="M15 28l30-13 30 13-30 13zM24 36v22c12 9 30 9 42 0V36"/><path d="M75 28v24"/><circle cx="75" cy="58" r="5"/></svg>}
             </div>
             <div class="role-number"><span>0{index + 1}</span><i>VIEW ROLE</i></div>
             <div class="role-heading"><p>{item.period}</p><h2>{item.organisation}</h2><strong>{item.role}</strong></div>
-            <div class="role-detail"><p>{item.lead}</p><ul>{item.evidence.map((point) => <li>{point}</li>)}</ul><small>{item.evidence.length} responsibility highlights</small></div>
+            <div class="role-detail">
+              <p>{item.lead}</p>
+              <ul>{item.evidence.map((point) => <li>{point}</li>)}</ul>
+              <small>{item.evidence.length} responsibility highlights</small>
+              {index === 0 ? (
+                <div class="role-proof proof-tracker" aria-label="Reconstructed recruitment tracker fragment">
+                  <header><span>RECONSTRUCTED PROOF</span><b>TRACKER / STATUS VIEW</b></header>
+                  <div class="proof-row proof-labels"><i>Stage</i><i>Check</i><i>Status</i></div>
+                  <div class="proof-row"><i>Assignment</i><i>Quality</i><i><mark>Reviewed</mark></i></div>
+                  <div class="proof-row"><i>Interview</i><i>Schedule</i><i><mark>Tracked</mark></i></div>
+                </div>
+              ) : index === 1 ? (
+                <div class="role-proof proof-planning" aria-label="Reconstructed FreshNest content-planning fragment">
+                  <header><span>RECONSTRUCTED PROOF</span><b>FRESHNEST / PLAN</b></header>
+                  <div><i>Audience</i><span>→</span><i>Pillar</i><span>→</span><i>Format</i></div>
+                  <footer><b>EDUCATE</b><b>ENGAGE</b><b>PUBLISH</b></footer>
+                </div>
+              ) : (
+                <div class="role-proof proof-campaign" aria-label="Reconstructed campaign execution fragment">
+                  <header><span>RECONSTRUCTED PROOF</span><b>CAMPAIGN / OUTPUT</b></header>
+                  <div class="proof-posts"><i>01<em>Carousel</em></i><i>02<em>Canva</em></i><i>03<em>SEO</em></i></div>
+                </div>
+              )}
+              <a class="related-work-link" href={relatedWorkLinks[index]}><span>View related work</span><i aria-hidden="true">↗</i></a>
+            </div>
           </article>
         ))}
       </section>
 
       <section id="education" class="education-section section-space">
         <div class="section-intro" data-reveal><p>02 / Foundation</p><h2>Education and professional development</h2></div>
-        <div class="education-grid">{credentials.map((item) => <article data-reveal tabindex="0"><span>{item.year}</span><h3>{item.title}</h3><p>{item.source}</p><small>{item.detail}</small></article>)}</div>
+        <div class="education-grid credential-shelf" aria-label="Education and professional credentials">
+          {credentials.map((item, index) => <article data-reveal tabindex="0"><i aria-hidden="true">0{index + 1}</i><span>{item.year}</span><h3>{item.title}</h3><p>{item.source}</p><small>{item.detail}</small></article>)}
+        </div>
       </section>
 
       <section id="recognition" class="recognition-section section-space">
         <div class="section-intro" data-reveal><p>03 / Recognition</p><h2>Selected academic evidence</h2></div>
-        <div class="recognition-grid">{recognition.map((item) => <article data-reveal tabindex="0"><span>{item.marker}</span><h3>{item.title}</h3><p>{item.detail}</p></article>)}</div>
+        <div class="recognition-grid recognition-markers">
+          {recognition.map((item, index) => <article data-reveal tabindex="0"><span>{recognitionMetrics[index]}</span><small>0{index + 1} / EVIDENCE</small><h3>{item.title}</h3><p>{item.detail}</p></article>)}
+        </div>
       </section>
     </main>
     <Footer />
   </div>
 </BaseLayout>
+
+<script>
+  const roleTimeline = document.querySelector<HTMLElement>('[data-role-timeline]');
+  const roleItems = [...(roleTimeline?.querySelectorAll<HTMLElement>('[data-role-index]') ?? [])];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const activateRole = (activeRole: HTMLElement) => {
+    roleItems.forEach((role) => role.classList.toggle('is-active', role === activeRole));
+    const activeIndex = Number(activeRole.dataset.roleIndex ?? 0);
+    const progress = roleItems.length > 1 ? (activeIndex / (roleItems.length - 1)) * 100 : 100;
+    roleTimeline?.style.setProperty('--timeline-progress', `${progress}%`);
+  };
+
+  if (roleTimeline && roleItems.length) {
+    if (reducedMotion.matches || !('IntersectionObserver' in window)) {
+      roleItems.forEach((role) => role.classList.add('is-active'));
+      roleTimeline.style.setProperty('--timeline-progress', '100%');
+    } else {
+      let timelineFrame = 0;
+      const syncActiveRole = () => {
+        cancelAnimationFrame(timelineFrame);
+        timelineFrame = requestAnimationFrame(() => {
+          const readingLine = innerHeight * .42;
+          const nearestRole = roleItems.reduce((nearest, role) => {
+            const rect = role.getBoundingClientRect();
+            const roleCenter = rect.top + Math.min(rect.height * .38, 220);
+            const nearestRect = nearest.getBoundingClientRect();
+            const nearestCenter = nearestRect.top + Math.min(nearestRect.height * .38, 220);
+            return Math.abs(roleCenter - readingLine) < Math.abs(nearestCenter - readingLine) ? role : nearest;
+          }, roleItems[0]);
+          activateRole(nearestRole);
+        });
+      };
+      addEventListener('scroll', syncActiveRole, { passive: true });
+      addEventListener('resize', syncActiveRole, { passive: true });
+      syncActiveRole();
+    }
+  }
+</script>

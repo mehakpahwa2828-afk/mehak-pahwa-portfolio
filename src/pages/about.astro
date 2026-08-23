@@ -17,8 +17,22 @@ import { capabilityGroups } from '../data/portfolio';
         </div>
       </header>
 
+      <section class="journey-path-section section-space" data-journey-path>
+        <div class="section-intro" data-reveal><p>01 / Journey</p><h2>From commercial foundations to operational responsibility</h2></div>
+        <div class="journey-path" data-reveal style="--journey-progress:0">
+          <svg viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+            <path class="journey-track" pathLength="1" d="M45 220 C180 70 290 250 420 130 S680 55 790 170 S910 245 960 75" />
+            <path class="journey-draw" pathLength="1" d="M45 220 C180 70 290 250 420 130 S680 55 790 170 S910 245 960 75" />
+          </svg>
+          <article><span>01</span><small>COMMERCE</small><h3>Learn to read the numbers.</h3><p>B.Com built the commercial and accounting foundation.</p></article>
+          <article><span>02</span><small>DISCIPLINE</small><h3>Build consistency through evidence.</h3><p>Academic recognition and CA Foundation strengthened preparation and execution.</p></article>
+          <article><span>03</span><small>PRACTICE</small><h3>Turn objectives into visible work.</h3><p>Content strategy and creative internships introduced practical execution.</p></article>
+          <article><span>04</span><small>RESPONSIBILITY</small><h3>See how the work connects.</h3><p>Recruitment operations brought together systems, reporting, quality, and coordination.</p></article>
+        </div>
+      </section>
+
       <section class="field-notes-section section-space" data-field-notes>
-        <div class="section-intro" data-reveal><p>01 / Career field notes</p><h2>The evidence behind my direction</h2></div>
+        <div class="section-intro" data-reveal><p>02 / Career field notes</p><h2>The evidence behind my direction</h2></div>
         <div class="field-notes" data-reveal data-active-note="0">
           <nav class="notes-index" aria-label="Career story chapters">
             <button class="is-active" type="button" data-note-tab="0" aria-selected="true"><span>01</span><b>Profile</b><small>About + why me</small></button>
@@ -55,7 +69,7 @@ import { capabilityGroups } from '../data/portfolio';
 
             <article class="notes-panel panel-direction" data-note-panel="3" hidden>
               <div class="notes-copy"><p>DIRECTION / 04</p><h3>The work became less about one task—and more about how everything connects.</h3><p>Recruitment operations brought together tracking, reporting, documentation, quality checks and leadership.</p></div>
-              <div class="operations-evidence"><div class="pipeline-mini" aria-label="Illustrative recruitment workflow"><span>Applications</span><i></i><span>Assignment</span><i></i><span>Scheduling</span><i></i><span>Interviews</span><i></i><span>Probation</span></div><div class="role-evidence"><small>CURRENT RESPONSIBILITY</small><strong class="role-credential-stamp">Project Manager<br/><b>+ HR Lead</b></strong><ul><li>Google Sheets trackers</li><li>Pivot tables and reporting</li><li>SOPs and quality checks</li><li>Cross-team coordination</li></ul><blockquote>“I notice the tracker people stop trusting, the handoff that needs repeating, and the status nobody can see.”</blockquote></div></div>
+              <div class="operations-evidence"><div class="pipeline-mini" aria-label="Illustrative recruitment workflow"><span>Applications</span><i></i><span>Assignment</span><i></i><span>Scheduling</span><i></i><span>Interviews</span><i></i><span>Probation</span></div><div class="role-evidence"><small>CURRENT RESPONSIBILITY</small><strong class="role-credential-stamp">Project Manager<br/><b>+ HR Lead</b></strong><ul><li>Google Sheets trackers</li><li>Pivot tables and reporting</li><li>SOPs and quality checks</li><li>Cross-team coordination</li></ul></div></div>
             </article>
             <div class="notes-progress"><span data-note-current>01</span><i><b data-note-bar></b></i><span>04</span></div>
           </div>
@@ -63,13 +77,17 @@ import { capabilityGroups } from '../data/portfolio';
       </section>
 
       <section class="about-belief section-space" data-reveal>
-        <p>WHAT I NOTICE</p>
-        <h2>I notice the tracker people stop trusting, the handoff that needs repeating, and the status nobody can see.</h2>
-        <div><span>That kind of friction interests me.</span><p>I want to understand where it comes from, organize the information around it, and help the work move more clearly.</p></div>
+        <div class="belief-layout">
+          <div class="belief-sticky">
+            <p>WHAT I NOTICE</p>
+            <h2>I notice the tracker people stop trusting, the handoff that needs repeating, and the status nobody can see.</h2>
+          </div>
+          <div class="belief-response"><span>That kind of friction interests me.</span><p>I want to understand where it comes from, organize the information around it, and help the work move more clearly.</p><small>OBSERVE / ORGANIZE / MAKE VISIBLE</small></div>
+        </div>
       </section>
 
       <section class="approach-section section-space">
-        <div class="section-intro" data-reveal><p>02 / Working approach</p><h2>How I move from an unclear situation to useful action</h2></div>
+        <div class="section-intro" data-reveal><p>03 / Working approach</p><h2>How I move from an unclear situation to useful action</h2></div>
         <div class="approach-interface" data-reveal>
           <article><span>01</span><div><small>OBSERVE</small><h3>Understand what is actually happening</h3></div><i>Look at the process, information, and people involved.</i></article>
           <article><span>02</span><div><small>ORGANIZE</small><h3>Give the moving parts a structure</h3></div><i>Use trackers, categories, documentation, or a clear plan.</i></article>
@@ -79,7 +97,7 @@ import { capabilityGroups } from '../data/portfolio';
       </section>
 
       <section class="toolkit-section section-space">
-        <div class="section-intro" data-reveal><p>03 / Working toolkit</p><h2>Capabilities, grouped by the job they help me do</h2></div>
+        <div class="section-intro" data-reveal><p>04 / Working toolkit</p><h2>Capabilities, grouped by the job they help me do</h2></div>
         <div class="toolkit-deck" data-reveal>
           {capabilityGroups.map((group, index) => (
             <article tabindex="0"><span>0{index + 1}</span><h3>{group.label}</h3><ul>{group.items.map((item) => <li>{item}</li>)}</ul><i aria-hidden="true">✦</i></article>
@@ -99,6 +117,25 @@ import { capabilityGroups } from '../data/portfolio';
 </BaseLayout>
 
 <script>
+  const journeySection = document.querySelector<HTMLElement>('[data-journey-path]');
+  const journeyPath = journeySection?.querySelector<HTMLElement>('.journey-path');
+  const reduceJourneyMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  if (journeySection && journeyPath) {
+    let journeyFrame = 0;
+    const drawJourney = () => {
+      cancelAnimationFrame(journeyFrame);
+      journeyFrame = requestAnimationFrame(() => {
+        const rect = journeySection.getBoundingClientRect();
+        const distance = innerHeight + rect.height;
+        const progress = Math.min(1, Math.max(0, (innerHeight - rect.top) / distance));
+        journeyPath.style.setProperty('--journey-progress', reduceJourneyMotion.matches ? '1' : String(progress));
+      });
+    };
+    addEventListener('scroll', drawJourney, { passive: true });
+    addEventListener('resize', drawJourney, { passive: true });
+    drawJourney();
+  }
+
   const fieldNotes = document.querySelector('[data-field-notes]');
   if (fieldNotes) {
     const notesFrame = fieldNotes.querySelector('.field-notes');

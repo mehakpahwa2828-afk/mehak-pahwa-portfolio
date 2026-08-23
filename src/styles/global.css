@@ -554,6 +554,54 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 @media(max-width:620px){.pipeline-carousel{min-height:720px}.pipeline-stage-nav{grid-template-columns:repeat(3,1fr)}.pipeline-stage-nav button:nth-child(4),.pipeline-stage-nav button:nth-child(5){border-top:1px solid var(--line)}.pipeline-deck{inset:165px 3% auto;height:215px}.pipeline-orbit{top:38%}.pipeline-details{height:250px;left:.75rem;right:.75rem;bottom:.75rem}.pipeline-details article{padding:1rem}.pipeline-details h3{font-size:1.35rem}.pipeline-details p{font-size:.7rem}}
 @media(prefers-reduced-motion:reduce){.pipeline-carousel .fi-stage{transition:none}.pipeline-carousel .fi-stage.is-current{opacity:1;transform:translate3d(-50%,-50%,0)}.pipeline-details article.is-active{opacity:1;transform:none;animation:none}}
 
+/* Work roadmap Q1: Project 01 opens as an interactive system card. */
+.project-featured .pipeline-visual{display:grid;grid-template-rows:auto auto 1fr auto;box-shadow:12px 14px 0 rgba(23,38,44,.18);transition:transform .3s ease,box-shadow .3s ease}
+.project-featured .pipeline-visual:hover{transform:translateY(-4px);box-shadow:16px 19px 0 rgba(23,38,44,.2)}
+.pipeline-open{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:54px;padding:.8rem 1rem;border:0;border-top:1px solid rgba(255,255,255,.4);background:var(--surface);color:var(--ink);font:600 .67rem/1.2 'Inter',Arial,sans-serif;letter-spacing:.07em;text-transform:uppercase;cursor:pointer}
+.pipeline-open b{font:400 1.1rem/1 'Newsreader',Georgia,serif;transition:transform .25s}
+.pipeline-open:hover b,.pipeline-open:focus-visible b{transform:translate(4px,-4px)}
+.project-featured>.pipeline-interface{position:relative;z-index:2;grid-column:1/-1;width:100%;overflow:hidden;border-top:1px solid var(--ink);background:var(--surface);color:var(--ink);animation:pipeline-interface-open .5s cubic-bezier(.2,.78,.18,1) both}
+.pipeline-interface[hidden]{display:none}
+.pipeline-interface-head{display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:.75rem 1rem;border-bottom:1px solid var(--ink);font-size:.58rem;letter-spacing:.09em;text-transform:uppercase}
+.pipeline-close{min-height:36px;padding:.45rem .65rem;border:1px solid var(--ink);background:transparent;color:inherit;font:inherit;cursor:pointer}
+.pipeline-interface-grid{display:grid;grid-template-columns:1fr 1fr}
+.pipeline-interface-grid>div{display:flex;flex-direction:column;min-height:112px;padding:1rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pipeline-interface-grid small{color:var(--accent);font-size:.52rem;letter-spacing:.1em}
+.pipeline-interface-grid strong{margin:.45rem 0;font:400 1.25rem/1 'Newsreader',Georgia,serif}
+.pipeline-interface-grid span{color:var(--muted);font-size:.62rem;line-height:1.45}
+.pipeline-evidence-preview{display:grid;grid-template-columns:1.2fr .8fr;gap:.75rem;padding:.85rem}
+.pipeline-evidence-preview section{min-width:0;border:1px solid var(--ink)}
+.tracker-mock header{display:flex;justify-content:space-between;padding:.55rem .65rem;border-bottom:1px solid var(--line);font-size:.48rem;letter-spacing:.08em}.tracker-mock header b{color:var(--accent);font-weight:600}
+.tracker-row{display:grid;grid-template-columns:.45fr 1fr .9fr 1fr;border-bottom:1px solid var(--line)}.tracker-row:last-child{border-bottom:0}.tracker-row i{min-width:0;padding:.45rem;border-right:1px solid var(--line);overflow:hidden;color:var(--muted);font-style:normal;font-size:.52rem;text-overflow:ellipsis;white-space:nowrap}.tracker-row i:last-child{border-right:0}.tracker-labels{background:var(--ink)}.tracker-labels i{color:var(--bg);font-weight:600;letter-spacing:.06em;text-transform:uppercase}.tracker-row mark{padding:.16rem .3rem;background:var(--accent-soft);color:var(--ink);font-size:.48rem}
+.real-evidence-slot{display:flex;flex-direction:column;justify-content:center;padding:.8rem;background:repeating-linear-gradient(-45deg,transparent,transparent 9px,color-mix(in srgb,var(--line),transparent 30%) 9px,color-mix(in srgb,var(--line),transparent 30%) 10px)}.real-evidence-slot small{color:var(--accent);font-size:.49rem;letter-spacing:.1em}.real-evidence-slot strong{margin:.45rem 0;font:400 1.08rem/1 'Newsreader',Georgia,serif}.real-evidence-slot p{margin:0;color:var(--muted);font-size:.54rem;line-height:1.45}.real-evidence-slot span{align-self:flex-start;margin-top:.6rem;padding:.25rem .35rem;border:1px solid var(--ink);background:var(--surface);font-size:.46rem;text-transform:uppercase}
+.case-story{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink)}.case-story article{min-width:0;padding:1.2rem;border-right:1px solid var(--line)}.case-story article:last-child{border-right:0}.case-story small{color:var(--accent);font-size:.5rem;letter-spacing:.1em}.case-story h4{margin:.7rem 0;font:400 1.25rem/1.05 'Newsreader',Georgia,serif}.case-story p{margin:0;color:var(--muted);font-size:.63rem;line-height:1.55}
+@keyframes pipeline-interface-open{from{opacity:0;clip-path:inset(0 0 100% 0);transform:translateY(-12px)}to{opacity:1;clip-path:inset(0);transform:none}}
+@media(max-width:900px){.case-story{grid-template-columns:1fr 1fr}.case-story article:nth-child(2){border-right:0}.case-story article:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media(max-width:620px){.project-featured .pipeline-visual{grid-template-rows:auto auto 1fr auto}.pipeline-interface-grid>div{min-height:95px;padding:.75rem}.pipeline-interface-grid strong{font-size:1.05rem}.pipeline-evidence-preview{grid-template-columns:1fr}.real-evidence-slot{min-height:125px}.tracker-row{grid-template-columns:.38fr 1fr .8fr 1fr}.case-story{grid-template-columns:1fr}.case-story article,.case-story article:nth-child(2){border-right:0;border-bottom:1px solid var(--line)}.case-story article:last-child{border-bottom:0}.case-story h4{font-size:1.4rem}}
+@media(prefers-reduced-motion:reduce){.project-featured .pipeline-visual,.pipeline-open b{transition:none}.project-featured .pipeline-visual:hover{transform:none}.pipeline-interface{animation:none}}
+
+/* Work roadmap Q5: FreshNest interactive planning logic. */
+.strategy-chain{display:grid;grid-template-columns:repeat(4,1fr);grid-column:1;gap:0;border:1px solid #17262c;background:var(--surface);color:#17262c}
+.strategy-chain button{position:relative;min-width:0;min-height:58px;padding:.55rem .35rem;border:0;border-right:1px solid var(--line);background:transparent;color:inherit;text-align:left;cursor:pointer;transition:background .25s,color .25s,transform .25s}
+.strategy-chain button:last-child{border-right:0}.strategy-chain button:not(:last-child)::after{content:'→';position:absolute;z-index:2;right:-.42rem;top:50%;display:grid;place-items:center;width:.8rem;height:.8rem;background:var(--surface);color:var(--accent);font-size:.55rem;transform:translateY(-50%)}
+.strategy-chain small,.strategy-chain span{display:block}.strategy-chain small{color:var(--accent);font-size:.45rem}.strategy-chain span{margin-top:.28rem;overflow:hidden;font:400 .72rem/1 'Newsreader',Georgia,serif;text-overflow:ellipsis}.strategy-chain button:hover,.strategy-chain button:focus-visible,.strategy-chain button.selected{z-index:1;background:#17262c;color:#fff;transform:translateY(-3px)}
+@media(min-width:621px){.project-sage .content-board{grid-template-rows:76px 76px 68px minmax(70px,1fr) 58px}.project-sage .note-a,.project-sage .note-b{min-height:76px}.project-sage .strategy-chain{grid-row:5}}
+@media(max-width:620px){.strategy-chain{grid-template-columns:1fr 1fr}.strategy-chain button:nth-child(2){border-right:0}.strategy-chain button:nth-child(-n+2){border-bottom:1px solid var(--line)}.strategy-chain button:nth-child(2)::after{display:none}.project-sage .project-visual{min-height:760px}}
+
+/* Work roadmap Q6: one featured campaign asset with a six-piece fan. */
+.project-ink .campaign-visual{display:grid;grid-template-columns:.9fr 1.1fr;grid-template-rows:1fr auto auto;gap:.75rem;right:2rem}
+.campaign-hero{position:relative;min-width:0;min-height:315px;padding:1.1rem;border:1px solid rgba(255,255,255,.55);background:linear-gradient(150deg,#f3efe7 0 58%,#8f3d26 58%);color:#17262c;text-align:left;cursor:pointer;overflow:hidden;transition:transform .35s,box-shadow .35s}.campaign-hero::after{content:'07';position:absolute;right:-.15em;bottom:-.2em;color:rgba(23,38,44,.12);font:400 9rem/.8 'Newsreader',Georgia,serif}.campaign-hero small,.campaign-hero strong,.campaign-hero span,.campaign-hero i{position:relative;z-index:1;display:block}.campaign-hero small{font-size:.5rem;letter-spacing:.12em}.campaign-hero strong{margin-top:2.2rem;font:400 2.4rem/1 'Newsreader',Georgia,serif}.campaign-hero span{margin-top:.4rem;font-size:.65rem}.campaign-hero i{position:absolute;left:1.1rem;bottom:1rem;color:#fff;font-size:.52rem;font-style:normal;letter-spacing:.08em}.campaign-hero:hover,.campaign-hero:focus-visible,.campaign-hero.selected{transform:translateY(-5px);box-shadow:8px 9px 0 #e9d4c4}
+.campaign-stack{position:relative;min-width:0;min-height:315px}.campaign-stack button{--spread:calc((var(--asset) - 2.5) * 13px);position:absolute;left:50%;top:50%;width:145px;height:215px;padding:.85rem;border:1px solid rgba(255,255,255,.65);background:color-mix(in srgb,#435156 calc(28% + var(--asset) * 8%),#8f3d26);color:#fff;text-align:left;cursor:pointer;transform:translate(-50%,-50%) translateX(var(--spread)) rotate(calc((var(--asset) - 2.5) * 3deg));transform-origin:bottom center;transition:transform .42s cubic-bezier(.2,.78,.18,1),filter .3s,box-shadow .3s}.campaign-stack button small,.campaign-stack button strong,.campaign-stack button span{display:block}.campaign-stack button small{font-size:.48rem}.campaign-stack button strong{position:absolute;left:.85rem;bottom:2.1rem;font:400 1.15rem/1 'Newsreader',Georgia,serif}.campaign-stack button span{position:absolute;left:.85rem;bottom:.75rem;font-size:.48rem;letter-spacing:.09em}.campaign-stack:hover button,.campaign-visual.is-gallery-open .campaign-stack button,.campaign-stack:focus-within button{transform:translate(-50%,-50%) translateX(calc((var(--asset) - 2.5) * 34px)) rotate(calc((var(--asset) - 2.5) * 6deg)) translateY(calc(abs(var(--asset) - 2.5) * -3px))}.campaign-stack button:hover,.campaign-stack button:focus-visible,.campaign-stack button.selected{z-index:10;filter:brightness(1.18);box-shadow:7px 9px 0 rgba(0,0,0,.22);transform:translate(-50%,-55%) translateX(calc((var(--asset) - 2.5) * 34px)) rotate(0)}
+.project-ink .campaign-tags{position:relative;grid-column:1;grid-row:2}.project-ink .campaign-detail{position:relative;inset:auto;grid-column:1/-1;grid-row:3;min-height:72px}.project-ink .campaign-visual::before{content:'CAMPAIGN GALLERY / 07 ASSETS'}
+@media(max-width:620px){.project-ink .campaign-visual{display:grid;grid-template-columns:1fr;grid-template-rows:210px 250px auto auto;inset:4rem .8rem .8rem}.campaign-hero{min-height:210px}.campaign-stack{min-height:250px}.campaign-stack button{width:105px;height:165px}.campaign-stack:hover button,.campaign-visual.is-gallery-open .campaign-stack button,.campaign-stack:focus-within button{transform:translate(-50%,-50%) translateX(calc((var(--asset) - 2.5) * 21px)) rotate(calc((var(--asset) - 2.5) * 5deg))}.project-ink .campaign-tags{grid-column:1;grid-row:3}.project-ink .campaign-detail{grid-column:1;grid-row:4}.project-ink .project-visual{min-height:760px}}
+@media(prefers-reduced-motion:reduce){.campaign-hero,.campaign-stack button{transition:none}}
+.campaign-stack:hover button,.campaign-visual.is-gallery-open .campaign-stack button,.campaign-stack:focus-within button{transform:translate(-50%,-50%) translateX(calc((var(--asset) - 2.5) * 34px)) rotate(calc((var(--asset) - 2.5) * 6deg))}
+
+/* Work roadmap Q7: distinct project grammar inside one interaction system. */
+.project-card[data-visual-grammar] .project-visual{isolation:isolate}.project-card[data-visual-grammar] .visual-index{display:inline-flex;align-items:center;gap:.45rem}.project-card[data-visual-grammar] .visual-index::before{content:'';width:7px;height:7px;border:1px solid currentColor;border-radius:50%}
+.project-card[data-visual-grammar=system] .visual-index::after{content:'SYSTEM';margin-left:.35rem;opacity:.65}.project-card[data-visual-grammar=planning] .visual-index::after{content:'PLANNING';margin-left:.35rem;opacity:.65}.project-card[data-visual-grammar=gallery] .visual-index::after{content:'GALLERY';margin-left:.35rem;opacity:.65}
+.project-card[data-visual-grammar] button:focus-visible{outline:2px solid currentColor;outline-offset:3px}.project-card[data-visual-grammar] button{font-family:'Inter',Arial,sans-serif}.project-card[data-visual-grammar] .board-note strong,.project-card[data-visual-grammar] .campaign-hero strong,.project-card[data-visual-grammar] .campaign-stack strong{font-family:'Newsreader',Georgia,serif}
+
 /* Asymmetric homepage closing statement with intentional link highlights. */
 .home-closing-cta{margin-inline:clamp(12px,2.4vw,38px);padding:clamp(4.5rem,8vw,8rem) clamp(3rem,8vw,9rem);clip-path:polygon(0 7%,7% 0,93% 3%,100% 19%,97% 88%,88% 100%,7% 96%,0 79%);background:linear-gradient(135deg,var(--dark) 0%,color-mix(in srgb,var(--dark),var(--accent) 8%) 100%)}
 .home-closing-cta h2{max-width:880px}
@@ -605,3 +653,315 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 .portrait-editorial-note{position:absolute;z-index:3;right:-28px;bottom:42px;padding:11px 16px 12px;background:#eee2cb;color:#2f2923;border-top:3px double #3b332c;box-shadow:5px 6px 0 color-mix(in srgb,var(--accent),transparent 48%);clip-path:polygon(0 5%,7% 0,15% 5%,23% 0,31% 4%,40% 0,49% 5%,58% 0,67% 4%,76% 0,85% 5%,94% 0,100% 4%,98% 95%,91% 100%,82% 96%,73% 100%,64% 95%,55% 100%,46% 96%,37% 100%,28% 95%,19% 100%,10% 96%,1% 100%);font-family:Georgia,serif;font-size:.76rem;font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:.045em;transform:rotate(3deg)}.portrait-editorial-note::before{content:'PROFILE NOTE';display:block;margin-bottom:5px;color:var(--accent);font-family:var(--font-body);font-size:.4rem;letter-spacing:.15em}
 @media(max-width:960px){.portrait-editorial-note{right:-20px;bottom:40px;padding:9px 12px;font-size:.66rem}}
 @media(max-width:700px){.portrait-editorial-note{right:-18px;bottom:38px}}
+
+/* Work roadmap Q8: moderate structural motion and always-available gallery controls. */
+.campaign-gallery-nav{display:grid;grid-template-columns:repeat(6,1fr);grid-column:1/-1;border:1px solid rgba(255,255,255,.45)}.campaign-gallery-nav button{min-width:0;padding:.45rem .3rem;border:0;border-right:1px solid rgba(255,255,255,.28);background:transparent;color:#fff;text-align:left;cursor:pointer;transition:background .22s,color .22s,transform .22s}.campaign-gallery-nav button:last-child{border-right:0}.campaign-gallery-nav small,.campaign-gallery-nav span{display:block}.campaign-gallery-nav small{font-size:.42rem;opacity:.65}.campaign-gallery-nav span{margin-top:.2rem;overflow:hidden;font-size:.48rem;text-overflow:ellipsis}.campaign-gallery-nav button:hover,.campaign-gallery-nav button:focus-visible,.campaign-gallery-nav button.selected{background:var(--surface);color:var(--ink);transform:translateY(-3px)}
+.project-ink .campaign-visual{grid-template-rows:1fr auto auto auto}.project-ink .campaign-tags{grid-row:3}.project-ink .campaign-detail{grid-row:4}
+.work-progress{position:sticky;z-index:12;top:.75rem;width:min(calc(100% - 64px),var(--max));margin:0 auto 1rem;display:grid;grid-template-columns:auto auto minmax(90px,180px);justify-content:end;align-items:center;gap:.75rem;padding:.55rem .7rem;border:1px solid var(--line);background:color-mix(in srgb,var(--surface),transparent 8%);backdrop-filter:blur(10px);color:var(--muted);font-size:.48rem;letter-spacing:.1em}.work-progress b{color:var(--ink);font-weight:500}.work-progress b i{color:var(--accent);font-style:normal}.work-progress em{display:block;height:2px;background:var(--line)}.work-progress em u{display:block;width:33.333%;height:100%;background:var(--accent);text-decoration:none;transition:width .55s cubic-bezier(.2,.78,.18,1)}
+@media(max-width:620px){.campaign-gallery-nav{grid-template-columns:repeat(3,1fr)}.campaign-gallery-nav button:nth-child(-n+3){border-bottom:1px solid rgba(255,255,255,.28)}.campaign-gallery-nav button:nth-child(3){border-right:0}.project-ink .campaign-visual{grid-template-rows:190px 225px auto auto auto}.project-ink .campaign-tags{grid-row:4}.project-ink .campaign-detail{grid-row:5}.work-progress{width:calc(100% - 40px);grid-template-columns:auto auto 80px}.work-progress>span{display:none}}
+@media(prefers-reduced-motion:reduce){.campaign-gallery-nav button,.work-progress em u{transition:none}.campaign-gallery-nav button:hover,.campaign-gallery-nav button:focus-visible,.campaign-gallery-nav button.selected{transform:none}}
+
+/* Keep every gallery control and its changing explanation inside Project 03. */
+.project-ink .project-visual{min-height:780px}.project-ink .campaign-visual{grid-template-rows:minmax(300px,1fr) auto auto minmax(82px,auto);overflow:visible}.campaign-gallery-nav{grid-template-columns:repeat(3,minmax(0,1fr))}.campaign-gallery-nav button:nth-child(-n+3){border-bottom:1px solid rgba(255,255,255,.28)}.campaign-gallery-nav button:nth-child(3){border-right:0}.project-ink .campaign-detail{display:block!important;visibility:visible;opacity:1;overflow:visible}
+@media(max-width:620px){.project-ink .project-visual{min-height:850px}.project-ink .campaign-visual{grid-template-rows:190px 225px auto auto minmax(105px,auto)}}
+
+/* Work roadmap Q9: intentionally vertical mobile composition. */
+@media(max-width:620px){
+  .work-list{width:calc(100% - 28px);gap:2.75rem}
+  .project-card{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+  .project-card .project-visual,.project-card:nth-child(even) .project-visual{order:1;width:100%}
+  .project-card .project-content{order:2;width:100%}
+  .project-featured>.pipeline-interface{order:3}
+  .pipeline-tabs{grid-template-columns:1fr}
+  .pipeline-tabs button{display:grid;grid-template-columns:34px 1fr;align-items:center;min-height:56px;border-right:0;text-align:left}
+  .pipeline-tabs button b,.pipeline-tabs button span{display:block}
+  .pipeline-interface-grid{grid-template-columns:1fr}
+  .pipeline-interface-grid>div{min-height:82px;border-right:0}
+  .pipeline-evidence-preview{padding:.65rem}
+  .tracker-mock{overflow:hidden}.tracker-row{grid-template-columns:34px minmax(72px,1fr) minmax(62px,.8fr) minmax(76px,1fr)}.tracker-row i{padding:.4rem .28rem;font-size:.46rem}
+  .case-story article{padding:1.15rem}
+  .project-sage .content-board{overflow:visible}
+  .strategy-chain{width:100%}
+  .project-ink .campaign-visual{overflow:visible}
+  .campaign-stack button{max-width:29vw}
+  .campaign-gallery-nav button{min-height:48px}
+  .project-content h3{font-size:clamp(2.25rem,11vw,3.25rem)}
+  .project-meta,.contribution-list{grid-template-columns:1fr}
+}
+@media(min-width:621px) and (max-width:900px){
+  .work-list{gap:3.25rem}
+  .project-featured>.pipeline-interface{grid-column:1}
+  .pipeline-interface-grid{grid-template-columns:1fr 1fr}
+  .project-sage .project-visual,.project-ink .project-visual{min-height:720px}
+}
+
+/* Keep the Project 01 case-study trigger visible after its stages stack on mobile. */
+@media(max-width:620px){
+  .project-featured .project-visual{min-height:650px}
+  .project-featured .pipeline-visual{inset:4rem .8rem .8rem;grid-template-rows:auto auto minmax(92px,1fr) auto;overflow:visible}
+  .project-featured .pipeline-open{position:relative;z-index:3;min-height:58px}
+}
+
+/* Work-page QA: semantic project headings and calmer tablet entry states. */
+.project-content .project-title{margin:1rem 0;font:400 clamp(2.4rem,4vw,3.8rem)/1 'Newsreader',Georgia,serif}
+@media(max-width:900px){
+  .campaign-gallery-nav button,.strategy-chain button{min-height:46px}
+  .has-js .project-card[data-reveal],.has-js .project-card:nth-child(even)[data-reveal]{transform:translateY(42px) scale(.98)}
+  .has-js .project-card[data-reveal].is-visible,.has-js .project-card:nth-child(even)[data-reveal].is-visible{animation-name:section-arrival-strong}
+}
+@media(max-width:620px){.project-content .project-title{font-size:clamp(2.25rem,11vw,3.25rem)}}
+
+/* Real, privacy-safe evidence for Recruitment Operations. */
+.real-evidence-figure{position:relative;display:grid;grid-template-rows:minmax(150px,1fr) auto;margin:0;overflow:hidden;background:var(--ink)}.real-evidence-figure img{display:block;width:100%;height:100%;min-height:150px;object-fit:cover;object-position:center 46%;filter:saturate(.72) contrast(.96);transition:filter .3s,transform .45s}.real-evidence-figure:hover img{filter:saturate(1) contrast(1);transform:scale(1.025)}.real-evidence-figure figcaption{display:grid;gap:.25rem;padding:.65rem .75rem;background:var(--ink);color:var(--bg)}.real-evidence-figure small{color:#ed8d67;font-size:.47rem;letter-spacing:.1em}.real-evidence-figure span{font-size:.52rem;line-height:1.45}
+@media(max-width:620px){.real-evidence-figure{grid-template-rows:190px auto}.real-evidence-figure img{min-height:190px}}
+@media(prefers-reduced-motion:reduce){.real-evidence-figure img{transition:none}.real-evidence-figure:hover img{transform:none}}
+
+/* Crop the source screenshot to the dashboard canvas; exclude browser chrome and Windows taskbar. */
+.real-evidence-figure{grid-template-rows:160px auto}.real-evidence-figure img{height:160px;min-height:160px;object-position:center 39%;transform:scale(1.16)}.real-evidence-figure:hover img{transform:scale(1.19)}
+@media(max-width:620px){.real-evidence-figure{grid-template-rows:180px auto}.real-evidence-figure img{height:180px;min-height:180px;object-position:center 39%;transform:scale(1.2)}.real-evidence-figure:hover img{transform:scale(1.2)}}
+@media(prefers-reduced-motion:reduce){.real-evidence-figure img,.real-evidence-figure:hover img{transform:scale(1.16)}}
+
+/* Give the ATS dashboard enough space to operate as readable evidence. */
+.pipeline-evidence-preview .real-evidence-figure{grid-column:1/-1;grid-template-rows:clamp(360px,34vw,500px) auto;margin-top:.2rem;border-color:var(--ink)}.pipeline-evidence-preview .real-evidence-figure img{height:100%;min-height:0;object-fit:cover;object-position:center 70%;transform:scale(1.28)}.pipeline-evidence-preview .real-evidence-figure:hover img{transform:scale(1.3)}.pipeline-evidence-preview .real-evidence-figure figcaption{grid-template-columns:auto minmax(0,1fr);align-items:center;gap:1rem;padding:.85rem 1rem}.pipeline-evidence-preview .real-evidence-figure span{font-size:.62rem}
+@media(max-width:620px){.pipeline-evidence-preview .real-evidence-figure{grid-template-rows:270px auto}.pipeline-evidence-preview .real-evidence-figure img{object-position:center 69%;transform:scale(1.48)}.pipeline-evidence-preview .real-evidence-figure:hover img{transform:scale(1.48)}.pipeline-evidence-preview .real-evidence-figure figcaption{grid-template-columns:1fr;gap:.35rem}.pipeline-evidence-preview .real-evidence-figure span{font-size:.56rem}}
+@media(prefers-reduced-motion:reduce){.pipeline-evidence-preview .real-evidence-figure img,.pipeline-evidence-preview .real-evidence-figure:hover img{transform:scale(1.28)}}
+
+/* Screenshot 269: preserve the complete dashboard canvas and separate its caption. */
+.pipeline-evidence-preview .real-evidence-figure{
+  display:grid;
+  grid-template-rows:auto auto;
+  grid-column:1/-1;
+  row-gap:1rem;
+  margin-top:.35rem;
+  padding:0;
+  overflow:visible;
+  border:0;
+  background:transparent;
+}
+.pipeline-evidence-preview .real-evidence-figure img,
+.pipeline-evidence-preview .real-evidence-figure:hover img{
+  display:block;
+  width:100%;
+  height:auto;
+  min-height:0;
+  aspect-ratio:1.9/1;
+  object-fit:cover;
+  object-position:center top;
+  border:1px solid var(--ink);
+  filter:saturate(.82) contrast(.98);
+  transform:none;
+}
+.pipeline-evidence-preview .real-evidence-figure figcaption{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  align-items:center;
+  gap:1rem;
+  margin:0;
+  padding:1rem;
+  border:1px solid var(--ink);
+  background:var(--ink);
+}
+.pipeline-evidence-preview .real-evidence-figure span{font-size:.62rem;line-height:1.55}
+@media(max-width:620px){
+  .pipeline-evidence-preview .real-evidence-figure{grid-template-rows:auto auto;row-gap:.7rem}
+  .pipeline-evidence-preview .real-evidence-figure img,
+  .pipeline-evidence-preview .real-evidence-figure:hover img{height:auto;min-height:0;aspect-ratio:1.9/1;object-position:center top;transform:none}
+  .pipeline-evidence-preview .real-evidence-figure figcaption{grid-template-columns:1fr;gap:.35rem;padding:.8rem}
+}
+
+/* Recruiter-facing evidence crop: readable preview, complete source one click away. */
+.pipeline-evidence-preview .dashboard-preview{
+  position:relative;
+  display:block;
+  width:100%;
+  aspect-ratio:1.85/1;
+  overflow:hidden;
+  border:1px solid var(--ink);
+  background:#f7f8fa;
+  color:#fff;
+}
+.pipeline-evidence-preview .dashboard-preview img,
+.pipeline-evidence-preview .dashboard-preview:hover img{
+  position:absolute;
+  left:-1.5%;
+  top:-22%;
+  width:136%;
+  max-width:none;
+  height:auto;
+  min-height:0;
+  aspect-ratio:auto;
+  object-fit:initial;
+  border:0;
+  filter:saturate(.88) contrast(1.02);
+  transform:none;
+  transition:filter .25s,transform .35s;
+}
+.pipeline-evidence-preview .dashboard-preview:hover img,
+.pipeline-evidence-preview .dashboard-preview:focus-visible img{filter:saturate(1) contrast(1.04);transform:scale(1.012)}
+@media(max-width:620px){
+  .pipeline-evidence-preview .dashboard-preview{aspect-ratio:1.45/1}
+  .pipeline-evidence-preview .dashboard-preview img,
+  .pipeline-evidence-preview .dashboard-preview:hover img{left:-2%;top:-8%;width:174%;transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .pipeline-evidence-preview .dashboard-preview img,
+  .pipeline-evidence-preview .dashboard-preview:hover img{transition:none;transform:none}
+}
+
+/* Experience roadmap Q1: a readable, scroll-linked progression of roles. */
+.role-timeline{position:relative;border-top:0;padding-left:46px}
+.role-timeline .timeline-track{position:absolute;z-index:0;left:17px;top:0;bottom:0;width:2px;background:var(--line);overflow:hidden;pointer-events:none}
+.role-timeline .timeline-track>i{position:absolute;inset:0 0 auto;height:var(--timeline-progress);background:var(--accent);transition:height .5s cubic-bezier(.2,.72,.2,1)}
+.role-timeline article{position:relative;z-index:1;padding-inline:1.4rem;opacity:.72;background:color-mix(in srgb,var(--surface),transparent 72%);transition:opacity .35s,background .35s,border-color .35s,transform .35s,box-shadow .35s}
+.role-timeline article:first-of-type{border-top:1px solid var(--line)}
+.role-timeline article.is-active{z-index:2;opacity:1;background:color-mix(in srgb,var(--accent-soft),var(--surface) 72%);border-color:color-mix(in srgb,var(--accent),transparent 52%);box-shadow:10px 12px 0 color-mix(in srgb,var(--accent-soft),transparent 58%);transform:translateX(6px) scale(1.012)}
+.role-timeline article.is-active .role-heading h2{letter-spacing:-.025em}
+.role-timeline article.is-active .role-heading strong{color:color-mix(in srgb,var(--accent),var(--ink) 18%)}
+.timeline-marker{position:absolute;left:-38px;top:50%;width:20px;height:20px;border:1px solid var(--muted);border-radius:50%;background:var(--surface);transform:translateY(-50%);transition:border-color .35s,background .35s,box-shadow .35s,transform .35s}
+.timeline-marker>i{position:absolute;inset:6px;border-radius:50%;background:var(--muted);transition:background .35s,transform .35s}
+.role-timeline article.is-active .timeline-marker{border-color:var(--accent);background:var(--surface);box-shadow:0 0 0 7px color-mix(in srgb,var(--accent),transparent 86%);transform:translateY(-50%) scale(1.08)}
+.role-timeline article.is-active .timeline-marker>i{background:var(--accent);transform:scale(1.2)}
+.role-timeline article:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+@media(max-width:900px){.role-timeline{padding-left:40px}.role-timeline .timeline-track{left:14px}.timeline-marker{left:-36px}}
+@media(max-width:620px){
+  .role-timeline{width:calc(100% - 28px);padding-left:32px}
+  .role-timeline .timeline-track{left:9px}
+  .role-timeline article{padding:1.7rem .8rem;opacity:.82}
+  .role-timeline article.is-active{box-shadow:6px 7px 0 color-mix(in srgb,var(--accent-soft),transparent 62%);transform:translateX(2px) scale(1.006)}
+  .timeline-marker{left:-31px;top:2rem;width:17px;height:17px;transform:none}
+  .timeline-marker>i{inset:5px}
+  .role-timeline article.is-active .timeline-marker{transform:scale(1.06)}
+}
+@media(prefers-reduced-motion:reduce){
+  .role-timeline .timeline-track>i{height:100%;transition:none}
+  .role-timeline article,.timeline-marker,.timeline-marker>i{opacity:1;transform:none;transition:none}
+}
+
+/* Experience roadmap Q2: compact reconstructed evidence, clearly labelled. */
+.role-proof{width:min(100%,560px);margin-top:1.4rem;border:1px solid var(--ink);background:var(--surface);color:var(--ink);box-shadow:6px 6px 0 color-mix(in srgb,var(--accent-soft),transparent 8%);transition:transform .3s,box-shadow .3s}
+.role-proof:hover{transform:translateY(-3px);box-shadow:9px 10px 0 color-mix(in srgb,var(--accent-soft),transparent 2%)}
+.role-proof header{display:flex;justify-content:space-between;gap:1rem;padding:.55rem .65rem;border-bottom:1px solid var(--line);font-size:.47rem;letter-spacing:.08em}
+.role-proof header span{color:var(--accent)}.role-proof header b{font-weight:600}
+.proof-row{display:grid;grid-template-columns:1fr .8fr .8fr;border-bottom:1px solid var(--line)}.proof-row:last-child{border-bottom:0}.proof-row i{min-width:0;padding:.5rem .6rem;border-right:1px solid var(--line);overflow:hidden;font-size:.52rem;font-style:normal;text-overflow:ellipsis;white-space:nowrap}.proof-row i:last-child{border-right:0}.proof-labels{background:var(--ink);color:var(--bg);text-transform:uppercase;letter-spacing:.06em}.proof-row mark{padding:.16rem .28rem;background:var(--accent-soft);color:var(--ink);font-size:.46rem}
+.proof-planning>div{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;padding:1rem}.proof-planning>div i{padding:.65rem .3rem;border:1px solid var(--line);font:400 .9rem/1 'Newsreader',Georgia,serif;text-align:center}.proof-planning>div span{padding:.25rem;color:var(--accent)}.proof-planning footer{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}.proof-planning footer b{padding:.55rem;border-right:1px solid var(--line);font-size:.48rem;letter-spacing:.08em;text-align:center}.proof-planning footer b:last-child{border-right:0}
+.proof-campaign{background:var(--ink);color:var(--bg)}.proof-campaign header{border-color:rgba(255,255,255,.22)}.proof-posts{display:flex;justify-content:center;align-items:flex-end;min-height:150px;padding:1.1rem;overflow:hidden}.proof-posts i{display:flex;flex-direction:column;justify-content:space-between;width:105px;height:125px;padding:.65rem;border:1px solid rgba(255,255,255,.55);background:#435156;color:#fff;font-size:.48rem;font-style:normal;transform:rotate(-6deg)}.proof-posts i:nth-child(2){z-index:2;background:#8f3d26;transform:translateY(-8px) rotate(2deg)}.proof-posts i:nth-child(3){background:#f3efe7;color:var(--ink);transform:rotate(7deg)}.proof-posts em{font:400 1rem/1 'Newsreader',Georgia,serif;font-style:normal}
+@media(max-width:620px){
+  .role-proof{width:100%;margin-top:1.2rem}
+  .role-proof header{flex-direction:column;gap:.2rem}
+  .proof-planning>div{padding:.7rem}.proof-planning>div i{font-size:.74rem}
+  .proof-posts{min-height:130px;padding:.8rem}.proof-posts i{width:29%;height:108px;padding:.5rem}.proof-posts em{font-size:.82rem}
+}
+@media(prefers-reduced-motion:reduce){.role-proof{transition:none}.role-proof:hover{transform:none}}
+
+/* Experience roadmap Q4: credentials read as a shelf, not job cards. */
+.credential-shelf{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;padding:0 0 1.35rem;border-top:0;border-bottom:3px double var(--ink)}
+.credential-shelf::after{content:'FOUNDATION / LEARNING / APPLICATION';position:absolute;right:0;bottom:-1.8rem;color:var(--muted);font-size:.46rem;letter-spacing:.12em}
+.credential-shelf article,.credential-shelf article:nth-child(odd){position:relative;display:flex;flex-direction:column;min-height:285px;padding:1.25rem 1.15rem;border:1px solid var(--line);background:color-mix(in srgb,var(--surface),var(--bg) 16%);box-shadow:none;overflow:hidden}
+.credential-shelf article:nth-child(2){transform:translateY(10px)}.credential-shelf article:nth-child(3){transform:translateY(-6px)}.credential-shelf article:nth-child(4){transform:translateY(5px)}
+.credential-shelf article::after{content:'';position:absolute;right:-34px;top:-34px;width:72px;height:72px;border:1px solid color-mix(in srgb,var(--accent),transparent 45%);border-radius:50%}
+.credential-shelf article>i{position:absolute;right:.8rem;top:.7rem;color:color-mix(in srgb,var(--accent),transparent 28%);font:400 2rem/1 'Newsreader',Georgia,serif;font-style:normal}
+.credential-shelf article>span{padding-right:2.7rem;color:var(--accent);font-size:.56rem;letter-spacing:.08em;text-transform:uppercase}
+.credential-shelf h3{margin:2.3rem 0 .8rem;font-size:clamp(1.45rem,2vw,2rem);line-height:1.02}
+.credential-shelf p{margin:0 0 1.5rem;line-height:1.5}.credential-shelf small{display:block;margin-top:auto;padding-top:.75rem;border-top:1px solid var(--line);color:var(--ink);font-size:.62rem;line-height:1.45}
+.credential-shelf article:hover,.credential-shelf article:focus-visible,.credential-shelf article:nth-child(2):hover,.credential-shelf article:nth-child(3):hover,.credential-shelf article:nth-child(4):hover{z-index:2;background:var(--surface);box-shadow:8px 9px 0 var(--accent-soft);transform:translateY(-5px)}
+@media(max-width:900px){.credential-shelf{grid-template-columns:repeat(2,1fr);gap:1.2rem}.credential-shelf article,.credential-shelf article:nth-child(2),.credential-shelf article:nth-child(3),.credential-shelf article:nth-child(4){min-height:245px;transform:none}}
+@media(max-width:620px){
+  .credential-shelf{grid-template-columns:1fr;padding-bottom:1rem}
+  .credential-shelf article,.credential-shelf article:nth-child(odd){min-height:0;padding:1.2rem}
+  .credential-shelf h3{margin:1.7rem 0 .55rem;font-size:1.65rem}.credential-shelf p{margin-bottom:1rem}
+  .credential-shelf::after{position:static;grid-column:1;padding-top:.2rem;text-align:right}
+}
+@media(prefers-reduced-motion:reduce){.credential-shelf article,.credential-shelf article:hover,.credential-shelf article:focus-visible{transform:none;transition:none}}
+
+/* Bookshelf refinement: credentials become readable book objects. */
+.credential-shelf{align-items:end;gap:clamp(.6rem,1.4vw,1.2rem);padding:2.2rem 2rem 1.8rem;border:1px solid var(--line);border-bottom:12px solid color-mix(in srgb,var(--ink),#7b4c34 35%);background:linear-gradient(to bottom,transparent 0 91%,color-mix(in srgb,var(--accent-soft),transparent 25%) 91%),repeating-linear-gradient(90deg,color-mix(in srgb,var(--line),transparent 55%) 0 1px,transparent 1px 64px)}
+.credential-shelf::before{content:'THE LEARNING SHELF';position:absolute;left:1rem;top:.75rem;color:var(--accent);font-size:.48rem;letter-spacing:.14em}
+.credential-shelf::after{content:'';position:absolute;left:-7px;right:-7px;bottom:-19px;height:7px;border:1px solid var(--ink);background:color-mix(in srgb,var(--accent-soft),var(--surface) 45%)}
+.credential-shelf article,.credential-shelf article:nth-child(odd),.credential-shelf article:nth-child(2),.credential-shelf article:nth-child(3),.credential-shelf article:nth-child(4){min-height:340px;padding:1.2rem .9rem;border:1px solid color-mix(in srgb,var(--ink),transparent 15%);border-radius:3px 3px 0 0;box-shadow:inset 5px 0 0 color-mix(in srgb,var(--ink),transparent 88%),4px 0 0 color-mix(in srgb,var(--ink),transparent 76%);transform:none}
+.credential-shelf article:nth-child(1){min-height:365px;background:#efe5d3}.credential-shelf article:nth-child(2){min-height:325px;background:#b7c1b0}.credential-shelf article:nth-child(3){min-height:350px;background:#d7a68e}.credential-shelf article:nth-child(4){min-height:310px;background:#d8d9d3}
+.credential-shelf article::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:1px;background:color-mix(in srgb,var(--ink),transparent 72%)}
+.credential-shelf article::after{right:.65rem;top:auto;bottom:.8rem;width:18px;height:18px;border-color:color-mix(in srgb,var(--ink),transparent 45%)}
+.credential-shelf article>i{right:.7rem;top:.65rem;font-size:1.55rem}.credential-shelf article>span{position:absolute;left:.8rem;bottom:1rem;max-width:calc(100% - 3.2rem);padding:0;color:var(--ink);font-size:.48rem;writing-mode:vertical-rl;transform:rotate(180deg)}
+.credential-shelf h3{margin:2.4rem 0 .85rem;font-size:clamp(1.4rem,1.85vw,1.85rem)}.credential-shelf p{font-size:.68rem}.credential-shelf small{margin-top:auto;padding:.75rem .1rem 2.2rem;border-top:1px solid color-mix(in srgb,var(--ink),transparent 55%);color:var(--ink)}
+.credential-shelf article:hover,.credential-shelf article:focus-visible,.credential-shelf article:nth-child(2):hover,.credential-shelf article:nth-child(3):hover,.credential-shelf article:nth-child(4):hover{background:var(--surface);box-shadow:inset 5px 0 0 color-mix(in srgb,var(--ink),transparent 88%),8px 8px 0 var(--accent-soft);transform:translateY(-10px) rotate(-.5deg)}
+
+/* Experience roadmap Q5: recognition becomes immediate factual evidence. */
+.recognition-markers{grid-template-columns:repeat(2,1fr);gap:1rem;border-top:0}
+.recognition-markers article,.recognition-markers article:nth-child(odd){position:relative;display:grid;grid-template-columns:minmax(145px,.65fr) 1fr;grid-template-rows:auto auto 1fr;column-gap:1.4rem;min-height:245px;padding:1.6rem;border:1px solid var(--line);background:color-mix(in srgb,var(--surface),transparent 8%);overflow:hidden}
+.recognition-markers article>span{grid-row:1/4;align-self:center;color:var(--accent);font:400 clamp(3rem,5vw,5.8rem)/.82 'Newsreader',Georgia,serif;letter-spacing:-.065em;white-space:nowrap}
+.recognition-markers article>small{color:var(--muted);font-size:.48rem;letter-spacing:.1em}.recognition-markers h3{margin:.7rem 0 .45rem;font-size:1.45rem}.recognition-markers p{margin:0;line-height:1.55}
+.recognition-markers article::after{content:'';position:absolute;right:-45px;bottom:-45px;width:110px;height:110px;border:1px solid color-mix(in srgb,var(--accent),transparent 52%);border-radius:50%;transition:transform .35s}
+.recognition-markers article:hover::after,.recognition-markers article:focus-visible::after{transform:translate(-14px,-12px) scale(1.08)}
+@media(max-width:900px){
+  .credential-shelf{grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible}.credential-shelf article,.credential-shelf article:nth-child(2),.credential-shelf article:nth-child(3),.credential-shelf article:nth-child(4){min-width:0}
+  .recognition-markers article,.recognition-markers article:nth-child(odd){grid-template-columns:1fr;grid-template-rows:auto auto auto;min-height:260px}.recognition-markers article>span{grid-row:auto}
+}
+@media(max-width:620px){
+  .credential-shelf{grid-template-columns:repeat(4,158px);padding:2.1rem 1rem 1.2rem;overflow-x:auto;scroll-snap-type:x proximity}.credential-shelf article,.credential-shelf article:nth-child(odd),.credential-shelf article:nth-child(2),.credential-shelf article:nth-child(3),.credential-shelf article:nth-child(4){min-width:158px;min-height:285px;padding:1rem .8rem;scroll-snap-align:start}.credential-shelf h3{font-size:1.35rem}.credential-shelf small{padding-bottom:2rem}
+  .recognition-markers{grid-template-columns:1fr}.recognition-markers article,.recognition-markers article:nth-child(odd){min-height:220px;padding:1.3rem}.recognition-markers article>span{font-size:clamp(3.8rem,17vw,5.3rem)}
+}
+@media(prefers-reduced-motion:reduce){.credential-shelf article:hover,.credential-shelf article:focus-visible,.recognition-markers article::after{transform:none;transition:none}}
+
+/* Experience roadmap Q6: quiet cross-links to matching case studies. */
+.related-work-link{position:relative;display:inline-flex;align-items:center;min-height:44px;gap:.75rem;margin-top:1.15rem;padding:.55rem 0;color:var(--ink);font-size:.61rem;font-weight:600;letter-spacing:.06em;text-decoration:none;text-transform:uppercase}
+.related-work-link::after{content:'';position:absolute;left:0;right:0;bottom:.3rem;height:1px;background:var(--accent);transform:scaleX(.28);transform-origin:left;transition:transform .32s cubic-bezier(.2,.72,.2,1)}
+.related-work-link i{color:var(--accent);font-size:.85rem;font-style:normal;transition:transform .28s}
+.related-work-link:hover::after,.related-work-link:focus-visible::after{transform:scaleX(1)}.related-work-link:hover i,.related-work-link:focus-visible i{transform:translate(3px,-3px)}
+.project-card[id]{scroll-margin-top:5rem}
+@media(max-width:620px){.related-work-link{min-height:44px;margin-top:.8rem}}
+@media(prefers-reduced-motion:reduce){.related-work-link::after,.related-work-link i{transition:none}}
+
+/* Experience roadmap Q7: an intentional vertical mobile timeline. */
+@media(max-width:620px){
+  .role-timeline{width:calc(100% - 24px);padding-left:30px;overflow:visible}
+  .role-timeline .timeline-track{left:8px;top:1.9rem;bottom:1.9rem;width:1px}
+  .role-timeline article,.role-timeline article.is-active{display:block;margin:0;padding:1.65rem .85rem 1.9rem;border-left:0;box-shadow:none;transform:none}
+  .role-timeline article.is-active{background:color-mix(in srgb,var(--accent-soft),var(--surface) 80%)}
+  .timeline-marker,.role-timeline article.is-active .timeline-marker{left:-29px;top:2rem;width:17px;height:17px;box-shadow:0 0 0 5px var(--bg);transform:none}
+  .role-number{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-right:3.6rem}
+  .role-number i{margin:0;writing-mode:initial}
+  .role-heading{padding-right:3.5rem}.role-heading h2{font-size:2rem}.role-heading strong{display:block;line-height:1.45}
+  .role-detail{margin-top:1.25rem;padding:0}.role-detail>p{font-size:1.15rem;line-height:1.35}.role-detail li{font-size:.78rem;line-height:1.5}
+  .role-proof{display:block;width:100%;max-width:none;margin:1.25rem 0 0;overflow:hidden}
+  .proof-tracker .proof-row{grid-template-columns:1fr .78fr .78fr}
+  .related-work-link{display:flex;width:max-content;max-width:100%;min-height:44px;margin-top:.8rem}
+}
+
+/* About roadmap Q1: the signature observation becomes the page's visual pause. */
+.about-belief{width:calc(100% - 32px);max-width:none;min-height:150vh;margin:0 16px;padding:0 clamp(2rem,7vw,7rem);overflow:visible}
+.about-belief::before{position:sticky;top:18vh;float:right;margin-right:-8vw;pointer-events:none}
+.about-belief>.belief-layout{position:relative;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(230px,.55fr);align-items:start;gap:clamp(3rem,8vw,9rem);min-height:150vh;padding:18vh 0 20vh;border-top:0}
+.belief-sticky{position:sticky;top:18vh;align-self:start}
+.belief-sticky>p{margin:0;color:#d99072;font-size:.6rem;letter-spacing:.13em}
+.belief-sticky h2{max-width:980px;margin:1.6rem 0 0;font-size:clamp(3.4rem,6.3vw,7rem);line-height:.92;letter-spacing:-.055em;text-wrap:balance}
+.belief-response{align-self:end;margin-bottom:10vh;padding:1.4rem 0;border-block:1px solid rgba(255,255,255,.25)}
+.about-belief .belief-response span{display:block;margin-bottom:1rem;color:#e7a789;font:400 1.5rem/1.05 'Newsreader',Georgia,serif}
+.about-belief .belief-response p{margin:0;color:#c5cccc;font-size:.86rem;line-height:1.7}
+.about-belief .belief-response small{display:block;margin-top:1.4rem;color:rgba(255,255,255,.48);font-size:.48rem;letter-spacing:.12em}
+@media(max-width:900px){
+  .about-belief{min-height:auto}.about-belief>.belief-layout{grid-template-columns:1fr;min-height:auto;padding:7rem 0;gap:4rem}
+  .belief-sticky{position:relative;top:auto}.belief-response{width:min(100%,560px);margin:0}
+}
+@media(max-width:620px){
+  .about-belief{width:calc(100% - 14px);margin-inline:7px;padding-inline:1.25rem}.about-belief>.belief-layout{padding:5rem 0;gap:3rem}
+  .belief-sticky h2{font-size:clamp(2.8rem,13vw,4.2rem);line-height:.96}.about-belief::before{display:none}
+}
+@media(prefers-reduced-motion:reduce){.belief-sticky{position:relative;top:auto}.about-belief,.about-belief>.belief-layout{min-height:auto}}
+
+/* About roadmap Q2: a journey path that reveals progression without hiding copy. */
+.journey-path-section{padding-top:5rem}
+.journey-path{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,3vw,3rem);min-height:430px;padding:6rem 1rem 2rem;isolation:isolate}
+.journey-path svg{position:absolute;z-index:-1;inset:0;width:100%;height:100%;overflow:visible}
+.journey-path path{fill:none;vector-effect:non-scaling-stroke}.journey-track{stroke:color-mix(in srgb,var(--ink),transparent 82%);stroke-width:1.2;stroke-dasharray:5 8}.journey-draw{stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--journey-progress));filter:drop-shadow(0 0 4px color-mix(in srgb,var(--accent),transparent 55%))}
+.journey-path article{position:relative;align-self:start;min-height:230px;padding:1.2rem;border:1px solid var(--line);background:color-mix(in srgb,var(--surface),transparent 8%);box-shadow:6px 7px 0 color-mix(in srgb,var(--accent-soft),transparent 22%)}
+.journey-path article:nth-of-type(2){margin-top:5.5rem}.journey-path article:nth-of-type(3){margin-top:1.5rem}.journey-path article:nth-of-type(4){margin-top:7rem}
+.journey-path article::before{content:'';position:absolute;left:1.15rem;top:-1.05rem;width:12px;height:12px;border:2px solid var(--surface);border-radius:50%;background:var(--accent);box-shadow:0 0 0 1px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent),transparent 84%)}
+.journey-path article>span{position:absolute;right:.75rem;top:.6rem;color:color-mix(in srgb,var(--accent),transparent 42%);font:400 2.3rem/1 'Newsreader',Georgia,serif}.journey-path article>small{color:var(--accent);font-size:.48rem;letter-spacing:.11em}.journey-path h3{margin:2.4rem 0 .75rem;font:400 1.55rem/1.03 'Newsreader',Georgia,serif}.journey-path p{margin:0;color:var(--muted);font-size:.7rem;line-height:1.55}
+@media(max-width:900px){.journey-path{grid-template-columns:1fr 1fr;min-height:0;padding-top:3rem}.journey-path svg{opacity:.55}.journey-path article:nth-of-type(2),.journey-path article:nth-of-type(3),.journey-path article:nth-of-type(4){margin-top:0}.journey-path article:nth-of-type(even){transform:translateY(2rem)}}
+@media(max-width:620px){
+  .journey-path{display:grid;grid-template-columns:1fr;gap:1rem;padding:1rem 0 1rem 34px}
+  .journey-path svg{display:none}.journey-path::before{content:'';position:absolute;left:10px;top:1.6rem;bottom:1.6rem;width:1px;background:linear-gradient(var(--accent) calc(var(--journey-progress)*100%),var(--line) 0)}
+  .journey-path article,.journey-path article:nth-of-type(even){min-height:0;padding:1.15rem;transform:none}.journey-path article::before{left:-30px;top:1.3rem}
+  .journey-path h3{margin:1.7rem 0 .55rem;font-size:1.45rem}
+}
+@media(prefers-reduced-motion:reduce){.journey-draw{stroke-dashoffset:0;filter:none}.journey-path::before{background:var(--accent)}}

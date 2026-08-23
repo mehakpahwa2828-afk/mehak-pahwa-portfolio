@@ -12,10 +12,11 @@ interface Props {
 }
 
 const { index, featured, category, context, title, summary, skills, contributions, theme } = Astro.props;
+const visualGrammar = index === '01' ? 'system' : index === '02' ? 'planning' : 'gallery';
 ---
 
-<article class:list={['project-card', `project-${theme}`, { 'project-featured': featured }]} data-reveal>
-  <div class="project-visual" aria-hidden="true">
+<article id={`project-${index}`} class:list={['project-card', `project-${theme}`, { 'project-featured': featured }]} data-visual-grammar={visualGrammar} data-reveal>
+  <div class="project-visual">
     <span class="visual-index">Project / {index}</span>
     {index !== '01' && <div class={`visual-signals signals-${index}`} aria-hidden="true"><span>{index}</span><span>↗</span><span>◎</span><span>{index === '02' ? 'IDEA / SIGNAL' : 'MAKE / SHARE'}</span><div class="signal-poster"><small>{index === '02' ? 'CONTENT SYSTEM' : 'CAMPAIGN SYSTEM'}</small><strong>{index === '02' ? '01—03' : '07'}</strong><p>{index === '02' ? 'Educate · Engage · Publish' : 'Research · Design · Content'}</p></div></div>}
     {index === '01' && (
@@ -28,6 +29,9 @@ const { index, featured, category, context, title, summary, skills, contribution
           <button type="button" role="tab" aria-selected="false" data-stage="interviews"><b>04</b><span>Interviews</span></button>
         </div>
         <div class="stage-detail" aria-live="polite"><small>APPLICATIONS</small><p>Tracked incoming activity so the pipeline stayed visible and current.</p></div>
+        <button class="pipeline-open" type="button" aria-expanded="false">
+          <span>Open case-study interface</span><b aria-hidden="true">↗</b>
+        </button>
       </div>
     )}
     {index === '02' && (
@@ -37,23 +41,39 @@ const { index, featured, category, context, title, summary, skills, contribution
         <button type="button" class="board-note note-c" data-content-step="publish"><small>PILLAR 03</small><strong>Plan to publish</strong><span>Audience · Format · Rhythm</span></button>
         <svg viewBox="0 0 300 220" role="presentation"><path d="M70 58 C140 20 170 70 220 92 M88 150 C145 190 190 160 222 124" /></svg>
         <div class="board-detail" aria-live="polite"><small>EDUCATE</small><p>Build useful content around topics the audience can understand and apply.</p></div>
-        <div class="studio-extra board-extra"><span>IDEA</span><i></i><b>AUDIENCE</b></div>
+        <div class="strategy-chain" aria-label="Content planning logic">
+          <button type="button" class="selected" data-strategy-step="audience"><small>01</small><span>Audience</span></button>
+          <button type="button" data-strategy-step="platform"><small>02</small><span>Platform</span></button>
+          <button type="button" data-strategy-step="format"><small>03</small><span>Format</span></button>
+          <button type="button" data-strategy-step="frequency"><small>04</small><span>Frequency</span></button>
+        </div>
       </div>
     )}
     {index === '03' && (
       <div class="campaign-visual">
-        <button type="button" class="post post-back" data-campaign-step="research"><span>03</span><strong>RESEARCH</strong><i>Campaign context</i></button>
-        <button type="button" class="post post-middle" data-campaign-step="design"><span>02</span><strong>DESIGN</strong><i>Canva execution</i></button>
-        <button type="button" class="post post-front selected" data-campaign-step="content"><span>01</span><strong>CONTENT</strong><i>7 social assets</i></button>
+        <button type="button" class="campaign-hero selected" data-campaign-step="content" aria-label="Show campaign content overview">
+          <small>FEATURED / 01</small><strong>CONTENT</strong><span>Campaign execution</span><i>Abstract preview</i>
+        </button>
+        <div class="campaign-stack" aria-label="Six supporting campaign previews">
+          {['Research', 'Carousel', 'Canva', 'SEO', 'HTML', 'Publish'].map((label, assetIndex) => (
+            <button type="button" style={`--asset:${assetIndex}`} data-campaign-asset={label.toLowerCase()} aria-label={`View ${label} campaign preview`}>
+              <small>0{assetIndex + 2}</small><strong>{label}</strong><span>Preview</span>
+            </button>
+          ))}
+        </div>
+        <div class="campaign-gallery-nav" aria-label="Select a campaign preview">
+          {['Research', 'Carousel', 'Canva', 'SEO', 'HTML', 'Publish'].map((label, assetIndex) => (
+            <button type="button" data-campaign-asset-nav={label.toLowerCase()} aria-label={`Select ${label} preview`}><small>0{assetIndex + 2}</small><span>{label}</span></button>
+          ))}
+        </div>
         <div class="campaign-tags"><span>Canva</span><span>SEO</span><span>HTML</span></div>
         <div class="campaign-detail" aria-live="polite"><small>CONTENT</small><p>Seven social posts, including carousel formats, created as part of the campaign workflow.</p></div>
-        <div class="studio-extra campaign-extra"><span>07</span><i></i><b>POSTS</b></div>
       </div>
     )}
   </div>
   <div class="project-content">
     <div class="project-heading-row"><p class="eyebrow">{category}</p>{featured && <span>Featured project</span>}</div>
-    <h3>{title}</h3>
+    <h2 class="project-title">{title}</h2>
     <p class="project-summary">{summary}</p>
     <dl class="project-meta">
       <div><dt>Context</dt><dd>{context}</dd></div>
@@ -64,6 +84,57 @@ const { index, featured, category, context, title, summary, skills, contribution
       <div class="contribution-list" aria-label="Project evidence">{contributions.map((item, itemIndex) => <span><b>0{itemIndex + 1}</b>{item}</span>)}</div>
     </div>
   </div>
+  {index === '01' && (
+    <section class="pipeline-interface" hidden aria-label="Recruitment Operations case-study interface">
+      <div class="pipeline-interface-head">
+        <span>Recruitment operations / system view</span>
+        <button type="button" class="pipeline-close" aria-label="Close case-study interface">Close ×</button>
+      </div>
+      <div class="pipeline-interface-grid">
+        <div><small>01 / INPUT</small><strong>Applications</strong><span>Incoming activity and follow-up visibility</span></div>
+        <div><small>02 / CHECK</small><strong>Screening</strong><span>Quality review across each recruitment step</span></div>
+        <div><small>03 / TRACK</small><strong>Assignments</strong><span>Daily evaluation, domain and platform tracking</span></div>
+        <div><small>04 / REPORT</small><strong>Interviews</strong><span>Scheduling, rounds, outcomes and daily reporting</span></div>
+      </div>
+      <div class="pipeline-evidence-preview">
+        <section class="tracker-mock" aria-label="Reconstructed recruitment tracker preview">
+          <header><span>DEMO TRACKER / RECONSTRUCTED</span><b>● LIVE VIEW</b></header>
+          <div class="tracker-row tracker-labels"><i>ID</i><i>Stage</i><i>Domain</i><i>Status</i></div>
+          <div class="tracker-row"><i>001</i><i>Assignment</i><i>Design</i><i><mark>In review</mark></i></div>
+          <div class="tracker-row"><i>002</i><i>R1</i><i>Content</i><i><mark>Scheduled</mark></i></div>
+          <div class="tracker-row"><i>003</i><i>Probation</i><i>Operations</i><i><mark>Next stage</mark></i></div>
+        </section>
+        <figure class="real-evidence-figure">
+          <div class="dashboard-preview">
+            <img src="/images/work/recruitment-ats-dashboard.png" alt="Recruitment ATS dashboard designed by Mehak, showing a funnel, stage overview, SLA reporting and charts using demonstration figures" loading="lazy" />
+          </div>
+          <figcaption><small>REAL EVIDENCE / ATS DASHBOARD</small><span>A focused preview of the recruitment funnel, stage movement and SLA monitoring. Figures shown are illustrative.</span></figcaption>
+        </figure>
+      </div>
+      <div class="case-story" aria-label="Recruitment Operations case-study summary">
+        <article>
+          <small>01 / SITUATION</small>
+          <h4>Multiple stages needed one visible operating view.</h4>
+          <p>Applications, assignments, interviews and candidate statuses had to remain understandable across daily recruitment activity.</p>
+        </article>
+        <article>
+          <small>02 / WHAT I BUILT</small>
+          <h4>A connected tracking and reporting system.</h4>
+          <p>Google Sheets trackers, status structures, quality checks and process documentation supported the recruitment workflow.</p>
+        </article>
+        <article>
+          <small>03 / HOW IT WORKED</small>
+          <h4>Activity was reviewed stage by stage.</h4>
+          <p>Daily and monthly views helped track assignments, interview rounds, domains, platforms, outcomes and movement toward probation.</p>
+        </article>
+        <article>
+          <small>04 / WHAT CHANGED</small>
+          <h4>The process became easier to follow.</h4>
+          <p>Recruitment activity, handoffs and current statuses could be reviewed through a more consistent and organized structure.</p>
+        </article>
+      </div>
+    </section>
+  )}
 </article>
 {index === '01' && <script>
   const stageCopy = {
@@ -80,6 +151,24 @@ const { index, featured, category, context, title, summary, skills, contribution
     button.setAttribute('aria-selected', 'true');
     if (detail && copy) detail.innerHTML = `<small>${copy[0]}</small><p>${copy[1]}</p>`;
   }));
+  document.querySelectorAll('.pipeline-open').forEach((openButton) => {
+    const project = openButton.closest('.project-card');
+    const panel = project?.querySelector<HTMLElement>('.pipeline-interface');
+    const closeButton = project?.querySelector<HTMLButtonElement>('.pipeline-close');
+    const setOpen = (isOpen: boolean) => {
+      if (!panel) return;
+      panel.hidden = !isOpen;
+      openButton.setAttribute('aria-expanded', String(isOpen));
+      project?.classList.toggle('is-interface-open', isOpen);
+      if (isOpen) closeButton?.focus();
+      else openButton.focus();
+    };
+    openButton.addEventListener('click', () => setOpen(true));
+    closeButton?.addEventListener('click', () => setOpen(false));
+    panel?.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  });
 </script>}
 {index === '02' && <script>
   const contentCopy = {
@@ -96,19 +185,40 @@ const { index, featured, category, context, title, summary, skills, contribution
     const detail = board?.querySelector('.board-detail');
     if (detail && copy) detail.innerHTML = `<small>${copy[0]}</small><p>${copy[1]}</p>`;
   }));
+  const strategyCopy = {
+    audience: ['AUDIENCE', 'Start with who the content needs to help and what they should understand.'],
+    platform: ['PLATFORM', 'Choose the channel where that audience and objective can meet naturally.'],
+    format: ['FORMAT', 'Shape the idea into the clearest post, carousel or supporting content format.'],
+    frequency: ['FREQUENCY', 'Place the content within a repeatable publishing rhythm rather than treating it as a one-off.'],
+  };
+  document.querySelectorAll('[data-strategy-step]').forEach((button) => button.addEventListener('click', () => {
+    const key = button.getAttribute('data-strategy-step');
+    const copy = key ? strategyCopy[key as keyof typeof strategyCopy] : undefined;
+    const board = button.closest('.content-board');
+    board?.querySelectorAll('[data-strategy-step]').forEach((item) => item.classList.remove('selected'));
+    button.classList.add('selected');
+    const detail = board?.querySelector('.board-detail');
+    if (detail && copy) detail.innerHTML = `<small>${copy[0]}</small><p>${copy[1]}</p>`;
+  }));
 </script>}
 {index === '03' && <script>
   const campaignCopy = {
     content: ['CONTENT', 'Seven social posts, including carousel formats, created as part of the campaign workflow.'],
-    design: ['DESIGN', 'Canva was used to turn planned ideas into clear, independent social assets.'],
-    research: ['RESEARCH', 'SEO and campaign research provided context for wider digital marketing work.'],
+    research: ['RESEARCH', 'Campaign and SEO research helped establish context before creative execution.'],
+    carousel: ['CAROUSEL', 'Multi-frame social content was planned as part of the seven-post campaign output.'],
+    canva: ['CANVA', 'Canva was used to turn planned ideas into independently created visual posts.'],
+    seo: ['SEO', 'SEO work supported the wider digital-marketing learning and execution process.'],
+    html: ['HTML', 'HTML was explored with AI assistance as part of the broader internship work.'],
+    publish: ['PUBLISH', 'The work connected research, content preparation and visual execution into campaign-ready assets.'],
   };
-  document.querySelectorAll('[data-campaign-step]').forEach((button) => button.addEventListener('click', () => {
-    const key = button.getAttribute('data-campaign-step');
+  document.querySelectorAll('[data-campaign-step], [data-campaign-asset], [data-campaign-asset-nav]').forEach((button) => button.addEventListener('click', () => {
+    const key = button.getAttribute('data-campaign-step') ?? button.getAttribute('data-campaign-asset') ?? button.getAttribute('data-campaign-asset-nav');
     const copy = key ? campaignCopy[key as keyof typeof campaignCopy] : undefined;
     const visual = button.closest('.campaign-visual');
-    visual?.querySelectorAll('[data-campaign-step]').forEach((item) => item.classList.remove('selected'));
-    button.classList.add('selected');
+    visual?.querySelectorAll('[data-campaign-step], [data-campaign-asset], [data-campaign-asset-nav]').forEach((item) => item.classList.remove('selected'));
+    visual?.querySelectorAll(`[data-campaign-asset="${key}"], [data-campaign-asset-nav="${key}"]`).forEach((item) => item.classList.add('selected'));
+    if (button.hasAttribute('data-campaign-step')) button.classList.add('selected');
+    visual?.classList.add('is-gallery-open');
     const detail = visual?.querySelector('.campaign-detail');
     if (detail && copy) detail.innerHTML = `<small>${copy[0]}</small><p>${copy[1]}</p>`;
   }));
