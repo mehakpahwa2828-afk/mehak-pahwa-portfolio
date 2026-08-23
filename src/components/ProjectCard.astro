@@ -151,7 +151,7 @@ const visualGrammar = index === '01' ? 'system' : index === '02' ? 'planning' : 
     button.setAttribute('aria-selected', 'true');
     if (detail && copy) detail.innerHTML = `<small>${copy[0]}</small><p>${copy[1]}</p>`;
   }));
-  document.querySelectorAll('.pipeline-open').forEach((openButton) => {
+  document.querySelectorAll<HTMLButtonElement>('.pipeline-open').forEach((openButton) => {
     const project = openButton.closest('.project-card');
     const panel = project?.querySelector<HTMLElement>('.pipeline-interface');
     const closeButton = project?.querySelector<HTMLButtonElement>('.pipeline-close');
