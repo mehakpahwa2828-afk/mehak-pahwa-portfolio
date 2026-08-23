@@ -83,6 +83,7 @@ const visualGrammar = index === '01' ? 'system' : index === '02' ? 'planning' : 
       <p>Evidence</p>
       <div class="contribution-list" aria-label="Project evidence">{contributions.map((item, itemIndex) => <span><b>0{itemIndex + 1}</b>{item}</span>)}</div>
     </div>
+    {index !== '01' && <button class="case-study-open" type="button" aria-expanded="false"><span>View case study</span><b aria-hidden="true">↗</b></button>}
   </div>
   {index === '01' && (
     <section class="pipeline-interface" hidden aria-label="Recruitment Operations case-study interface">
@@ -135,6 +136,28 @@ const visualGrammar = index === '01' ? 'system' : index === '02' ? 'planning' : 
       </div>
     </section>
   )}
+  {index === '02' && (
+    <section class="project-case-study" hidden aria-label="FreshNest Content Strategy case study">
+      <div class="pipeline-interface-head"><span>FreshNest / content strategy</span><button type="button" class="case-study-close">Close ×</button></div>
+      <div class="case-study-intro"><small>PROJECT OVERVIEW</small><h3>Turning an imaginary brand objective into a usable content system.</h3><p>The work connected audience thinking, content pillars, formats and publishing rhythm so individual posts belonged to one coherent strategy.</p></div>
+      <div class="case-preview case-preview-strategy" aria-label="Reconstructed content strategy preview">
+        <header><span>RECONSTRUCTED PREVIEW</span><b>CONTENT SYSTEM</b></header>
+        <div><article><small>01</small><strong>Audience</strong><span>Who needs the content?</span></article><i>→</i><article><small>02</small><strong>Pillars</strong><span>Educate · Engage · Activate</span></article><i>→</i><article><small>03</small><strong>Rhythm</strong><span>Platform · Format · Frequency</span></article></div>
+      </div>
+      <div class="case-story"><article><small>01 / PROBLEM</small><h4>A brand idea needed a clear content direction.</h4><p>The challenge was to move from a broad objective to content that was relevant, repeatable and suitable for its audience.</p></article><article><small>02 / MY ROLE</small><h4>Research and structure the strategy.</h4><p>I developed audience thinking, content pillars, platform distribution and engagement ideas for the FreshNest concept.</p></article><article><small>03 / SYSTEM</small><h4>Connect each idea to execution.</h4><p>The planning logic linked audience, platform, format and frequency instead of treating posts as isolated pieces.</p></article><article><small>04 / LEARNING</small><h4>Strategy makes creative work more intentional.</h4><p>The project strengthened how I translate objectives into an organized content plan.</p></article></div>
+    </section>
+  )}
+  {index === '03' && (
+    <section class="project-case-study" hidden aria-label="Campaign and Creative Execution case study">
+      <div class="pipeline-interface-head"><span>Campaign / creative execution</span><button type="button" class="case-study-close">Close ×</button></div>
+      <div class="case-study-intro"><small>PROJECT OVERVIEW</small><h3>Moving from research to campaign-ready creative output.</h3><p>The internship combined independent Canva execution with a content calendar and introductory, AI-assisted exposure to SEO and HTML work.</p></div>
+      <div class="case-preview case-preview-campaign" aria-label="Reconstructed campaign asset preview">
+        <header><span>RECONSTRUCTED PREVIEW</span><b>OUTPUT BOARD / 07 POSTS</b></header>
+        <div><article><small>01 / RESEARCH</small><strong>Context</strong><span>Topics and campaign direction</span></article><article><small>02 / DESIGN</small><strong>Canva</strong><span>Posts and carousel formats</span></article><article><small>03 / SUPPORT</small><strong>SEO + HTML</strong><span>AI-assisted learning exposure</span></article></div>
+      </div>
+      <div class="case-story"><article><small>01 / PROBLEM</small><h4>Campaign ideas needed visual execution.</h4><p>The work required translating research and planned topics into clear social content.</p></article><article><small>02 / MY ROLE</small><h4>Create the visual assets independently.</h4><p>I designed seven Canva posts, including carousel formats, and organized them within a content calendar.</p></article><article><small>03 / APPROACH</small><h4>Research, create, then prepare.</h4><p>The workflow connected topic research, creative design and supporting campaign preparation.</p></article><article><small>04 / LEARNING</small><h4>Creative output works best inside a system.</h4><p>The internship expanded my understanding of how design, SEO and HTML support wider campaign execution.</p></article></div>
+    </section>
+  )}
 </article>
 {index === '01' && <script>
   const stageCopy = {
@@ -168,6 +191,21 @@ const visualGrammar = index === '01' ? 'system' : index === '02' ? 'planning' : 
     panel?.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') setOpen(false);
     });
+  });
+  document.querySelectorAll<HTMLButtonElement>('.case-study-open').forEach((openButton) => {
+    const project = openButton.closest('.project-card');
+    const panel = project?.querySelector<HTMLElement>('.project-case-study');
+    const closeButton = panel?.querySelector<HTMLButtonElement>('.case-study-close');
+    const setOpen = (isOpen: boolean) => {
+      if (!panel) return;
+      panel.hidden = !isOpen;
+      openButton.setAttribute('aria-expanded', String(isOpen));
+      project?.classList.toggle('is-case-study-open', isOpen);
+      if (isOpen) closeButton?.focus(); else openButton.focus();
+    };
+    openButton.addEventListener('click', () => setOpen(true));
+    closeButton?.addEventListener('click', () => setOpen(false));
+    panel?.addEventListener('keydown', (event) => { if (event.key === 'Escape') setOpen(false); });
   });
 </script>}
 {index === '02' && <script>
