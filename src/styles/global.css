@@ -1072,6 +1072,19 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 .chapter-transition{background:transparent;color:var(--ink);box-shadow:none}
 .chapter-transition::after{width:24%;background:linear-gradient(90deg,transparent,rgba(23,20,22,.14),rgba(255,255,255,.82),transparent);opacity:1}
 .chapter-transition i{background:linear-gradient(90deg,var(--ink),var(--line))}.chapter-transition span{color:var(--muted)}.chapter-transition strong{color:var(--ink)}
+
+/* Final Mission Control palette: one editorial system, no dashboard colour split. */
+.mission-control{--mission-green:var(--accent);background:transparent;border-block:1px solid var(--line)}
+.mission-control::before{background-image:linear-gradient(color-mix(in srgb,var(--line),transparent 58%) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--line),transparent 58%) 1px,transparent 1px);opacity:.22}
+.mission-control::after,.mission-ambient{display:none}
+.mission-panels{border-width:1px 0;border-color:var(--line);background:transparent;box-shadow:none}
+.stage-workflow{background:color-mix(in srgb,var(--accent-soft),transparent 52%)}
+.stage-workflow::before{opacity:.46}
+.mission-pipeline>button[data-state=active]{border-color:color-mix(in srgb,var(--accent),transparent 58%);background:color-mix(in srgb,var(--accent-soft),transparent 28%);box-shadow:none}
+.mission-pipeline>button[aria-selected=true]>i,.mission-node{box-shadow:0 0 0 4px color-mix(in srgb,var(--accent),transparent 86%)}
+.stage-components article{background:color-mix(in srgb,var(--surface),transparent 72%)}
+.candidate-row,.screen-row,.linear-flow>div{background:color-mix(in srgb,var(--surface),transparent 32%)}
+.screening-scan,.flow-status i{box-shadow:none}
 @media(max-width:620px){.related-work-link{min-height:44px;margin-top:.8rem}}
 @media(prefers-reduced-motion:reduce){.related-work-link::after,.related-work-link i{transition:none}}
 
