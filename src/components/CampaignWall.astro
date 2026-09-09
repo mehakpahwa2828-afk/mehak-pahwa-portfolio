@@ -1,0 +1,49 @@
+---
+const assets = [
+  {src:'/images/work/alfido-hiring-roles.png', label:'Multi-role hiring post', meta:'Announcement / Canva'},
+  {src:'/images/work/alfido-internship-benefits.png', label:'Five reasons to intern', meta:'Information post / Canva'},
+  {src:'/images/work/alfido-application-steps.png', label:'Apply in six steps', meta:'Process explainer / Canva'},
+];
+---
+<section class="campaign-wall" aria-labelledby="campaign-wall-title" data-campaign-wall>
+  <header><p>Interactive campaign wall</p><h3 id="campaign-wall-title">Selected visual outputs.</h3><span>03 assets · independently designed in Canva</span></header>
+  <div class="campaign-composition">
+    {assets.map((asset, index) => <button type="button" class:list={['campaign-asset', `asset-${index + 1}`]} data-wall-asset={index} aria-label={`Open ${asset.label}`}><img src={asset.src} alt={asset.label} loading="lazy" decoding="async"/><span><small>{asset.meta}</small><strong>{asset.label}</strong></span></button>)}
+    <aside aria-hidden="true"><span>RESEARCH</span><i></i><span>DESIGN</span><i></i><span>CONTENT</span></aside>
+  </div>
+  <dialog class="campaign-lightbox" aria-label="Campaign asset preview">
+    <button type="button" data-lightbox-close aria-label="Close preview">Close ×</button>
+    <figure><img src="" alt=""/><figcaption><small></small><strong></strong></figcaption></figure>
+    <div><button type="button" data-lightbox-prev aria-label="Previous campaign asset">← Previous</button><button type="button" data-lightbox-next aria-label="Next campaign asset">Next →</button></div>
+  </dialog>
+</section>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-campaign-wall]').forEach((wall) => {
+    const buttons = [...wall.querySelectorAll<HTMLButtonElement>('[data-wall-asset]')];
+    const dialog = wall.querySelector<HTMLDialogElement>('dialog');
+    const image = dialog?.querySelector<HTMLImageElement>('img');
+    const small = dialog?.querySelector<HTMLElement>('figcaption small');
+    const strong = dialog?.querySelector<HTMLElement>('figcaption strong');
+    let current = 0;
+    const show = (index: number) => {
+      current = (index + buttons.length) % buttons.length;
+      const source = buttons[current].querySelector<HTMLImageElement>('img');
+      const meta = buttons[current].querySelector<HTMLElement>('small');
+      const title = buttons[current].querySelector<HTMLElement>('strong');
+      if (image && source) { image.src = source.src; image.alt = source.alt; }
+      if (small && meta) small.textContent = meta.textContent;
+      if (strong && title) strong.textContent = title.textContent;
+    };
+    buttons.forEach((button, index) => button.addEventListener('click', () => { show(index); dialog?.showModal(); }));
+    dialog?.querySelector('[data-lightbox-close]')?.addEventListener('click', () => dialog.close());
+    dialog?.querySelector('[data-lightbox-prev]')?.addEventListener('click', () => show(current - 1));
+    dialog?.querySelector('[data-lightbox-next]')?.addEventListener('click', () => show(current + 1));
+    dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+    wall.addEventListener('pointermove', (event) => {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches || innerWidth < 900) return;
+      const bounds = wall.getBoundingClientRect();
+      wall.style.setProperty('--wall-x', `${((event.clientX - bounds.left) / bounds.width - .5) * 8}px`);
+      wall.style.setProperty('--wall-y', `${((event.clientY - bounds.top) / bounds.height - .5) * 8}px`);
+    });
+  });
+</script>

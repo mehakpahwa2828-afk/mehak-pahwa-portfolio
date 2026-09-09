@@ -1,0 +1,33 @@
+---
+const steps = [
+  {key:'audience', number:'01', title:'Audience', text:'Start with who the content needs to help and what they should understand.', visual:'Needs · clarity · trust'},
+  {key:'pillars', number:'02', title:'Pillars', text:'Organize ideas into repeatable themes: educate, engage and activate.', visual:'Educate / Engage / Activate'},
+  {key:'formats', number:'03', title:'Formats', text:'Match each idea to the clearest post, carousel or supporting format.', visual:'Post · Carousel · Story'},
+  {key:'calendar', number:'04', title:'Calendar', text:'Give the strategy a usable rhythm instead of treating posts as one-offs.', visual:'M  T  W  T  F'},
+  {key:'distribution', number:'05', title:'Distribution', text:'Connect the right platform and channel to the audience and objective.', visual:'Instagram → LinkedIn → Community'},
+];
+---
+<section class="strategy-map" aria-labelledby="strategy-map-title" data-strategy-map>
+  <header><p>Interactive strategy map</p><h3 id="strategy-map-title">From audience insight to distribution.</h3></header>
+  <div class="strategy-map-grid">
+    <div class="strategy-route" role="tablist" aria-label="Content strategy stages">
+      {steps.map((step, index) => <button type="button" role="tab" aria-selected={index === 0 ? 'true' : 'false'} data-map-tab={step.key}><small>{step.number}</small><span>{step.title}</span><i aria-hidden="true"></i></button>)}
+    </div>
+    <div class="strategy-map-panels">
+      {steps.map((step, index) => <article role="tabpanel" data-map-panel={step.key} hidden={index !== 0}><small>{step.number} / {step.title}</small><h4>{step.text}</h4><div class={`strategy-artifact artifact-${step.key}`} aria-hidden="true"><span>{step.visual}</span><i></i><i></i><i></i></div></article>)}
+    </div>
+  </div>
+</section>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-strategy-map]').forEach((map) => {
+    const tabs = [...map.querySelectorAll<HTMLButtonElement>('[data-map-tab]')];
+    const panels = [...map.querySelectorAll<HTMLElement>('[data-map-panel]')];
+    const select = (tab: HTMLButtonElement) => {
+      const key = tab.dataset.mapTab;
+      tabs.forEach(item => item.setAttribute('aria-selected', String(item === tab)));
+      panels.forEach(panel => panel.hidden = panel.dataset.mapPanel !== key);
+    };
+    tabs.forEach(tab => tab.addEventListener('click', () => select(tab)));
+  });
+</script>
+

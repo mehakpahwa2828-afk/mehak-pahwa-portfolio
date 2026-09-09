@@ -1,0 +1,8 @@
+---
+interface Props { from: string; to: string; }
+const { from, to } = Astro.props;
+---
+<aside class="chapter-transition" data-reveal aria-label={`Transition from ${from} to ${to}`}>
+  <span>{from}</span><i aria-hidden="true"></i><strong>{to}</strong>
+</aside>
+

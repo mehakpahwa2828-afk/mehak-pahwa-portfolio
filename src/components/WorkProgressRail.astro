@@ -1,0 +1,21 @@
+---
+const items = [
+  ['01', 'Recruitment Systems', 'project-01'],
+  ['02', 'Content Strategy', 'project-02'],
+  ['03', 'Campaign Execution', 'project-03'],
+];
+---
+<nav class="work-rail" aria-label="Work projects">
+  <p>Project index</p>
+  <div class="work-rail-track" aria-hidden="true"><i></i></div>
+  <ol>
+    {items.map(([number, title, id], index) => (
+      <li data-rail-item data-state={index === 0 ? 'active' : 'upcoming'}>
+        <a href={`#${id}`} aria-label={`Go to project ${number}: ${title}`}>
+          <span>{number}</span><i aria-hidden="true"></i><strong>{title}</strong>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>
+

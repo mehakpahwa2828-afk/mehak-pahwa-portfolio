@@ -2,35 +2,56 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import WorkProgressRail from '../components/WorkProgressRail.astro';
+import ProjectChapterTransition from '../components/ProjectChapterTransition.astro';
+import RecruitmentMissionControl from '../components/RecruitmentMissionControl.astro';
+import StrategyMap from '../components/StrategyMap.astro';
+import CampaignWall from '../components/CampaignWall.astro';
 import { projects } from '../data/portfolio';
+const [recruitment, strategy, campaign] = projects;
 ---
-<BaseLayout title="Selected Work | Mehak Pahwa" description="Selected operations and digital marketing work by Mehak Pahwa.">
-  <div class="site-shell">
-    <Header />
-    <main id="main">
-      <header class="page-header" data-reveal><p class="page-kicker"><span></span>Selected work</p><h1>Work that made information <em>more useful.</em></h1><p>These projects show what I was responsible for, how I approached the work, and which tools supported it.</p></header>
-      <div class="work-marquee" data-reveal aria-hidden="true"><div><span>PROCESS DESIGN</span><i>✦</i><span>CONTENT THINKING</span><i>✦</i><span>QUALITY CHECKS</span><i>✦</i><span>VISUAL EXECUTION</span><i>✦</i><span>PROCESS DESIGN</span><i>✦</i><span>CONTENT THINKING</span></div></div>
-      <div class="work-progress" aria-hidden="true"><span>ACTIVE PROJECT</span><b><i>01</i> / 03</b><em><u></u></em></div>
-      <section class="work-list">{projects.map((project) => <ProjectCard {...project} />)}</section>
-      <section class="page-cta compact" data-reveal><p>Want the role-level context?</p><h2>See where this work fits in my experience.</h2><div><a href="/experience">View experience ↗</a><a href="/about">Capabilities ↗</a></div></section>
-    </main>
-    <Footer />
-  </div>
+<BaseLayout title="Selected Work | Mehak Pahwa" description="Selected operations, strategy and campaign work by Mehak Pahwa.">
+  <div class="site-shell work-experience"><Header /><main id="main">
+    <header class="page-header work-page-header" data-reveal><p class="page-kicker"><span></span>Selected work</p><h1>Work that made information <em>more useful.</em></h1><p>Three chapters across systems, strategy and execution—each showing the thinking and evidence behind the work.</p></header>
+    <WorkProgressRail />
+    <div class="work-chapters">
+      <article id="project-01" class="work-chapter chapter-systems" data-work-project="01">
+        <header class="chapter-intro" data-reveal><div><small>01 / Systems</small><span>Featured project</span></div><div><p>{recruitment.category}</p><h2>{recruitment.title}</h2></div><div><p>{recruitment.summary}</p><dl><div><dt>Context</dt><dd>{recruitment.context}</dd></div><div><dt>Role & tools</dt><dd>Project management · Google Sheets · SOPs · Quality checks</dd></div></dl></div></header>
+        <RecruitmentMissionControl />
+        <section class="work-evidence evidence-dashboard" data-reveal aria-labelledby="dashboard-title"><header><small>System evidence</small><h3 id="dashboard-title">A recruitment view built for visibility.</h3><p>The dashboard connects funnel movement, current stages and SLA monitoring. Figures shown are illustrative.</p></header><figure><img src="/images/work/recruitment-ats-dashboard.png" alt="Recruitment ATS dashboard showing funnel, stage overview, SLA reporting and charts using demonstration figures" loading="lazy" decoding="async"/><figcaption><span>ATS dashboard / Google Sheets</span><strong>Recruitment funnel, stage movement and status visibility.</strong></figcaption></figure></section>
+        <section class="chapter-outcomes" data-reveal><article><small>Problem</small><h3>Multiple stages needed one visible operating view.</h3></article><article><small>System</small><p>Trackers, status structures, quality checks and process documentation supported the workflow.</p></article><article><small>Outcome</small><p>Recruitment activity, handoffs and current status became easier to review consistently.</p></article></section>
+      </article>
+      <ProjectChapterTransition from="01 / SYSTEMS" to="02 / STRATEGY" />
+      <article id="project-02" class="work-chapter chapter-strategy" data-work-project="02">
+        <header class="chapter-intro" data-reveal><div><small>02 / Strategy</small><span>Concept project</span></div><div><p>{strategy.category}</p><h2>{strategy.title}</h2></div><div><p>{strategy.summary}</p><dl><div><dt>Context</dt><dd>{strategy.context}</dd></div><div><dt>Role & tools</dt><dd>Research · Content planning · Strategy development</dd></div></dl></div></header>
+        <StrategyMap />
+        <section class="work-evidence evidence-strategy" data-reveal aria-labelledby="strategy-evidence-title"><header><small>Submitted project material</small><h3 id="strategy-evidence-title">The planning behind the system.</h3><p>FreshNest was a concept-brand submission. The strategy document used AI-assisted drafting and is shown as project evidence, not live campaign performance.</p></header><div>
+          <figure><a href="/images/work/freshnest-strategy-overview.png" target="_blank" rel="noreferrer"><img src="/images/work/freshnest-strategy-overview.png" alt="FreshNest audience, tone, content pillars and platform strategy overview" loading="lazy" decoding="async"/></a><figcaption><small>01 / Strategy overview</small><strong>Audience, tone and five content pillars.</strong></figcaption></figure>
+          <figure><a href="/images/work/freshnest-educational-planning.png" target="_blank" rel="noreferrer"><img src="/images/work/freshnest-educational-planning.png" alt="FreshNest educational content planning with platforms, formats and frequency" loading="lazy" decoding="async"/></a><figcaption><small>02 / Execution detail</small><strong>Ideas connected to format and publishing rhythm.</strong></figcaption></figure>
+          <blockquote><small>03 / Project logic</small><p>Five content formats—video, image, educational, influencer and emotional storytelling—each served a distinct role inside one connected brand direction.</p></blockquote>
+        </div></section>
+      </article>
+      <ProjectChapterTransition from="02 / STRATEGY" to="03 / EXECUTION" />
+      <article id="project-03" class="work-chapter chapter-execution" data-work-project="03">
+        <header class="chapter-intro" data-reveal><div><small>03 / Execution</small><span>Visual project</span></div><div><p>{campaign.category}</p><h2>{campaign.title}</h2></div><div><p>{campaign.summary}</p><dl><div><dt>Context</dt><dd>{campaign.context}</dd></div><div><dt>Role & tools</dt><dd>Canva · Content calendar · Campaign support</dd></div></dl></div></header>
+        <CampaignWall />
+        <section class="chapter-outcomes chapter-outcomes-dark" data-reveal><article><small>Creative output</small><h3>Seven Canva posts, including carousel formats.</h3></article><article><small>Workflow</small><p>Topic research, design and a posting calendar brought the campaign pieces together.</p></article><article><small>Disclosure</small><p>SEO and HTML were separate AI-assisted learning activities, not independent technical work.</p></article></section>
+      </article>
+    </div>
+    <section class="work-completion" data-reveal><p>WORK ARCHIVE · 03/03 EXPLORED</p><i aria-hidden="true"></i><span>Next chapter</span><h2>See how these capabilities were built through experience.</h2><a class="button button-primary" href="/experience">Explore Experience <b aria-hidden="true">→</b></a></section>
+  </main><Footer /></div>
 </BaseLayout>
 <script>
-  const projectCards = [...document.querySelectorAll<HTMLElement>('.work-list .project-card')];
-  const activeNumber = document.querySelector<HTMLElement>('.work-progress b i');
-  const activeLine = document.querySelector<HTMLElement>('.work-progress em u');
-  if (projectCards.length && activeNumber && activeLine) {
-    const updateProject = (index: number) => {
-      activeNumber.textContent = String(index + 1).padStart(2, '0');
-      activeLine.style.width = `${((index + 1) / projectCards.length) * 100}%`;
-    };
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible) updateProject(projectCards.indexOf(visible.target as HTMLElement));
-    }, { threshold: [.25, .5, .75] });
-    projectCards.forEach((card) => observer.observe(card));
-  }
+  const workProjects = [...document.querySelectorAll<HTMLElement>('[data-work-project]')];
+  const railItems = [...document.querySelectorAll<HTMLElement>('[data-rail-item]')];
+  const railFill = document.querySelector<HTMLElement>('.work-rail-track i');
+  const updateRail = () => {
+    if (!workProjects.length) return;
+    const point = innerHeight * .38;
+    let active = workProjects.findIndex(project => { const r = project.getBoundingClientRect(); return r.top <= point && r.bottom > point; });
+    if (active < 0) active = workProjects[0].getBoundingClientRect().top > point ? 0 : workProjects.length - 1;
+    railItems.forEach((item, index) => item.dataset.state = index < active ? 'completed' : index === active ? 'active' : 'upcoming');
+    if (railFill) railFill.style.height = `${(active / (workProjects.length - 1)) * 100}%`;
+  };
+  updateRail(); addEventListener('scroll', updateRail, {passive:true}); addEventListener('resize', updateRail, {passive:true});
 </script>
