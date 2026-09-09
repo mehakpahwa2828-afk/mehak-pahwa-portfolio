@@ -11,10 +11,10 @@ const steps = [
   <header><p>Interactive strategy map</p><h3 id="strategy-map-title">From audience insight to distribution.</h3></header>
   <div class="strategy-map-grid">
     <div class="strategy-route" role="tablist" aria-label="Content strategy stages">
-      {steps.map((step, index) => <button type="button" role="tab" aria-selected={index === 0 ? 'true' : 'false'} data-map-tab={step.key}><small>{step.number}</small><span>{step.title}</span><i aria-hidden="true"></i></button>)}
+      {steps.map((step, index) => <button type="button" role="tab" aria-selected={index === 0 ? 'true' : 'false'} data-state={index === 0 ? 'active' : 'inactive'} data-map-tab={step.key}><small>{step.number}</small><span>{step.title}</span><i aria-hidden="true"></i></button>)}
     </div>
     <div class="strategy-map-panels">
-      {steps.map((step, index) => <article role="tabpanel" data-map-panel={step.key} hidden={index !== 0}><small>{step.number} / {step.title}</small><h4>{step.text}</h4><div class={`strategy-artifact artifact-${step.key}`} aria-hidden="true"><span>{step.visual}</span><i></i><i></i><i></i></div></article>)}
+      {steps.map((step, index) => <article role="tabpanel" data-map-panel={step.key} hidden={index !== 0}><small>{step.number} / {step.title}</small><h4>{step.text}</h4><div class={`strategy-artifact artifact-${step.key}`} aria-hidden="true"><div>{step.visual.split(/ · | \/ | → /).map((label)=><span>{label}</span>)}</div><i></i><i></i><i></i><i></i><i></i></div></article>)}
     </div>
   </div>
 </section>
@@ -22,12 +22,13 @@ const steps = [
   document.querySelectorAll<HTMLElement>('[data-strategy-map]').forEach((map) => {
     const tabs = [...map.querySelectorAll<HTMLButtonElement>('[data-map-tab]')];
     const panels = [...map.querySelectorAll<HTMLElement>('[data-map-panel]')];
+    const explored = new Set<string>();
     const select = (tab: HTMLButtonElement) => {
       const key = tab.dataset.mapTab;
-      tabs.forEach(item => item.setAttribute('aria-selected', String(item === tab)));
+      if (key) explored.add(key);
+      tabs.forEach(item => { const active=item===tab; item.setAttribute('aria-selected',String(active)); item.dataset.state=active?'active':explored.has(item.dataset.mapTab||'')?'explored':'inactive'; });
       panels.forEach(panel => panel.hidden = panel.dataset.mapPanel !== key);
     };
     tabs.forEach(tab => tab.addEventListener('click', () => select(tab)));
   });
 </script>
-

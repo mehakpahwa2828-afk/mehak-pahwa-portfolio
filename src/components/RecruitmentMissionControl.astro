@@ -1,80 +1,39 @@
 ---
 const stages = [
-  { key:'applications', number:'01', name:'Applications', objective:'Keep every incoming application visible and followed up.', system:'A structured candidate tracker organized activity by source, domain and current stage.', check:'Application details, follow-up status and completeness stayed reviewable.', output:'A clean record ready to move into screening.', visual:'rows' },
-  { key:'screening', number:'02', name:'Screening', objective:'Move suitable applications forward with consistent quality checks.', system:'Defined status fields and review checkpoints made decisions easier to trace.', check:'Screening quality and the completeness of each stage were reviewed.', output:'A clear decision and assignment-ready candidate status.', visual:'filter' },
-  { key:'assignments', number:'03', name:'Assignments', objective:'Track submissions, evaluations and results without losing context.', system:'Daily evaluation, domain, platform and invite-credit views supported tracking.', check:'Received dates, evaluation progress, delays and result status were monitored.', output:'An evaluated assignment ready for interview scheduling.', visual:'steps' },
-  { key:'interviews', number:'04', name:'Interviews', objective:'Coordinate interview rounds and keep candidate movement visible.', system:'Scheduling logs tracked R1, R2, panels, time slots and current outcomes.', check:'Daily schedules, candidate status, round movement and reporting were reviewed.', output:'A documented outcome and the next-stage or probation status.', visual:'calendar' },
+  { key:'applications', number:'01', name:'Applications', objective:'Keep every incoming application visible and followed up.', system:'A structured candidate tracker organized activity by source, domain and current stage.', check:'Application details, follow-up status and completeness stayed reviewable.', output:'A clean record ready to move into screening.' },
+  { key:'screening', number:'02', name:'Screening', objective:'Move suitable applications forward with consistent quality checks.', system:'Defined status fields and review checkpoints made decisions easier to trace.', check:'Screening quality and the completeness of each stage were reviewed.', output:'A clear decision and assignment-ready candidate status.' },
+  { key:'assignments', number:'03', name:'Assignments', objective:'Track submissions, evaluations and results without losing context.', system:'Daily evaluation, domain, platform and invite-credit views supported tracking.', check:'Received dates, evaluation progress, delays and result status were monitored.', output:'An evaluated assignment ready for interview scheduling.' },
+  { key:'interviews', number:'04', name:'Interviews', objective:'Coordinate interview rounds and keep candidate movement visible.', system:'Scheduling logs tracked R1, R2, panels, time slots and current outcomes.', check:'Daily schedules, candidate status, round movement and reporting were reviewed.', output:'A documented outcome and the next-stage or probation status.' },
 ];
 ---
 <section class="mission-control" aria-labelledby="mission-title" data-mission-control>
-  <header>
-    <div><p>Explore the recruitment system</p><h3 id="mission-title">Mission control</h3></div>
-    <div class="mission-progress" aria-live="polite"><span>SYSTEM EXPLORED</span><strong><b>0</b> / 4</strong></div>
-  </header>
+  <div class="mission-ambient" aria-hidden="true"><i></i><i></i></div>
+  <header><div><p>Explore the recruitment system</p><h3 id="mission-title">Mission control</h3></div><div class="mission-progress" aria-live="polite"><span>System explored</span><strong><b>0</b> / 4</strong></div></header>
   <div class="mission-pipeline" role="tablist" aria-label="Recruitment pipeline stages">
     <i class="mission-line" aria-hidden="true"><u></u></i><i class="mission-node" aria-hidden="true"></i>
-    {stages.map((stage, index) => (
-      <button type="button" role="tab" aria-selected={index === 0 ? 'true' : 'false'} aria-controls={`mission-panel-${stage.key}`} data-mission-tab={stage.key}>
-        <small>{stage.number}</small><span>{stage.name}</span><i aria-hidden="true"></i>
-      </button>
-    ))}
+    {stages.map((stage, index) => <button type="button" role="tab" aria-selected={index === 0 ? 'true' : 'false'} aria-controls={`mission-panel-${stage.key}`} data-state={index === 0 ? 'active' : 'inactive'} data-mission-tab={stage.key}><small>{stage.number}</small><strong>{stage.name}</strong><span aria-hidden="true">{index === 0 ? 'Active' : 'Upcoming'}</span><i aria-hidden="true"></i></button>)}
   </div>
   <div class="mission-panels">
     {stages.map((stage, index) => (
       <section id={`mission-panel-${stage.key}`} role="tabpanel" data-mission-panel={stage.key} hidden={index !== 0}>
-        <div class={`stage-abstract stage-${stage.visual}`} aria-hidden="true">
-          <i></i><i></i><i></i><i></i><span></span>
+        <div class={`stage-workflow workflow-${stage.key}`} aria-label={`${stage.name} workflow illustration`}>
+          {stage.key === 'applications' && <><header><span>Candidate intake</span><b>Tracker ready</b></header><div class="intake-labels"><i>New</i><i>Source</i><i>Domain</i><i>Status</i></div>{['ROW 01','ROW 02','ROW 03'].map((row)=><div class="candidate-row"><strong>{row}</strong><i>Inbound</i><i>General</i><em>Captured</em></div>)}<footer><span>Incoming</span><i>↓</i><strong>Tracker</strong></footer></>}
+          {stage.key === 'screening' && <><header><span>Quality review</span><b>3 checks</b></header><div class="screening-scan" aria-hidden="true"></div>{[['Candidate 01','Ready'],['Candidate 02','Review'],['Candidate 03','Ready']].map(([candidate,status])=><div class="screen-row"><strong>{candidate}</strong><i>Check</i><em>{status}</em></div>)}</>}
+          {stage.key === 'assignments' && <><header><span>Evaluation flow</span><b>Stage movement</b></header><div class="linear-flow">{['Submitted','Evaluation','Result'].map((item,i)=><><div><small>0{i+1}</small><strong>{item}</strong></div>{i<2&&<i>→</i>}</>)}</div><div class="flow-status"><i></i><span>Submission status moves through each checkpoint</span></div></>}
+          {stage.key === 'interviews' && <><header><span>Interview journey</span><b>Round tracking</b></header><div class="linear-flow interview-flow">{['Schedule','R1','R2','Outcome'].map((item,i)=><><div><small>0{i+1}</small><strong>{item}</strong></div>{i<3&&<i>→</i>}</>)}</div><div class="flow-status"><i></i><span>Scheduling, rounds and outcome stay connected</span></div></>}
         </div>
-        <div class="stage-components">
-          <article><small>Objective</small><p>{stage.objective}</p></article>
-          <article><small>System</small><p>{stage.system}</p></article>
-          <article><small>Check</small><p>{stage.check}</p></article>
-          <article><small>Output</small><p>{stage.output}</p></article>
-        </div>
+        <div class="stage-components"><article><small>Objective</small><p>{stage.objective}</p></article><article><small>System</small><p>{stage.system}</p></article><article><small>Check</small><p>{stage.check}</p></article><article><small>Output</small><p>{stage.output}</p></article></div>
       </section>
     ))}
   </div>
   <p class="mission-complete" hidden>Full recruitment flow mapped.</p>
 </section>
-
 <script>
   document.querySelectorAll<HTMLElement>('[data-mission-control]').forEach((control) => {
-    const tabs = [...control.querySelectorAll<HTMLButtonElement>('[data-mission-tab]')];
-    const panels = [...control.querySelectorAll<HTMLElement>('[data-mission-panel]')];
-    const explored = new Set<string>();
-    const count = control.querySelector<HTMLElement>('.mission-progress strong');
-    const node = control.querySelector<HTMLElement>('.mission-node');
-    const fill = control.querySelector<HTMLElement>('.mission-line u');
-    const complete = control.querySelector<HTMLElement>('.mission-complete');
-    const select = (tab: HTMLButtonElement, focus = false) => {
-      const key = tab.dataset.missionTab || '';
-      const index = tabs.indexOf(tab);
-      explored.add(key);
-      tabs.forEach((item, itemIndex) => {
-        const active = item === tab;
-        item.setAttribute('aria-selected', String(active));
-        item.dataset.state = itemIndex < index ? 'completed' : active ? 'active' : 'upcoming';
-        item.tabIndex = active ? 0 : -1;
-      });
-      panels.forEach((panel) => panel.hidden = panel.dataset.missionPanel !== key);
-      control.style.setProperty('--mission-index', String(index));
-      control.style.setProperty('--mobile-fill', `${index * (100 / 3)}%`);
-      if (node) node.style.left = `${index * (100 / 3)}%`;
-      if (fill) fill.style.width = `${index * (100 / 3)}%`;
-      if (count) count.innerHTML = `<b>${explored.size}</b> / 4${explored.size === 4 ? ' <i>✓</i>' : ''}`;
-      if (complete) complete.hidden = explored.size !== 4;
-      if (focus) tab.focus();
-    };
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => select(tab));
-      tab.addEventListener('keydown', (event) => {
-        if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
-        event.preventDefault();
-        let next = tabs.indexOf(tab) + (event.key === 'ArrowRight' ? 1 : -1);
-        if (event.key === 'Home') next = 0;
-        if (event.key === 'End') next = tabs.length - 1;
-        select(tabs[(next + tabs.length) % tabs.length], true);
-      });
-    });
+    const tabs=[...control.querySelectorAll<HTMLButtonElement>('[data-mission-tab]')]; const panels=[...control.querySelectorAll<HTMLElement>('[data-mission-panel]')]; const explored=new Set<string>();
+    const count=control.querySelector<HTMLElement>('.mission-progress strong'); const node=control.querySelector<HTMLElement>('.mission-node'); const fill=control.querySelector<HTMLElement>('.mission-line u'); const complete=control.querySelector<HTMLElement>('.mission-complete');
+    const select=(tab:HTMLButtonElement,focus=false)=>{const key=tab.dataset.missionTab||'';const index=tabs.indexOf(tab);explored.add(key);tabs.forEach((item)=>{const active=item===tab;const wasExplored=explored.has(item.dataset.missionTab||'');item.setAttribute('aria-selected',String(active));item.dataset.state=active?'active':wasExplored?'explored':'inactive';item.tabIndex=active?0:-1;const status=item.querySelector<HTMLElement>('span');if(status)status.textContent=active?'Active':wasExplored?'Explored':'Upcoming';});panels.forEach(panel=>panel.hidden=panel.dataset.missionPanel!==key);control.style.setProperty('--mobile-fill',`${index*(100/3)}%`);if(node)node.style.left=`${index*(100/3)}%`;if(fill)fill.style.width=`${index*(100/3)}%`;if(count)count.innerHTML=`<b>${explored.size}</b> / 4${explored.size===4?' <i>✓</i>':''}`;if(complete)complete.hidden=explored.size!==4;if(focus)tab.focus();};
+    tabs.forEach(tab=>{tab.addEventListener('click',()=>select(tab));tab.addEventListener('keydown',(event)=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();let next=tabs.indexOf(tab)+(event.key==='ArrowRight'?1:-1);if(event.key==='Home')next=0;if(event.key==='End')next=tabs.length-1;select(tabs[(next+tabs.length)%tabs.length],true);});});
+    const observer=new IntersectionObserver((entries)=>{if(entries.some(entry=>entry.isIntersecting)){control.classList.add('mission-ready');observer.disconnect();}},{threshold:.2});observer.observe(control);
   });
 </script>
