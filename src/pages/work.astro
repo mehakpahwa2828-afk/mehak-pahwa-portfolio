@@ -51,7 +51,7 @@ const [recruitment, strategy, campaign] = projects;
     let active = workProjects.findIndex(project => { const r = project.getBoundingClientRect(); return r.top <= point && r.bottom > point; });
     if (active < 0) active = workProjects[0].getBoundingClientRect().top > point ? 0 : workProjects.length - 1;
     railItems.forEach((item, index) => item.dataset.state = index < active ? 'completed' : index === active ? 'active' : 'upcoming');
-    if (railFill) railFill.style.height = `${(active / (workProjects.length - 1)) * 100}%`;
+    if (railFill) railFill.style.width = `${(active / (workProjects.length - 1)) * 100}%`;
   };
   updateRail(); addEventListener('scroll', updateRail, {passive:true}); addEventListener('resize', updateRail, {passive:true});
 </script>
