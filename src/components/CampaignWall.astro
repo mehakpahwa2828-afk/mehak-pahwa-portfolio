@@ -7,10 +7,10 @@ const assets = [
 ---
 <section class="campaign-wall" aria-labelledby="campaign-wall-title" data-campaign-wall>
   <header><p>Interactive campaign wall</p><h3 id="campaign-wall-title">Selected visual outputs.</h3><span>03 assets · independently designed in Canva</span></header>
-  <div class="campaign-composition">
-    {assets.map((asset, index) => <button type="button" class:list={['campaign-asset', `asset-${index + 1}`]} data-wall-asset={index} aria-label={`Open ${asset.label}`}><img src={asset.src} alt={asset.label} loading="lazy" decoding="async"/><span><small>{asset.meta}</small><strong>{asset.label}</strong></span></button>)}
-    <aside aria-hidden="true"><span>RESEARCH</span><i></i><span>DESIGN</span><i></i><span>CONTENT</span></aside>
+  <div class="campaign-composition" data-active="0">
+    {assets.map((asset, index) => <button type="button" class:list={['campaign-asset', `asset-${index + 1}`]} data-wall-asset={index} data-position={index === 0 ? 'active' : index === 1 ? 'next' : 'previous'} aria-label={`Open ${asset.label}`}><img src={asset.src} alt={asset.label} loading="lazy" decoding="async"/><span><small>{asset.meta}</small><strong>{asset.label}</strong></span></button>)}
   </div>
+  <div class="campaign-carousel-controls" aria-label="Campaign gallery controls"><button type="button" data-wall-prev aria-label="Show previous campaign asset">←</button><p><span data-wall-current>01</span> / 03</p><button type="button" data-wall-next aria-label="Show next campaign asset">→</button></div>
   <dialog class="campaign-lightbox" aria-label="Campaign asset preview">
     <button type="button" data-lightbox-close aria-label="Close preview">Close ×</button>
     <figure><img src="" alt=""/><figcaption><small></small><strong></strong></figcaption></figure>
@@ -25,19 +25,33 @@ const assets = [
     const small = dialog?.querySelector<HTMLElement>('figcaption small');
     const strong = dialog?.querySelector<HTMLElement>('figcaption strong');
     let current = 0;
-    const show = (index: number) => {
+    let lightboxCurrent = 0;
+    const positionCards = (index: number) => {
       current = (index + buttons.length) % buttons.length;
-      const source = buttons[current].querySelector<HTMLImageElement>('img');
-      const meta = buttons[current].querySelector<HTMLElement>('small');
-      const title = buttons[current].querySelector<HTMLElement>('strong');
+      buttons.forEach((button, buttonIndex) => {
+        const offset = (buttonIndex - current + buttons.length) % buttons.length;
+        button.dataset.position = offset === 0 ? 'active' : offset === 1 ? 'next' : 'previous';
+      });
+      wall.querySelector<HTMLElement>('[data-wall-current]')!.textContent = `0${current + 1}`;
+    };
+    const show = (index: number) => {
+      lightboxCurrent = (index + buttons.length) % buttons.length;
+      const source = buttons[lightboxCurrent].querySelector<HTMLImageElement>('img');
+      const meta = buttons[lightboxCurrent].querySelector<HTMLElement>('small');
+      const title = buttons[lightboxCurrent].querySelector<HTMLElement>('strong');
       if (image && source) { image.src = source.src; image.alt = source.alt; }
       if (small && meta) small.textContent = meta.textContent;
       if (strong && title) strong.textContent = title.textContent;
     };
-    buttons.forEach((button, index) => button.addEventListener('click', () => { show(index); dialog?.showModal(); }));
+    buttons.forEach((button, index) => button.addEventListener('click', () => {
+      if (button.dataset.position !== 'active') { positionCards(index); return; }
+      show(index); dialog?.showModal();
+    }));
+    wall.querySelector('[data-wall-prev]')?.addEventListener('click', () => positionCards(current - 1));
+    wall.querySelector('[data-wall-next]')?.addEventListener('click', () => positionCards(current + 1));
     dialog?.querySelector('[data-lightbox-close]')?.addEventListener('click', () => dialog.close());
-    dialog?.querySelector('[data-lightbox-prev]')?.addEventListener('click', () => show(current - 1));
-    dialog?.querySelector('[data-lightbox-next]')?.addEventListener('click', () => show(current + 1));
+    dialog?.querySelector('[data-lightbox-prev]')?.addEventListener('click', () => show(lightboxCurrent - 1));
+    dialog?.querySelector('[data-lightbox-next]')?.addEventListener('click', () => show(lightboxCurrent + 1));
     dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
     wall.addEventListener('pointermove', (event) => {
       if (matchMedia('(prefers-reduced-motion: reduce)').matches || innerWidth < 900) return;
