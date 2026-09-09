@@ -1041,6 +1041,37 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 .chapter-transition::after{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent),transparent 82%),transparent);opacity:.7}
 .chapter-transition i{background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent),transparent 78%))}
 .chapter-transition span{color:var(--muted)}
+
+/* Work-page integration pass: Mission Control belongs to the editorial canvas. */
+.mission-control{--mission-green:#2f704b;margin-block:4rem 2rem;padding-inline:0;background:radial-gradient(circle at 88% 5%,rgba(103,88,132,.08),transparent 34%),radial-gradient(circle at 6% 92%,rgba(158,39,53,.06),transparent 30%);color:var(--ink);box-shadow:none;border-block:1px solid var(--line)}
+.mission-control::before{background-image:linear-gradient(color-mix(in srgb,var(--line),transparent 28%) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--line),transparent 28%) 1px,transparent 1px);opacity:.32}
+.mission-control::after{background:radial-gradient(circle,rgba(103,88,132,.09),transparent 68%);filter:blur(36px)}
+.mission-ambient i:first-child{background:#8a789d;opacity:.06}.mission-ambient i:last-child{background:#9e2735;opacity:.045}
+.mission-control>header{padding-inline:clamp(1rem,3vw,2.5rem);border-bottom-color:var(--line)}
+.mission-control>header p{color:var(--accent)}.mission-control>header h3{color:var(--ink)}
+.mission-progress span{color:var(--muted)}.mission-progress strong{color:var(--ink)}.mission-progress i{color:var(--mission-green)}
+.mission-pipeline{margin-inline:clamp(1rem,3vw,2.5rem)}
+.mission-pipeline>button{color:color-mix(in srgb,var(--muted),transparent 16%)}.mission-pipeline>button>i{background:var(--surface)}
+.mission-pipeline>button[data-state=active]{border-color:color-mix(in srgb,var(--mission-green),transparent 55%);background:color-mix(in srgb,var(--mission-green),transparent 91%);color:var(--ink);box-shadow:0 8px 22px rgba(31,62,44,.06)}
+.mission-pipeline>button[data-state=active]>span,.mission-pipeline>button[data-state=explored]>span{color:var(--mission-green)}
+.mission-pipeline>button[data-state=explored]{color:var(--ink)}.mission-pipeline>button[data-state=inactive]{color:var(--muted)}
+.mission-pipeline>button[aria-selected=true]>i,.mission-pipeline>button[data-state=explored]>i,.mission-line u,.mission-node{background:var(--mission-green)}
+.mission-pipeline>button[aria-selected=true]>i,.mission-node{box-shadow:0 0 0 4px color-mix(in srgb,var(--mission-green),transparent 84%),0 0 14px color-mix(in srgb,var(--mission-green),transparent 48%)}
+.mission-line{background:var(--line)}
+.mission-panels{margin-inline:clamp(1rem,3vw,2.5rem);border-color:var(--line);background:color-mix(in srgb,var(--surface),transparent 18%);box-shadow:0 18px 45px rgba(35,25,27,.055)}
+.stage-workflow{background:linear-gradient(145deg,color-mix(in srgb,var(--accent-soft),transparent 38%),color-mix(in srgb,var(--surface),transparent 12%));color:var(--ink)}
+.stage-workflow::before{background-image:linear-gradient(color-mix(in srgb,var(--line),transparent 45%) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--line),transparent 45%) 1px,transparent 1px)}
+.stage-workflow>header{border-bottom-color:var(--line)}.stage-workflow>header span,.intake-labels{color:var(--muted)}.stage-workflow>header b,.stage-workflow>footer i,.screen-row i,.linear-flow>div small,.linear-flow>i,.stage-components small{color:var(--mission-green)}
+.candidate-row,.screen-row,.linear-flow>div{border-color:var(--line);background:color-mix(in srgb,var(--surface),transparent 8%);color:var(--ink)}
+.candidate-row i,.screen-row em,.flow-status,.stage-workflow>footer{color:var(--muted)}.candidate-row em{color:var(--mission-green)}
+.stage-workflow>footer strong{border-color:color-mix(in srgb,var(--mission-green),transparent 55%);color:var(--ink);background:color-mix(in srgb,var(--mission-green),transparent 92%)}
+.screening-scan{background:var(--mission-green);box-shadow:0 0 12px color-mix(in srgb,var(--mission-green),transparent 25%)}
+.flow-status i{background:var(--mission-green);box-shadow:0 0 12px color-mix(in srgb,var(--mission-green),transparent 30%)}
+.stage-components article{border-color:var(--line)}.stage-components p{color:var(--muted)}.mission-complete{color:var(--mission-green)}
+
+.chapter-transition{background:transparent;color:var(--ink);box-shadow:none}
+.chapter-transition::after{width:24%;background:linear-gradient(90deg,transparent,rgba(23,20,22,.14),rgba(255,255,255,.82),transparent);opacity:1}
+.chapter-transition i{background:linear-gradient(90deg,var(--ink),var(--line))}.chapter-transition span{color:var(--muted)}.chapter-transition strong{color:var(--ink)}
 @media(max-width:620px){.related-work-link{min-height:44px;margin-top:.8rem}}
 @media(prefers-reduced-motion:reduce){.related-work-link::after,.related-work-link i{transition:none}}
 
