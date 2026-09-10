@@ -1085,6 +1085,26 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 .stage-components article{background:color-mix(in srgb,var(--surface),transparent 72%)}
 .candidate-row,.screen-row,.linear-flow>div{background:color-mix(in srgb,var(--surface),transparent 32%)}
 .screening-scan,.flow-status i{box-shadow:none}
+
+/* Final Work-page refinement pass. */
+.dashboard-image-open img{width:100%;height:100%;object-fit:cover;object-position:left top;transform:scale(1.26);transform-origin:left top}
+.dashboard-image-open:hover img,.dashboard-image-open:focus-visible img{transform:scale(1.285)}
+
+.mission-control{--mission-green:#2f704b}
+.mission-ambient{display:block}.mission-control::after{display:block}
+.mission-ambient i:first-child{background:#706591;opacity:.045}.mission-ambient i:last-child{background:#625688;opacity:.035}
+.mission-control::after{background:radial-gradient(circle,rgba(103,88,132,.065),transparent 70%)}
+.mission-pipeline>button strong{transition:color .25s,font-weight .25s}.mission-pipeline>button[data-state=active] strong{font-weight:700}.mission-pipeline>button[data-state=active]{border-color:color-mix(in srgb,var(--mission-green),transparent 46%);background:color-mix(in srgb,var(--mission-green),transparent 89%)}
+.mission-pipeline>button[data-state=explored]{background:color-mix(in srgb,var(--ink),transparent 96%)}.mission-pipeline>button[data-state=explored]>i{background:var(--mission-green);border-color:var(--mission-green)}
+.mission-pipeline>button[data-state=inactive]{opacity:.62}.mission-pipeline>button[data-state=inactive]>i{background:var(--surface);border-color:var(--muted)}
+.mission-line u,.mission-node{transition-duration:.58s}.mission-control.is-transitioning .mission-panels{opacity:.82}
+.mission-panels{transition:opacity .24s}.mission-panels>section{animation-duration:.34s}
+.mission-panels>section:not([hidden]) .stage-workflow{animation:stage-visual-once .32s .16s both}
+@keyframes stage-visual-once{from{opacity:.55;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+.evidence-strategy>header>p{max-width:520px;font-size:.66rem;line-height:1.55;opacity:.72}
+@media(max-width:620px){.dashboard-image-open img{transform:scale(1.24);transform-origin:left top}.dashboard-image-open:hover img,.dashboard-image-open:focus-visible img{transform:scale(1.24)}}
+@media(prefers-reduced-motion:reduce){.mission-panels>section:not([hidden]) .stage-workflow{animation:none!important}.dashboard-image-open img,.dashboard-image-open:hover img,.dashboard-image-open:focus-visible img{transform:scale(1.26)!important}}
 @media(max-width:620px){.related-work-link{min-height:44px;margin-top:.8rem}}
 @media(prefers-reduced-motion:reduce){.related-work-link::after,.related-work-link i{transition:none}}
 

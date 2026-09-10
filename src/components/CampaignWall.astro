@@ -6,11 +6,11 @@ const assets = [
 ];
 ---
 <section class="campaign-wall" aria-labelledby="campaign-wall-title" data-campaign-wall>
-  <header><p>Interactive campaign wall</p><h3 id="campaign-wall-title">Selected visual outputs.</h3><span>03 assets · independently designed in Canva</span></header>
-  <div class="campaign-composition" data-active="0">
-    {assets.map((asset, index) => <button type="button" class:list={['campaign-asset', `asset-${index + 1}`]} data-wall-asset={index} data-position={index === 0 ? 'active' : index === 1 ? 'next' : 'previous'} aria-label={`Open ${asset.label}`}><img src={asset.src} alt={asset.label} loading="lazy" decoding="async"/><span><small>{asset.meta}</small><strong>{asset.label}</strong></span></button>)}
+  <header><p>Interactive campaign wall</p><h3 id="campaign-wall-title">Selected visual outputs.</h3><span>03 selected assets · from 07 Canva posts</span></header>
+  <div class="campaign-composition" data-active="1">
+    {assets.map((asset, index) => <button type="button" class:list={['campaign-asset', `asset-${index + 1}`]} data-wall-asset={index} data-position={index === 1 ? 'active' : index === 2 ? 'next' : 'previous'} aria-label={`Open ${asset.label}`}><img src={asset.src} alt={asset.label} loading="lazy" decoding="async"/><span><small>{asset.meta}</small><strong>{asset.label}</strong></span></button>)}
   </div>
-  <div class="campaign-carousel-controls" aria-label="Campaign gallery controls"><button type="button" data-wall-prev aria-label="Show previous campaign asset">←</button><p><span data-wall-current>01</span> / 03</p><button type="button" data-wall-next aria-label="Show next campaign asset">→</button></div>
+  <div class="campaign-carousel-controls" aria-label="Campaign gallery controls"><button type="button" data-wall-prev aria-label="Show previous campaign asset">←</button><p><span data-wall-current>02</span> / 03</p><button type="button" data-wall-next aria-label="Show next campaign asset">→</button></div>
   <dialog class="campaign-lightbox" aria-label="Campaign asset preview">
     <button type="button" data-lightbox-close aria-label="Close preview">Close ×</button>
     <figure><img src="" alt=""/><figcaption><small></small><strong></strong></figcaption></figure>
@@ -24,8 +24,8 @@ const assets = [
     const image = dialog?.querySelector<HTMLImageElement>('img');
     const small = dialog?.querySelector<HTMLElement>('figcaption small');
     const strong = dialog?.querySelector<HTMLElement>('figcaption strong');
-    let current = 0;
-    let lightboxCurrent = 0;
+    let current = 1;
+    let lightboxCurrent = 1;
     const positionCards = (index: number) => {
       current = (index + buttons.length) % buttons.length;
       buttons.forEach((button, buttonIndex) => {
