@@ -4,77 +4,126 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { credentials, experience, recognition } from '../data/portfolio';
 
+const orderedExperience = [experience[2], experience[1], experience[0]];
+const roleMeta = [
+  { capabilities: ['Visual Execution', 'Campaign Support'], asset: '/images/work/alfido-internship-benefits.png', assetAlt: 'Canva campaign post designed during the Alfido Tech internship', artifact: 'Campaign creative', workLink: '/work#project-03' },
+  { capabilities: ['Content Strategy', 'Audience Thinking'], asset: '/images/work/freshnest-strategy-overview.png', assetAlt: 'FreshNest content strategy overview', artifact: 'Strategy framework', workLink: '/work#project-02' },
+  { capabilities: ['Process Systems', 'Coordination', 'Reporting'], asset: '/images/work/recruitment-dashboard-primary-card.png', assetAlt: 'Aggregate recruitment ATS dashboard view', artifact: 'Operational system', workLink: '/work#project-01' },
+];
+const allCapabilities = roleMeta.flatMap((item) => item.capabilities);
 const recognitionMetrics = ['MERIT', '286/400', '98/100', '#1'];
-const relatedWorkLinks = ['/work#project-01', '/work#project-02', '/work#project-03'];
 ---
 
 <BaseLayout title="Experience | Mehak Pahwa" description="Experience, education, and recognition for Mehak Pahwa.">
-  <div class="site-shell">
+  <div class="site-shell experience-journey-page">
     <Header />
     <main id="main">
-      <header class="page-header" data-reveal>
+      <header class="page-header experience-journey-header" data-reveal>
         <p class="page-kicker"><span></span>Experience</p>
-        <h1>Learning by taking responsibility for <em>real work.</em></h1>
-        <p>My roles have moved from content execution into process tracking, quality checks, documentation, and team coordination.</p>
+        <div class="experience-header-grid">
+          <h1>Learning by taking responsibility for <em>real work.</em></h1>
+          <div>
+            <p>My roles have moved from content execution into process tracking, quality checks, documentation, and team coordination.</p>
+            <span>SCROLL TO TRACE THE JOURNEY</span>
+          </div>
+        </div>
       </header>
 
-      <div class="trajectory" data-reveal aria-hidden="true"><span>Content execution</span><i></i><span>Process visibility</span><i></i><span>Team coordination</span><b>NOW</b></div>
+      <section class="career-journey section-space" aria-labelledby="career-journey-title" data-career-journey>
+        <div class="section-intro career-journey-intro" data-reveal>
+          <p>01 / Career route</p>
+          <h2 id="career-journey-title">Responsibility built through practice</h2>
+        </div>
 
-      <div class="section-intro experience-intro" data-reveal>
-        <p>01 / Experience</p>
-        <h2>Responsibility across content, systems, and coordination</h2>
-      </div>
+        <div class="career-layout">
+          <div class="career-route" style="--route-progress: 0">
+            <svg class="career-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <path class="career-path-base" d="M50,1 C58,5 72,8 72,13 S28,27 28,37 S72,51 72,64 S50,76 50,82 L50,98" pathLength="1"></path>
+              <path class="career-path-fill" d="M50,1 C58,5 72,8 72,13 S28,27 28,37 S72,51 72,64 S50,76 50,82 L50,98" pathLength="1"></path>
+            </svg>
 
-      <section class="role-list role-timeline" aria-label="Professional experience" data-role-timeline style="--timeline-progress: 0%">
-        <span class="timeline-track" aria-hidden="true"><i></i></span>
-        {experience.map((item, index) => (
-          <article id={index === 0 ? 'current-role' : undefined} class:list={{ 'is-active': index === 0 }} data-role-index={index} data-reveal tabindex="0">
-            <span class="timeline-marker" aria-hidden="true"><i></i></span>
-            <div class={`role-sticker sticker-${index + 1}`} aria-hidden="true">
-              {index === 0 ? <svg viewBox="0 0 90 90"><circle cx="45" cy="20" r="10"/><path d="M45 31v30M27 47l18-9 18 9M32 76l13-15 13 15"/><circle cx="17" cy="49" r="6"/><circle cx="73" cy="49" r="6"/></svg> : index === 1 ? <svg viewBox="0 0 90 90"><path d="M18 20h54v48H18zM28 31h34M28 42h22M28 53h28"/><path d="M59 61l13 13"/><circle cx="55" cy="57" r="12"/></svg> : <svg viewBox="0 0 90 90"><path d="M15 28l30-13 30 13-30 13zM24 36v22c12 9 30 9 42 0V36"/><path d="M75 28v24"/><circle cx="75" cy="58" r="5"/></svg>}
+            <div class="journey-guide" aria-hidden="true">
+              <span class="guide-body"><i></i><i></i><b></b></span>
+              <small>GUIDE</small>
             </div>
-            <div class="role-number"><span>0{index + 1}</span><i>VIEW ROLE</i></div>
-            <div class="role-heading"><p>{item.period}</p><h2>{item.organisation}</h2><strong>{item.role}</strong></div>
-            <div class="role-detail">
-              <p>{item.lead}</p>
-              <ul>{item.evidence.map((point) => <li>{point}</li>)}</ul>
-              <small>{item.evidence.length} responsibility highlights</small>
-              {index === 0 ? (
-                <div class="role-proof proof-tracker" aria-label="Reconstructed recruitment tracker fragment">
-                  <header><span>RECONSTRUCTED PROOF</span><b>TRACKER / STATUS VIEW</b></header>
-                  <div class="proof-row proof-labels"><i>Stage</i><i>Check</i><i>Status</i></div>
-                  <div class="proof-row"><i>Assignment</i><i>Quality</i><i><mark>Reviewed</mark></i></div>
-                  <div class="proof-row"><i>Interview</i><i>Schedule</i><i><mark>Tracked</mark></i></div>
+
+            {orderedExperience.map((item, index) => (
+              <article class:list={['career-milestone', `milestone-${index + 1}`]} data-role-index={index} tabindex="0" aria-labelledby={`role-title-${index}`}>
+                <span class="career-node" aria-hidden="true"><i></i><b>0{index + 1}</b></span>
+                <div class="career-card">
+                  <header><span>0{index + 1} / ROLE</span><time>{item.period}</time></header>
+                  <div class="career-card-heading">
+                    <p>{index === 0 ? 'CREATIVE EXECUTION' : index === 1 ? 'STRATEGY & PLANNING' : 'OPERATIONS & LEADERSHIP'}</p>
+                    <h3 id={`role-title-${index}`}>{item.organisation}</h3>
+                    <strong>{item.role}</strong>
+                  </div>
+                  <p class="career-lead">{item.lead}</p>
+                  <ul class="career-evidence-list">{item.evidence.map((point) => <li>{point}</li>)}</ul>
+                  <div class="role-capabilities" aria-label="Capabilities acquired in this role">
+                    <small>CAPABILITIES ACQUIRED</small>
+                    <div>{roleMeta[index].capabilities.map((capability) => <span data-capability={capability}>{capability}</span>)}</div>
+                  </div>
+                  <figure class="career-artifact">
+                    <a href={roleMeta[index].workLink} aria-label={`View ${item.organisation} project evidence on the Work page`}>
+                      <img src={roleMeta[index].asset} alt={roleMeta[index].assetAlt} loading={index === 0 ? 'eager' : 'lazy'} />
+                      <span><small>0{index + 1} / EVIDENCE</small><strong>{roleMeta[index].artifact}</strong><i aria-hidden="true">↗</i></span>
+                    </a>
+                  </figure>
                 </div>
-              ) : index === 1 ? (
-                <div class="role-proof proof-planning" aria-label="Reconstructed FreshNest content-planning fragment">
-                  <header><span>RECONSTRUCTED PROOF</span><b>FRESHNEST / PLAN</b></header>
-                  <div><i>Audience</i><span>→</span><i>Pillar</i><span>→</span><i>Format</i></div>
-                  <footer><b>EDUCATE</b><b>ENGAGE</b><b>PUBLISH</b></footer>
-                </div>
-              ) : (
-                <div class="role-proof proof-campaign" aria-label="Reconstructed campaign execution fragment">
-                  <header><span>RECONSTRUCTED PROOF</span><b>CAMPAIGN / OUTPUT</b></header>
-                  <div class="proof-posts"><i>01<em>Carousel</em></i><i>02<em>Canva</em></i><i>03<em>SEO</em></i></div>
-                </div>
-              )}
-              <a class="related-work-link" href={relatedWorkLinks[index]}><span>View related work</span><i aria-hidden="true">↗</i></a>
-            </div>
-          </article>
-        ))}
+              </article>
+            ))}
+
+          </div>
+
+          <aside class="capability-inventory" aria-live="polite" aria-atomic="false">
+            <header><span>CAPABILITIES ACQUIRED</span><b data-capability-count>0</b></header>
+            <div data-capability-inventory><p data-capability-empty>Capabilities appear as the journey unfolds.</p></div>
+          </aside>
+        </div>
       </section>
 
-      <section id="education" class="education-section section-space">
+      <section id="education" class="education-section section-space experience-foundation">
         <div class="section-intro" data-reveal><p>02 / Foundation</p><h2>Education and professional development</h2></div>
         <div class="education-grid credential-shelf" aria-label="Education and professional credentials">
           {credentials.map((item, index) => <article data-reveal tabindex="0"><i aria-hidden="true">0{index + 1}</i><span>{item.year}</span><h3>{item.title}</h3><p>{item.source}</p><small>{item.detail}</small></article>)}
         </div>
       </section>
 
-      <section id="recognition" class="recognition-section section-space">
-        <div class="section-intro" data-reveal><p>03 / Recognition</p><h2>Selected academic evidence</h2></div>
-        <div class="recognition-grid recognition-markers">
-          {recognition.map((item, index) => <article data-reveal tabindex="0"><span>{recognitionMetrics[index]}</span><small>0{index + 1} / EVIDENCE</small><h3>{item.title}</h3><p>{item.detail}</p></article>)}
+      <section id="recognition" class="achievement-vault section-space" data-achievement-vault aria-labelledby="achievement-title">
+        <div class="vault-heading" data-reveal>
+          <div><p>03 / Recognition</p><span>ACHIEVEMENTS <b data-achievement-count>00 / 04</b></span></div>
+          <h2 id="achievement-title">Achievement Vault</h2>
+          <p>Academic evidence, revealed through the journey.</p>
+        </div>
+        <div class="vault-grid">
+          {recognition.map((item, index) => (
+            <article class="vault-marker" data-achievement-index={index} tabindex="0" aria-labelledby={`achievement-${index}`}>
+              <header><span>0{index + 1}</span><small data-vault-state>SEALED</small></header>
+              <strong>{recognitionMetrics[index]}</strong>
+              <h3 id={`achievement-${index}`}>{item.title}</h3>
+              <p>{item.detail}</p>
+              <i aria-hidden="true"></i>
+            </article>
+          ))}
+        </div>
+        <p class="vault-complete" data-vault-complete hidden>ACHIEVEMENTS DISCOVERED · 04/04</p>
+      </section>
+
+      <section class="career-now" data-now-node tabindex="0" aria-labelledby="career-now-title">
+        <span class="career-node now-node" aria-hidden="true"><i></i><b>NOW</b></span>
+        <span class="journey-guide final-journey-guide" aria-hidden="true"><span class="guide-body"><i></i><i></i><b></b></span><small>GUIDE</small></span>
+        <div>
+          <p>CURRENT POINT / STILL IN PROGRESS</p>
+          <h2 id="career-now-title">The journey is still being built.</h2>
+          <div class="now-status">
+            <span><b data-final-career>00/03</b> Career journey explored</span>
+            <span><b data-final-achievements>00/04</b> Achievements discovered</span>
+          </div>
+          <div class="now-capabilities" aria-label="Capabilities collected through the career journey">
+            <small>CAPABILITY STACK</small>
+            <div>{allCapabilities.map((capability) => <span data-final-capability={capability}>{capability}</span>)}</div>
+          </div>
+          <a class="button button-primary" href="/about"><span>Next: How I think &amp; work</span><b aria-hidden="true">→</b></a>
         </div>
       </section>
     </main>
@@ -83,40 +132,130 @@ const relatedWorkLinks = ['/work#project-01', '/work#project-02', '/work#project
 </BaseLayout>
 
 <script>
-  const roleTimeline = document.querySelector<HTMLElement>('[data-role-timeline]');
-  const roleItems = [...(roleTimeline?.querySelectorAll<HTMLElement>('[data-role-index]') ?? [])];
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const journey = document.querySelector<HTMLElement>('[data-career-journey]');
+  const route = journey?.querySelector<HTMLElement>('.career-route');
+  const routePath = route?.querySelector<SVGPathElement>('.career-path-fill');
+  const guide = route?.querySelector<HTMLElement>('.journey-guide');
+  const milestones = [...(route?.querySelectorAll<HTMLElement>('[data-role-index]') ?? [])];
+  const nowNode = document.querySelector<HTMLElement>('[data-now-node]');
+  const inventory = journey?.querySelector<HTMLElement>('[data-capability-inventory]');
+  const capabilityCount = journey?.querySelector<HTMLElement>('[data-capability-count]');
+  const capabilityEmpty = journey?.querySelector<HTMLElement>('[data-capability-empty]');
+  const finalCareer = document.querySelector<HTMLElement>('[data-final-career]');
+  const finalAchievements = document.querySelector<HTMLElement>('[data-final-achievements]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const acquiredCapabilities = new Set<string>();
+  const exploredRoles = new Set<number>();
+  const routeStops = [.18, .5, .83, .96];
+  const guideStops = [[72, 13], [28, 37], [72, 64], [50, 98]];
 
-  const activateRole = (activeRole: HTMLElement) => {
-    roleItems.forEach((role) => role.classList.toggle('is-active', role === activeRole));
-    const activeIndex = Number(activeRole.dataset.roleIndex ?? 0);
-    const progress = roleItems.length > 1 ? (activeIndex / (roleItems.length - 1)) * 100 : 100;
-    roleTimeline?.style.setProperty('--timeline-progress', `${progress}%`);
+  const placeGuide = (progress: number, acknowledge = false, stopIndex?: number) => {
+    if (!routePath || !guide) return;
+    const point = stopIndex === undefined
+      ? routePath.getPointAtLength(routePath.getTotalLength() * progress)
+      : { x: guideStops[stopIndex][0], y: guideStops[stopIndex][1] };
+    guide.style.setProperty('--guide-x', `${point.x}%`);
+    guide.style.setProperty('--guide-y', `${point.y}%`);
+    guide.classList.toggle('is-acknowledging', acknowledge && !reduceMotion.matches);
+    if (acknowledge && !reduceMotion.matches) setTimeout(() => guide.classList.remove('is-acknowledging'), 720);
   };
 
-  if (roleTimeline && roleItems.length) {
-    if (reducedMotion.matches || !('IntersectionObserver' in window)) {
-      roleItems.forEach((role) => role.classList.add('is-active'));
-      roleTimeline.style.setProperty('--timeline-progress', '100%');
+  const addCapability = (label: string) => {
+    if (!label || acquiredCapabilities.has(label) || !inventory) return;
+    acquiredCapabilities.add(label);
+    capabilityEmpty?.remove();
+    const chip = document.createElement('span');
+    chip.textContent = label;
+    chip.className = 'inventory-chip';
+    if (!reduceMotion.matches) chip.classList.add('is-arriving');
+    inventory.append(chip);
+    if (capabilityCount) capabilityCount.textContent = String(acquiredCapabilities.size).padStart(2, '0');
+    document.querySelector<HTMLElement>(`[data-final-capability="${CSS.escape(label)}"]`)?.classList.add('is-collected');
+  };
+
+  const unlockRole = (role: HTMLElement) => {
+    const index = Number(role.dataset.roleIndex ?? 0);
+    if (exploredRoles.has(index)) return;
+    exploredRoles.add(index);
+    role.classList.add('is-explored');
+    role.querySelectorAll<HTMLElement>('[data-capability]').forEach((chip, chipIndex) => {
+      setTimeout(() => addCapability(chip.dataset.capability ?? ''), reduceMotion.matches ? 0 : 430 + chipIndex * 100);
+    });
+    if (finalCareer) finalCareer.textContent = `${String(exploredRoles.size).padStart(2, '0')}/03`;
+  };
+
+  const activateRole = (role: HTMLElement, acknowledge = true) => {
+    const index = Number(role.dataset.roleIndex ?? 0);
+    milestones.forEach((item) => item.classList.toggle('is-active', item === role));
+    role.classList.add('is-explored');
+    route?.style.setProperty('--route-progress', String(routeStops[index]));
+    placeGuide(routeStops[index], acknowledge, index);
+    unlockRole(role);
+  };
+
+  if (route && milestones.length) {
+    placeGuide(.015);
+    if (reduceMotion.matches || !('IntersectionObserver' in window)) {
+      milestones.forEach((role) => activateRole(role, false));
+      nowNode?.classList.add('is-active');
+      route.style.setProperty('--route-progress', '1');
+      placeGuide(.96, false, 3);
     } else {
-      let timelineFrame = 0;
-      const syncActiveRole = () => {
-        cancelAnimationFrame(timelineFrame);
-        timelineFrame = requestAnimationFrame(() => {
-          const readingLine = innerHeight * .42;
-          const nearestRole = roleItems.reduce((nearest, role) => {
-            const rect = role.getBoundingClientRect();
-            const roleCenter = rect.top + Math.min(rect.height * .38, 220);
-            const nearestRect = nearest.getBoundingClientRect();
-            const nearestCenter = nearestRect.top + Math.min(nearestRect.height * .38, 220);
-            return Math.abs(roleCenter - readingLine) < Math.abs(nearestCenter - readingLine) ? role : nearest;
-          }, roleItems[0]);
-          activateRole(nearestRole);
-        });
-      };
-      addEventListener('scroll', syncActiveRole, { passive: true });
-      addEventListener('resize', syncActiveRole, { passive: true });
-      syncActiveRole();
+      const roleObserver = new IntersectionObserver((entries) => {
+        entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio).slice(0, 1).forEach((entry) => activateRole(entry.target as HTMLElement));
+      }, { rootMargin: '-25% 0px -38% 0px', threshold: [.15, .35, .6] });
+      milestones.forEach((role) => {
+        roleObserver.observe(role);
+        role.addEventListener('focusin', () => activateRole(role));
+      });
+      const unlockPassedRoles = () => milestones.forEach((role) => {
+        if (role.getBoundingClientRect().top < innerHeight * .7) unlockRole(role);
+      });
+      addEventListener('scroll', unlockPassedRoles, { passive: true });
+      unlockPassedRoles();
+      if (nowNode) {
+        const nowObserver = new IntersectionObserver(([entry]) => {
+          if (!entry.isIntersecting) return;
+          milestones.forEach((item) => item.classList.remove('is-active'));
+          nowNode.classList.add('is-active');
+          route.style.setProperty('--route-progress', '1');
+          placeGuide(.96, true, 3);
+        }, { rootMargin: '-20% 0px -25% 0px', threshold: .35 });
+        nowObserver.observe(nowNode);
+        nowNode.addEventListener('focusin', () => { route.style.setProperty('--route-progress', '1'); placeGuide(.96, true, 3); });
+      }
+    }
+  }
+
+  const vault = document.querySelector<HTMLElement>('[data-achievement-vault]');
+  const achievements = [...(vault?.querySelectorAll<HTMLElement>('[data-achievement-index]') ?? [])];
+  const vaultCount = vault?.querySelector<HTMLElement>('[data-achievement-count]');
+  const vaultComplete = vault?.querySelector<HTMLElement>('[data-vault-complete]');
+  const discoveredAchievements = new Set<number>();
+  const unlockAchievement = (marker: HTMLElement) => {
+    const index = Number(marker.dataset.achievementIndex ?? 0);
+    if (discoveredAchievements.has(index)) return;
+    discoveredAchievements.add(index);
+    marker.classList.add('is-unlocked');
+    const state = marker.querySelector<HTMLElement>('[data-vault-state]');
+    if (state) state.textContent = 'DISCOVERED';
+    const count = discoveredAchievements.size;
+    if (vaultCount) vaultCount.textContent = `${String(count).padStart(2, '0')} / 04`;
+    if (finalAchievements) finalAchievements.textContent = `${String(count).padStart(2, '0')}/04`;
+    if (count === achievements.length && vaultComplete) vaultComplete.hidden = false;
+  };
+  if (achievements.length) {
+    if (reduceMotion.matches || !('IntersectionObserver' in window)) achievements.forEach(unlockAchievement);
+    else {
+      const achievementObserver = new IntersectionObserver((entries) => {
+        entries.filter((entry) => entry.isIntersecting).forEach((entry) => unlockAchievement(entry.target as HTMLElement));
+      }, { rootMargin: '-12% 0px -18% 0px', threshold: .42 });
+      achievements.forEach((marker) => { achievementObserver.observe(marker); marker.addEventListener('focusin', () => unlockAchievement(marker)); });
+      const unlockPassedAchievements = () => achievements.forEach((marker) => {
+        if (marker.getBoundingClientRect().top < innerHeight * .8) unlockAchievement(marker);
+      });
+      addEventListener('scroll', unlockPassedAchievements, { passive: true });
+      unlockPassedAchievements();
     }
   }
 </script>
