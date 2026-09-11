@@ -1105,6 +1105,16 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 .evidence-strategy>header>p{max-width:520px;font-size:.66rem;line-height:1.55;opacity:.72}
 @media(max-width:620px){.dashboard-image-open img{transform:scale(1.24);transform-origin:left top}.dashboard-image-open:hover img,.dashboard-image-open:focus-visible img{transform:scale(1.24)}}
 @media(prefers-reduced-motion:reduce){.mission-panels>section:not([hidden]) .stage-workflow{animation:none!important}.dashboard-image-open img,.dashboard-image-open:hover img,.dashboard-image-open:focus-visible img{transform:scale(1.26)!important}}
+
+/* Recruitment evidence gallery — aggregate ATS views only. */
+.recruitment-evidence-gallery{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}.recruitment-evidence-gallery .evidence-primary{grid-column:1/-1}.recruitment-evidence-gallery figure{display:flex;min-width:0;flex-direction:column;margin:0;border:1px solid var(--line);background:var(--surface)}
+.evidence-image-open{display:block;width:100%;padding:0;border:0;background:var(--surface);cursor:zoom-in;text-align:inherit}.evidence-crop{position:relative;display:block;width:100%;overflow:hidden;background:#eef1f4}.evidence-crop img{display:block;max-width:none;height:auto;transition:transform .38s cubic-bezier(.2,.72,.2,1)}
+.crop-primary{aspect-ratio:16/9}.crop-primary img{width:140%;transform:translate(-1.2%,-18%);transform-origin:left top}.evidence-image-open:hover .crop-primary img,.evidence-image-open:focus-visible .crop-primary img{transform:translate(-1.2%,-18%) scale(1.018)}
+.crop-analytics{aspect-ratio:16/7}.crop-analytics img{width:133%;transform:translate(-1.5%,-30%);transform-origin:left top}.evidence-image-open:hover .crop-analytics img,.evidence-image-open:focus-visible .crop-analytics img{transform:translate(-1.5%,-30%) scale(1.018)}
+.crop-interviews{aspect-ratio:16/10}.crop-interviews img{width:245%;transform:translate(-13.5%,-22.5%);transform-origin:left top}.evidence-image-open:hover .crop-interviews img,.evidence-image-open:focus-visible .crop-interviews img{transform:translate(-13.5%,-22.5%) scale(1.018)}
+.recruitment-evidence-gallery figcaption{display:flex;justify-content:space-between;gap:1.5rem;margin-top:auto;padding:1rem;border-top:1px solid var(--line)}.recruitment-evidence-gallery figcaption span{color:var(--accent);font-size:.55rem;letter-spacing:.05em;text-transform:uppercase}.recruitment-evidence-gallery figcaption strong{font:400 1rem 'Newsreader',Georgia,serif;text-align:right}
+@media(max-width:620px){.recruitment-evidence-gallery{grid-template-columns:1fr}.recruitment-evidence-gallery .evidence-primary{grid-column:auto}.recruitment-evidence-gallery figcaption{flex-direction:column;gap:.45rem}.recruitment-evidence-gallery figcaption strong{text-align:left}}
+@media(prefers-reduced-motion:reduce){.evidence-crop img,.evidence-image-open:hover .evidence-crop img,.evidence-image-open:focus-visible .evidence-crop img{transition:none}}
 @media(max-width:620px){.related-work-link{min-height:44px;margin-top:.8rem}}
 @media(prefers-reduced-motion:reduce){.related-work-link::after,.related-work-link i{transition:none}}
 
