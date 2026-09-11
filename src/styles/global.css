@@ -1115,6 +1115,12 @@ html[data-theme=dark] .scrapbook-book{background:#766653}html[data-theme=dark] .
 .recruitment-evidence-gallery figcaption{display:flex;justify-content:space-between;gap:1.5rem;margin-top:auto;padding:1rem;border-top:1px solid var(--line)}.recruitment-evidence-gallery figcaption span{color:var(--accent);font-size:.55rem;letter-spacing:.05em;text-transform:uppercase}.recruitment-evidence-gallery figcaption strong{font:400 1rem 'Newsreader',Georgia,serif;text-align:right}
 @media(max-width:620px){.recruitment-evidence-gallery{grid-template-columns:1fr}.recruitment-evidence-gallery .evidence-primary{grid-column:auto}.recruitment-evidence-gallery figcaption{flex-direction:column;gap:.45rem}.recruitment-evidence-gallery figcaption strong{text-align:left}}
 @media(prefers-reduced-motion:reduce){.evidence-crop img,.evidence-image-open:hover .evidence-crop img,.evidence-image-open:focus-visible .evidence-crop img{transition:none}}
+
+/* Pixel-cropped ATS derivatives replace browser-window previews. */
+.recruitment-evidence-gallery .crop-primary{aspect-ratio:1322/680}.recruitment-evidence-gallery .crop-analytics{aspect-ratio:1320/430}.recruitment-evidence-gallery .crop-interviews{aspect-ratio:756/450}
+.recruitment-evidence-gallery .evidence-crop img{width:100%;height:100%;object-fit:cover;transform:none;transform-origin:center}
+.recruitment-evidence-gallery .evidence-image-open:hover .evidence-crop img,.recruitment-evidence-gallery .evidence-image-open:focus-visible .evidence-crop img{transform:scale(1.018)}
+@media(prefers-reduced-motion:reduce){.recruitment-evidence-gallery .evidence-image-open:hover .evidence-crop img,.recruitment-evidence-gallery .evidence-image-open:focus-visible .evidence-crop img{transform:none}}
 @media(max-width:620px){.related-work-link{min-height:44px;margin-top:.8rem}}
 @media(prefers-reduced-motion:reduce){.related-work-link::after,.related-work-link i{transition:none}}
 
