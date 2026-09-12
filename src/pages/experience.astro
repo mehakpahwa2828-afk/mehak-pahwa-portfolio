@@ -42,7 +42,8 @@ const recognitionMetrics = ['MERIT', '286/400', '98/100', '#1'];
               <path class="career-path-fill" d="M50,1 C58,5 72,8 72,13 S28,27 28,37 S72,51 72,64 S50,76 50,82 L50,98" pathLength="1"></path>
             </svg>
 
-            <div class="journey-guide" aria-hidden="true">
+            <div class="journey-guide" data-state="neutral" aria-hidden="true">
+              <span class="guide-ring"></span>
               <span class="guide-body"><i></i><i></i><b></b></span>
               <small>GUIDE</small>
             </div>
@@ -76,7 +77,7 @@ const recognitionMetrics = ['MERIT', '286/400', '98/100', '#1'];
           </div>
 
           <aside class="capability-inventory" aria-live="polite" aria-atomic="false">
-            <header><span>CAPABILITIES ACQUIRED</span><b data-capability-count>0</b></header>
+            <header><span>CAPABILITIES ACQUIRED</span><b data-capability-count>00/07</b></header>
             <div data-capability-inventory><p data-capability-empty>Capabilities appear as the journey unfolds.</p></div>
           </aside>
         </div>
@@ -90,6 +91,7 @@ const recognitionMetrics = ['MERIT', '286/400', '98/100', '#1'];
       </section>
 
       <section id="recognition" class="achievement-vault section-space" data-achievement-vault aria-labelledby="achievement-title">
+        <span class="journey-guide vault-guide" data-state="neutral" aria-hidden="true"><span class="guide-ring"></span><span class="guide-body"><i></i><i></i><b></b></span><small>GUIDE</small></span>
         <div class="vault-heading" data-reveal>
           <div><p>03 / Recognition</p><span>ACHIEVEMENTS <b data-achievement-count>00 / 04</b></span></div>
           <h2 id="achievement-title">Achievement Vault</h2>
@@ -111,13 +113,14 @@ const recognitionMetrics = ['MERIT', '286/400', '98/100', '#1'];
 
       <section class="career-now" data-now-node tabindex="0" aria-labelledby="career-now-title">
         <span class="career-node now-node" aria-hidden="true"><i></i><b>NOW</b></span>
-        <span class="journey-guide final-journey-guide" aria-hidden="true"><span class="guide-body"><i></i><i></i><b></b></span><small>GUIDE</small></span>
+        <span class="journey-guide final-journey-guide" data-state="settled" aria-hidden="true"><span class="guide-ring"></span><span class="guide-body"><i></i><i></i><b></b></span><small>GUIDE</small></span>
         <div>
           <p>CURRENT POINT / STILL IN PROGRESS</p>
           <h2 id="career-now-title">The journey is still being built.</h2>
           <div class="now-status">
-            <span><b data-final-career>00/03</b> Career journey explored</span>
-            <span><b data-final-achievements>00/04</b> Achievements discovered</span>
+            <span>Career journey · <b data-final-career>00/03</b> explored</span>
+            <span>Capabilities · <b data-final-capabilities>00/07</b> acquired</span>
+            <span>Achievements · <b data-final-achievements>00/04</b> discovered</span>
           </div>
           <div class="now-capabilities" aria-label="Capabilities collected through the career journey">
             <small>CAPABILITY STACK</small>
@@ -142,64 +145,135 @@ const recognitionMetrics = ['MERIT', '286/400', '98/100', '#1'];
   const capabilityCount = journey?.querySelector<HTMLElement>('[data-capability-count]');
   const capabilityEmpty = journey?.querySelector<HTMLElement>('[data-capability-empty]');
   const finalCareer = document.querySelector<HTMLElement>('[data-final-career]');
+  const finalCapabilities = document.querySelector<HTMLElement>('[data-final-capabilities]');
   const finalAchievements = document.querySelector<HTMLElement>('[data-final-achievements]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const acquiredCapabilities = new Set<string>();
   const exploredRoles = new Set<number>();
   const routeStops = [.18, .5, .83, .96];
   const guideStops = [[72, 13], [28, 37], [72, 64], [50, 98]];
+  const guideTimers = new Set<number>();
+  let activeSequence = 0;
+  let pendingRole: HTMLElement | null = null;
 
-  const placeGuide = (progress: number, acknowledge = false, stopIndex?: number) => {
+  const queueGuideStep = (callback: () => void, delay: number) => {
+    const timer = window.setTimeout(() => {
+      guideTimers.delete(timer);
+      callback();
+    }, delay);
+    guideTimers.add(timer);
+  };
+
+  const clearGuideSequence = () => {
+    guideTimers.forEach((timer) => window.clearTimeout(timer));
+    guideTimers.clear();
+  };
+
+  const setGuideState = (state: 'neutral' | 'looking' | 'unlocking' | 'settled', direction = 0, offPath = false) => {
+    if (!guide) return;
+    guide.dataset.state = state;
+    guide.style.setProperty('--guide-look', String(direction));
+    guide.style.setProperty('--guide-peek', `${direction * 18}px`);
+    guide.classList.toggle('is-off-path', offPath);
+  };
+
+  const placeGuide = (progress: number, stopIndex?: number) => {
     if (!routePath || !guide) return;
     const point = stopIndex === undefined
       ? routePath.getPointAtLength(routePath.getTotalLength() * progress)
       : { x: guideStops[stopIndex][0], y: guideStops[stopIndex][1] };
     guide.style.setProperty('--guide-x', `${point.x}%`);
     guide.style.setProperty('--guide-y', `${point.y}%`);
-    guide.classList.toggle('is-acknowledging', acknowledge && !reduceMotion.matches);
-    if (acknowledge && !reduceMotion.matches) setTimeout(() => guide.classList.remove('is-acknowledging'), 720);
   };
 
-  const addCapability = (label: string) => {
+  const addCapability = (label: string, order = 0, animate = true) => {
     if (!label || acquiredCapabilities.has(label) || !inventory) return;
     acquiredCapabilities.add(label);
     capabilityEmpty?.remove();
     const chip = document.createElement('span');
     chip.textContent = label;
     chip.className = 'inventory-chip';
-    if (!reduceMotion.matches) chip.classList.add('is-arriving');
+    if (animate && !reduceMotion.matches) {
+      chip.classList.add('is-arriving');
+      chip.style.animationDelay = `${order * 70}ms`;
+    }
     inventory.append(chip);
-    if (capabilityCount) capabilityCount.textContent = String(acquiredCapabilities.size).padStart(2, '0');
+    if (capabilityCount) capabilityCount.textContent = `${String(acquiredCapabilities.size).padStart(2, '0')}/07`;
+    if (finalCapabilities) finalCapabilities.textContent = `${String(acquiredCapabilities.size).padStart(2, '0')}/07`;
     document.querySelector<HTMLElement>(`[data-final-capability="${CSS.escape(label)}"]`)?.classList.add('is-collected');
   };
 
-  const unlockRole = (role: HTMLElement) => {
+  const unlockRole = (role: HTMLElement, animateInventory = true) => {
     const index = Number(role.dataset.roleIndex ?? 0);
     if (exploredRoles.has(index)) return;
     exploredRoles.add(index);
     role.classList.add('is-explored');
-    role.querySelectorAll<HTMLElement>('[data-capability]').forEach((chip, chipIndex) => {
-      setTimeout(() => addCapability(chip.dataset.capability ?? ''), reduceMotion.matches ? 0 : 430 + chipIndex * 100);
-    });
+    role.querySelectorAll<HTMLElement>('[data-capability]').forEach((chip, chipIndex) => addCapability(chip.dataset.capability ?? '', chipIndex, animateInventory));
     if (finalCareer) finalCareer.textContent = `${String(exploredRoles.size).padStart(2, '0')}/03`;
   };
 
-  const activateRole = (role: HTMLElement, acknowledge = true) => {
+  const activateRole = (role: HTMLElement) => {
     const index = Number(role.dataset.roleIndex ?? 0);
-    milestones.forEach((item) => item.classList.toggle('is-active', item === role));
-    role.classList.add('is-explored');
+    const direction = index === 1 ? 1 : -1;
+    if (pendingRole && pendingRole !== role) unlockRole(pendingRole, false);
+    clearGuideSequence();
+    const sequence = ++activeSequence;
+    pendingRole = role;
+    milestones.forEach((item) => {
+      item.classList.remove('is-active', 'is-capabilities-visible');
+    });
     route?.style.setProperty('--route-progress', String(routeStops[index]));
-    placeGuide(routeStops[index], acknowledge, index);
-    unlockRole(role);
+    setGuideState('neutral');
+    guide?.classList.add('is-travelling');
+    placeGuide(routeStops[index], index);
+
+    if (reduceMotion.matches) {
+      guide?.classList.remove('is-travelling');
+      role.classList.add('is-active', 'is-capabilities-visible');
+      unlockRole(role, false);
+      setGuideState('settled');
+      pendingRole = null;
+      return;
+    }
+
+    queueGuideStep(() => {
+      if (sequence !== activeSequence) return;
+      guide?.classList.remove('is-travelling');
+      setGuideState('looking', direction, true);
+    }, 330);
+    queueGuideStep(() => {
+      if (sequence !== activeSequence) return;
+      role.classList.add('is-active');
+    }, 440);
+    queueGuideStep(() => {
+      if (sequence !== activeSequence) return;
+      role.classList.add('is-capabilities-visible');
+      setGuideState('unlocking', direction, true);
+    }, 540);
+    queueGuideStep(() => {
+      if (sequence !== activeSequence) return;
+      unlockRole(role, true);
+    }, 660);
+    queueGuideStep(() => {
+      if (sequence !== activeSequence) return;
+      setGuideState('settled', 0, false);
+      pendingRole = null;
+    }, 860);
   };
 
   if (route && milestones.length) {
     placeGuide(.015);
     if (reduceMotion.matches || !('IntersectionObserver' in window)) {
-      milestones.forEach((role) => activateRole(role, false));
+      milestones.forEach((role) => unlockRole(role, false));
+      const lastRole = milestones.at(-1);
+      if (lastRole) {
+        milestones.forEach((item) => item.classList.toggle('is-active', item === lastRole));
+        lastRole.classList.add('is-capabilities-visible');
+      }
       nowNode?.classList.add('is-active');
       route.style.setProperty('--route-progress', '1');
-      placeGuide(.96, false, 3);
+      placeGuide(.96, 3);
+      setGuideState('settled');
     } else {
       const roleObserver = new IntersectionObserver((entries) => {
         entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio).slice(0, 1).forEach((entry) => activateRole(entry.target as HTMLElement));
@@ -209,7 +283,7 @@ const recognitionMetrics = ['MERIT', '286/400', '98/100', '#1'];
         role.addEventListener('focusin', () => activateRole(role));
       });
       const unlockPassedRoles = () => milestones.forEach((role) => {
-        if (role.getBoundingClientRect().top < innerHeight * .7) unlockRole(role);
+        if (role.getBoundingClientRect().top < 0) unlockRole(role, false);
       });
       addEventListener('scroll', unlockPassedRoles, { passive: true });
       unlockPassedRoles();
@@ -217,12 +291,16 @@ const recognitionMetrics = ['MERIT', '286/400', '98/100', '#1'];
         const nowObserver = new IntersectionObserver(([entry]) => {
           if (!entry.isIntersecting) return;
           milestones.forEach((item) => item.classList.remove('is-active'));
+          if (pendingRole) unlockRole(pendingRole, false);
+          clearGuideSequence();
+          pendingRole = null;
           nowNode.classList.add('is-active');
           route.style.setProperty('--route-progress', '1');
-          placeGuide(.96, true, 3);
+          setGuideState('settled');
+          placeGuide(.96, 3);
         }, { rootMargin: '-20% 0px -25% 0px', threshold: .35 });
         nowObserver.observe(nowNode);
-        nowNode.addEventListener('focusin', () => { route.style.setProperty('--route-progress', '1'); placeGuide(.96, true, 3); });
+        nowNode.addEventListener('focusin', () => { route.style.setProperty('--route-progress', '1'); setGuideState('settled'); placeGuide(.96, 3); });
       }
     }
   }
@@ -231,12 +309,29 @@ const recognitionMetrics = ['MERIT', '286/400', '98/100', '#1'];
   const achievements = [...(vault?.querySelectorAll<HTMLElement>('[data-achievement-index]') ?? [])];
   const vaultCount = vault?.querySelector<HTMLElement>('[data-achievement-count]');
   const vaultComplete = vault?.querySelector<HTMLElement>('[data-vault-complete]');
+  const vaultGuide = vault?.querySelector<HTMLElement>('.vault-guide');
+  let vaultGuideTimer = 0;
   const discoveredAchievements = new Set<number>();
+  const acknowledgeAchievement = (index: number) => {
+    if (!vaultGuide || reduceMotion.matches) return;
+    window.clearTimeout(vaultGuideTimer);
+    vaultGuide.style.setProperty('--vault-shift', `${(index - 1.5) * 7}px`);
+    vaultGuide.dataset.state = 'looking';
+    vaultGuide.classList.add('is-scanning');
+    vaultGuideTimer = window.setTimeout(() => {
+      vaultGuide.dataset.state = 'unlocking';
+      vaultGuideTimer = window.setTimeout(() => {
+        vaultGuide.dataset.state = 'settled';
+        vaultGuide.classList.remove('is-scanning');
+      }, 260);
+    }, 260);
+  };
   const unlockAchievement = (marker: HTMLElement) => {
     const index = Number(marker.dataset.achievementIndex ?? 0);
     if (discoveredAchievements.has(index)) return;
     discoveredAchievements.add(index);
     marker.classList.add('is-unlocked');
+    acknowledgeAchievement(index);
     const state = marker.querySelector<HTMLElement>('[data-vault-state]');
     if (state) state.textContent = 'DISCOVERED';
     const count = discoveredAchievements.size;
